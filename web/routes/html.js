@@ -1,6 +1,13 @@
 /*jshint esversion: 6 */
 const path = require('path');
+
+// Require middleware to check user login status
 const is_authenticated = require('../config/middleware/is_authenticated');
+
+// See! With ONE LINE! How hard is that? :p
+let theme = config.theme;
+
+// Logo slug used for themes
 let logo_slug = path.join(__dirname, '../assets/images/theme/', theme, '/logo.png');
 
 // Export the html routes to main app
