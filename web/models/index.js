@@ -20,7 +20,7 @@ function getModels(config, force = false) {
   let sequelize = new Sequelize(config.db.database, config.db.username, config.db.password, config.db);
 
   // Sequelize each of the model modules
-  modules.forEach(module) {
+  modules.forEach((module) => {
     let model = module(sequelize, Sequelize, config);
     models[model.name] = model;
   });
