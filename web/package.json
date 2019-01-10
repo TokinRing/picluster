@@ -8,15 +8,21 @@
     "body-parser": "^1.17.2",
     "exec": "",
     "express": "^4.15.3",
+    "express-session": "^1.15.6",
     "font-logos": "git+https://github.com/Lukas-W/font-logos.git",
     "jquery": "^3.2.1",
     "jquery.terminal": "^1.5.0",
     "line-reader": "^0.4.0",
     "moment": "^2.18.1",
     "multer": "^1.3.0",
+    "mysql": "^2.16.0",
+    "mysql2": "^1.6.4",
     "node-gyp": "",
+    "passport": "^0.4.0",
+    "passport-local": "^1.0.0",
     "request": "",
     "request-debug": "",
+    "sequelize": "^4.42.0",
     "sys": ""
   }
 }

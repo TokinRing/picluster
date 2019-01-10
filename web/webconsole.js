@@ -7,6 +7,15 @@ const express = require('express');
 const request = require('request');
 const bodyParser = require('body-parser');
 
+// Import passport
+const passport = require("./config/passport");
+
+// Import the models folder
+const db = require("./models");
+
+// Require middleware for checking user login status
+const is_authenticated = require("../config/middleware/is_authenticated");
+
 let config = JSON.parse(fs.readFileSync((process.env.PICLUSTER_CONFIG ? process.env.PICLUSTER_CONFIG : '../config.json'), 'utf8'));
 
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = config.ssl_self_signed ? '0' : '1';
@@ -19,6 +28,15 @@ app.use('/assets', express.static(path.join(__dirname, 'assets'), {
 app.use('/node_modules', express.static(path.join(__dirname, 'node_modules'), {
   maxage: '48h'
 }));
+
+// Use sessions to track of user login status
+app.use(session({ secret: config.session_secret, resave: true, saveUninitialized: true }));
+app.use(passport.initialize());
+app.use(passport.session());
+
+// Require api and html routes
+require("./routes/html.js")(app);
+require("./routes/api.js")(app);
 
 const upload = multer({
   dest: '../'
@@ -1157,9 +1175,6 @@ app.get('/getconfig', (req, res) => {
   }
 });
 
-app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, '/index.html'));
-});
 app.get('/blank.html', (req, res) => {
   res.sendFile(path.join(__dirname, '/blank.html'));
 });
@@ -1255,13 +1270,21 @@ if (config.ssl && config.ssl_cert && config.ssl_key) {
     key: fs.readFileSync(config.ssl_key)
   };
   const webconsole = https.createServer(ssl_options, app);
-  webconsole.listen(web_port, () => {
-    console.log('Listening on port %d', web_port);
+
+  // Sync DB and spawn web console
+  db.sequelize.sync().then(function() {
+    webconsole.listen(web_port, () => {
+      console.log('Listening on port %d', web_port);
+    });
   });
 } else {
   console.log('Non-SSL Web Console enabled');
   const webconsole = http.createServer(app);
-  webconsole.listen(web_port, () => {
-    console.log('Listening on port %d', web_port);
+
+  // Sync DB and spawn web console
+  db.sequelize.sync().then(function() {
+    webconsole.listen(web_port, () => {
+      console.log('Listening on port %d', web_port);
+    });
   });
 }

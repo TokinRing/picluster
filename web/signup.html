@@ -1,0 +1,100 @@
+<html>
+
+<head>
+	<script src="/assets/jquery.min.js"></script>
+	<link rel="stylesheet" href="/assets/picluster-iframe.css">
+	<link rel="stylesheet" href="/assets/circle.css">
+	<script>
+		function getContainerStatus() {
+			setTimeout(function () {
+				if (parent.token) {
+					$.get("/nodes?token=" + parent.token, function (data) {
+						var check_data = data;
+						var total = check_data.total_containers;
+						var running = 0;
+						for (var i in check_data.data) {
+							running = running + check_data.data[i].total_running_containers;
+						}
+
+						var calc = Math.floor((running / total * 100));
+						var percent = 0;
+						(!calc == 100) ? percent = percent = Math.ceil((calc + 1) / 100) * 10: percent = calc;
+
+						document.getElementById("running_containers").textContent = percent + "%";
+						document.getElementById("running-class").className = "c100 p" + percent + " small";
+						getContainerStatus();
+					});
+				}
+			}, 5000)
+		}
+
+	</script>
+</head>
+
+<body>
+	<div id="landing_page">
+		<img id="logo" src="/logo.png">
+		<br>
+		<b>Welcome to PiCluster!</b>
+	</div>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6 col-md-offset-3">
+        <h2>Sign Up Form</h2>
+        <form class="signup">
+          <div class="form-group">
+            <label for="InputUsername">Username</label>
+            <input type="username" class="form-control" id="username-input" placeholder="Username">
+          </div>
+          <div class="form-group">
+            <label for="InputPassword">Password</label>
+            <input type="password" class="form-control" id="password-input" placeholder="Password">
+          </div>
+          <div style="display: none" id="alert" class="alert alert-danger" role="alert">
+            <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+            <span class="sr-only">Error:</span> <span class="msg"></span>
+          </div>
+          <button type="submit" class="btn btn-default">Sign Up</button>
+        </form>
+        <br />
+        <p>Or <a href="/login">Login</a></p>
+      </div>
+    </div>
+  </div>
+
+  <script type="text/javascript" src="assets/signup.js"></script>
+
+	<div id="source_issues_circle">
+		<a href='https://github.com/picluster/picluster' id='source' target="_blank">
+			<img src="/assets/images/GitHub-Mark-120px-plus.png">
+			<br>
+			GitHub
+		</a>
+		<a href='https://github.com/picluster/picluster/issues' id='issues' target="_blank">
+			<img src="/assets/images/Debug-Bug-icon.png">
+			<br>
+			Report Issue
+		</a>
+		<a href="containers-layout.html" id="status_circle">
+			<div class="page">
+				<div class="clearfix">
+					<div id="running-class" class="c100 p0 small">
+						<span id='running_containers'>0%</span>
+						<div class="slice">
+							<div class="bar"></div>
+							<div class="fill"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+			Running
+		</a>
+	</div>
+	<script>
+		getContainerStatus();
+
+	</script>
+</body>
+
+</html>
