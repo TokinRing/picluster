@@ -4,8 +4,8 @@ const fs = require('fs');
 const path = require('path');
 const Sequelize = require('sequelize');
 const basename = path.basename(module.filename);
-const env = process.env.NODE_ENV || 'production';
-const config = require(__dirname + '/../../config.json')[env];
+//const env = process.env.NODE_ENV || 'production';
+const config = require(__dirname + '/../../config.json');
 
 // Initialize models
 let models = {};
@@ -16,12 +16,8 @@ let modules = [
 ];
 
 function getModels(config, force = false) {
-  // Initialize sequelize instance by env variables or defaults
-  if (config.use_env_variable) {
-    let sequelize = new Sequelize(process.env[config.use_env_variable]);
-  } else {
-    let sequelize = new Sequelize(config.database, config.username, config.password, config);
-  }
+  // Initialize sequelize DataType
+  let sequelize = new Sequelize(config.db.database, config.db.username, config.db.password, config.db);
 
   // Sequelize each of the model modules
   modules.forEach(module) {
@@ -46,5 +42,5 @@ function getModels(config, force = false) {
 
 
 module.exports = {
-  getModels();
+  getModels(config);
 }

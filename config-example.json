@@ -22,21 +22,7 @@
   "web_port": "3003",
   "theme": "default",
   "session_secret": "changeme",
-  "development": {
-    "username": "root",
-    "password": null,
-    "database": "database_development",
-    "host": "127.0.0.1",
-    "dialect": "mysql"
-  },
-  "test": {
-    "username": "root",
-    "password": null,
-    "database": "database_test",
-    "host": "127.0.0.1",
-    "dialect": "mysql"
-  },
-  "production": {
+  "db": {
     "username": "root",
     "password": null,
     "database": "database_production",
