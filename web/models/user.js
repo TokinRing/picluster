@@ -1,5 +1,5 @@
 // Requiring bcrypt for password hashing
-const bcrypt = require("bcrypt-nodejs");
+const bcrypt = require("bcrypt");
 
 // Creating our User model
 module.exports = function(sequelize, DataTypes) {

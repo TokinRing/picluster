@@ -5,6 +5,7 @@
     "unsafe-perm": true
   },
   "dependencies": {
+    "bcrypt": "^3.0.3",
     "body-parser": "^1.17.2",
     "exec": "",
     "express": "^4.15.3",
