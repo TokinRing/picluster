@@ -3,6 +3,7 @@ const bcrypt = require("bcrypt");
 
 // Creating our User model
 module.exports = (sequelize, DataTypes) => {
+  // Define a new model for User objects
   let User = sequelize.define("User", {
     // Username cannot be null
     username: {
@@ -10,10 +11,18 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       unique: true
     },
+
     // Password cannot be null
     password: {
       type: DataTypes.STRING,
       allowNull: false
+    },
+
+    // API token cannot be null
+    api_token: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      unique: true
     }
   });
 

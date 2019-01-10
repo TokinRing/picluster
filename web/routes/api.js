@@ -3,6 +3,7 @@
 // Require our models and configured passport
 const models = require("../models");
 const passport = require("../config/passport");
+const lib = require("../lib/picluster-web-lib");
 
 module.exports = (app) => {
   // Use passport.authenticate middleware with local strategy
@@ -17,7 +18,8 @@ module.exports = (app) => {
     console.log(req.body);
     models.User.create({
       username: req.body.username,
-      password: req.body.password
+      password: req.body.password,
+      api_token: generate_api_token
     }).then(function() {
       res.redirect(307, "/api/login");
     }).catch(function(err) {
