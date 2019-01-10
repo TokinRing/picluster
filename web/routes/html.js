@@ -1,6 +1,9 @@
 /*jshint esversion: 6 */
 const path = require('path');
 
+// Parse JSON config
+let config = JSON.parse(fs.readFileSync((process.env.PICLUSTER_CONFIG ? process.env.PICLUSTER_CONFIG : '../config.json'), 'utf8'));
+
 // Require middleware to check user login status
 const is_authenticated = require('../config/middleware/is_authenticated');
 
