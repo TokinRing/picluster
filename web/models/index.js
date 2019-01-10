@@ -7,7 +7,7 @@ const path = require('path');
 const Sequelize = require('sequelize');
 const basename = path.basename(module.filename);
 //const env = process.env.NODE_ENV || 'production';
-const config = require(__dirname + '/../../config.json');
+const config = JSON.parse(fs.readFileSync((process.env.PICLUSTER_CONFIG ? process.env.PICLUSTER_CONFIG : '../../config.json'), 'utf8'));
 
 // Initialize models
 let models = {};
