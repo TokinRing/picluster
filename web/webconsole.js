@@ -13,7 +13,7 @@ const session = require('express-session');
 const passport = require("./config/passport");
 
 // Import the models folder
-const db = require("./models");
+let db = require("./models");
 
 // Require middleware for checking user login status
 const is_authenticated = require("./config/middleware/is_authenticated");
@@ -1274,7 +1274,7 @@ if (config.ssl && config.ssl_cert && config.ssl_key) {
   const webconsole = https.createServer(ssl_options, app);
 
   // Sync DB and spawn web console
-  db.sequelize.sync().then(function() {
+  db.sequelize.sync().then(() => {
     webconsole.listen(web_port, () => {
       console.log('Listening on port %d', web_port);
     });
@@ -1284,7 +1284,7 @@ if (config.ssl && config.ssl_cert && config.ssl_key) {
   const webconsole = http.createServer(app);
 
   // Sync DB and spawn web console
-  db.sequelize.sync().then(function() {
+  db.sequelize.sync().then(() => {
     webconsole.listen(web_port, () => {
       console.log('Listening on port %d', web_port);
     });

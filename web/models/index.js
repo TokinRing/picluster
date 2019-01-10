@@ -19,7 +19,7 @@ let modules = [
 
 function getModels(config, force = false) {
   // Initialize sequelize DataType
-  let sequelize = new Sequelize(config.db.database, config.db.username, config.db.password, config.db);
+  let sequelize = new Sequelize(config.db.database, config.db.username, config.db.password, {config.db.host, config.db.dialect});
 
   // Sequelize each of the model modules
   modules.forEach((module) => {
