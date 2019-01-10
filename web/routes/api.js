@@ -1,10 +1,12 @@
-// Requiring our models and passport as we've configured it
+/*jshint esversion: 6 */
+
+// Require our models and configured passport
 const db = require("../models");
 const passport = require("../config/passport");
 
-module.exports = function(app) {
-  // Using the passport.authenticate middleware with local strategy
-  // If user has valid credentials, send to members page else sent an error
+module.exports = (app) => {
+  // Use passport.authenticate middleware with local strategy
+  // If user has valid credentials, send to members page else throw error
   app.post("/api/login", passport.authenticate("local"), function(req, res) {
     // Send user back to the members page since the redirect will happen there
     res.json("/members");
