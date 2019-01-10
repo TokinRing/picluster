@@ -1,36 +1,50 @@
 'use strict';
 
-const fs        = require('fs');
-const path      = require('path');
+const fs = require('fs');
+const path = require('path');
 const Sequelize = require('sequelize');
-const basename  = path.basename(module.filename);
-const env       = process.env.NODE_ENV || 'production';
-const config    = require(__dirname + '/../../config.json')[env];
-let db        = {};
+const basename = path.basename(module.filename);
+const env = process.env.NODE_ENV || 'production';
+const config = require(__dirname + '/../../config.json')[env];
 
-if (config.use_env_variable) {
-  let sequelize = new Sequelize(process.env[config.use_env_variable]);
-} else {
-  let sequelize = new Sequelize(config.database, config.username, config.password, config);
-}
+// Initialize models
+let models = {};
 
-fs
-  .readdirSync(__dirname)
-  .filter(function(file) {
-    return (file.indexOf('.') !== 0) && (file !== basename) && (file.slice(-3) === '.js');
-  })
-  .forEach(function(file) {
-    let model = sequelize['import'](path.join(__dirname, file));
-    db[model.name] = model;
+// Models to include by module
+let modules = [
+  require('./user.js')
+];
+
+function getModels(config, force = false) {
+  // Initialize sequelize instance by env variables or defaults
+  if (config.use_env_variable) {
+    let sequelize = new Sequelize(process.env[config.use_env_variable]);
+  } else {
+    let sequelize = new Sequelize(config.database, config.username, config.password, config);
+  }
+
+  // Sequelize each of the model modules
+  modules.forEach(module) {
+    let model = module(sequelize, Sequelize, config);
+    models[model.name] = model;
   });
 
-Object.keys(db).forEach(function(modelName) {
-  if (db[modelName].associate) {
-    db[modelName].associate(db);
-  }
-});
+  // Initialize model object relation mapping
+  Object.keys(models).forEach(function(modelName) {
+    if (models[modelName].associate) {
+      models[modelName].associate(models);
+    }
+  });
 
-db.sequelize = sequelize;
-db.Sequelize = Sequelize;
+  // Store instance and DataType
+  models.sequelize = sequelize;
+  models.Sequelize = Sequelize;
 
-module.exports = db;
+  // Return object of all sequelized models
+  return models
+}
+
+
+module.exports = {
+  getModels();
+}
