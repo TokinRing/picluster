@@ -42,5 +42,5 @@ function getModels(config, force = false) {
 
 
 module.exports = {
-  getModels(config);
-}
+  getModels(config)
+};
