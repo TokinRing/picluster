@@ -9,13 +9,13 @@ const request = require('request');
 const bodyParser = require('body-parser');
 const session = require('express-session');
 
-// Import passport
+// Import configured passport
 const passport = require("./config/passport");
 
 // Import the models folder
 let models = require("./models");
 
-// Require middleware for checking user login status
+// Require middleware to check user login status
 const is_authenticated = require("./config/middleware/is_authenticated");
 
 let config = JSON.parse(fs.readFileSync((process.env.PICLUSTER_CONFIG ? process.env.PICLUSTER_CONFIG : '../config.json'), 'utf8'));
@@ -27,6 +27,8 @@ app.use(bodyParser());
 app.use('/assets', express.static(path.join(__dirname, 'assets'), {
   maxage: '48h'
 }));
+
+// TODO: wtf is node_modules being served?
 app.use('/node_modules', express.static(path.join(__dirname, 'node_modules'), {
   maxage: '48h'
 }));
@@ -46,26 +48,40 @@ const upload = multer({
 const scheme = config.ssl ? 'https://' : 'http://';
 const ssl_self_signed = config.ssl_self_signed === false;
 const request_timeout = 5000;
+
+// wtf is this stored as an object? wtf expand on 3 lines what can be done in 1?
 const {
   web_port
 } = config;
+
 let syslog = config.syslog ? config.syslog : '';
+
+// wtf is this stored as an object? wtf expand on 3 lines what can be done in 1?
 const {
   doc_dir
 } = config;
+
+// wtf is this stored as an object? wtf expand on 3 lines what can be done in 1?
 let {
   theme
 } = config;
+
 let logo_slug = path.join(__dirname, '/assets/images/theme/', theme, '/logo.png');
+
+// wtf is this stored as an object? wtf expand on 3 lines what can be done in 1?
 let {
   token
 } = config;
+
 let user = config.web_username;
 let password = config.web_password;
 let server = config.web_connect;
+
+// wtf is this stored as an object? wtf expand on 3 lines what can be done in 1?
 let {
   server_port
 } = config;
+
 let nodedata = '';
 
 /*
@@ -94,7 +110,7 @@ function getData() {
       }
     });
     getData();
-  }, 5000);
+  }, 5000); // TODO: Change to a constant from a config value
 }
 getData();
 
@@ -127,35 +143,10 @@ function serve_doc_pages() {
 }
   */
 
-app.get('/exec.html', (req, res) => {
-  const check_token = req.query.token;
-  if ((check_token !== token) || (!check_token)) {
-    res.end('\nError: Invalid Credentials');
-  } else {
-    res.sendFile(path.join(__dirname, '/exec.html'));
-  }
-});
-
-app.get('/config-edit.html', (req, res) => {
-  const check_token = req.query.token;
-  if ((check_token !== token) || (!check_token)) {
-    res.end('\nError: Invalid Credentials');
-  } else {
-    res.sendFile(path.join(__dirname, '/config-edit.html'));
-  }
-});
-
-app.get('/monitoring.html', (req, res) => {
-  const check_token = req.query.token;
-  if ((check_token !== token) || (!check_token) || (!config.monitoring)) {
-    res.end('\nError: Invalid Credentials or invalid configuration.');
-  } else {
-    res.redirect(config.monitoring);
-  }
-});
-
 app.post('/sendconfig', (req, res) => {
   const check_token = req.body.token;
+
+  // wtf is this stored as an object? wtf expand on 3 lines what can be done in 1?
   const {
     payload
   } = req.body;
@@ -1177,92 +1168,7 @@ app.get('/getconfig', (req, res) => {
   }
 });
 
-app.get('/blank.html', (req, res) => {
-  res.sendFile(path.join(__dirname, '/blank.html'));
-});
-app.get('/nodes-list.html', (req, res) => {
-  res.sendFile(path.join(__dirname, '/nodes-list.html'));
-});
-app.get('/containers-layout.html', (req, res) => {
-  res.sendFile(path.join(__dirname, '/containers-layout.html'));
-});
-app.get('/images-prune.html', (req, res) => {
-  res.sendFile(path.join(__dirname, '/images-prune.html'));
-});
-app.get('/functions-clear.html', (req, res) => {
-  res.sendFile(path.join(__dirname, '/functions-clear.html'));
-});
-app.get('/functions-viewer.html', (req, res) => {
-  res.sendFile(path.join(__dirname, '/functions-viewer.html'));
-});
-app.get('/functions-create.html', (req, res) => {
-  res.sendFile(path.join(__dirname, '/functions-create.html'));
-});
-app.get('/functions-current.html', (req, res) => {
-  res.sendFile(path.join(__dirname, '/functions-current.html'));
-});
-app.get('/config-reload.html', (req, res) => {
-  res.sendFile(path.join(__dirname, '/config-reload.html'));
-});
-app.get('/images-pull.html', (req, res) => {
-  res.sendFile(path.join(__dirname, '/images-pull.html'));
-});
-app.get('/images-manage.html', (req, res) => {
-  res.sendFile(path.join(__dirname, '/images-manage.html'));
-});
-app.get('/swarm.html', (req, res) => {
-  res.sendFile(path.join(__dirname, '/swarm.html'));
-});
-app.get('/images-layout.html', (req, res) => {
-  res.sendFile(path.join(__dirname, '/images-layout.html'));
-});
-app.get('/log.html', (req, res) => {
-  res.sendFile(path.join(__dirname, '/log.html'));
-});
-app.get('/heartbeat.html', (req, res) => {
-  res.sendFile(path.join(__dirname, '/heartbeat.html'));
-});
-app.get('/syslog.html', (req, res) => {
-  res.sendFile(path.join(__dirname, '/syslog.html'));
-});
-app.get('/containers-manage.html', (req, res) => {
-  res.sendFile(path.join(__dirname, '/containers-manage.html'));
-});
-app.get('/terminal.html', (req, res) => {
-  res.sendFile(path.join(__dirname, '/terminal.html'));
-});
-app.get('/containers-add.html', (req, res) => {
-  res.sendFile(path.join(__dirname, '/containers-add.html'));
-});
-app.get('/nodes-add.html', (req, res) => {
-  res.sendFile(path.join(__dirname, '/nodes-add.html'));
-});
-app.get('/nodes-remove.html', (req, res) => {
-  res.sendFile(path.join(__dirname, '/nodes-remove.html'));
-});
-app.get('/nodes-manage.html', (req, res) => {
-  res.sendFile(path.join(__dirname, '/nodes-manage.html'));
-});
-app.get('/elasticsearch.html', (req, res) => {
-  res.sendFile(path.join(__dirname, '/elasticsearch.html'));
-});
-app.get('/rsyslog.html', (req, res) => {
-  res.sendFile(path.join(__dirname, '/rsyslog.html'));
-});
-app.get('/favicon.ico', (req, res) => {
-  res.sendFile(path.join(__dirname, '/favicon.ico'));
-});
-app.get('/docs.html', (req, res) => {
-  res.sendFile(path.join(__dirname, '/docs.html'));
-});
-app.get('/images-upload.html', (req, res) => {
-  res.sendFile(path.join(__dirname, '/images-upload.html'));
-});
-
-app.get('/logo.png', (req, res) => {
-  res.sendFile(logo_slug);
-});
-
+// TODO: Migrate to html routes, once that goddamn iframe is removed
 // Removing for now serve_doc_pages();
 
 if (config.ssl && config.ssl_cert && config.ssl_key) {
@@ -1273,7 +1179,7 @@ if (config.ssl && config.ssl_cert && config.ssl_key) {
   };
   const webconsole = https.createServer(ssl_options, app);
 
-  // Sync DB and spawn web console
+  // Sync DB models and spawn web console
   models.sequelize.sync().then(() => {
     webconsole.listen(web_port, () => {
       console.log('Listening on port %d', web_port);
@@ -1283,7 +1189,7 @@ if (config.ssl && config.ssl_cert && config.ssl_key) {
   console.log('Non-SSL Web Console enabled');
   const webconsole = http.createServer(app);
 
-  // Sync DB and spawn web console
+  // Sync DB models and spawn web console
   models.sequelize.sync().then(() => {
     webconsole.listen(web_port, () => {
       console.log('Listening on port %d', web_port);
