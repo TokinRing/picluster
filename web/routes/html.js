@@ -48,6 +48,28 @@ module.exports = (app) => {
     res.sendFile(path.join(__dirname, '../views/login.html'));
   });
 
+  // Handle login page
+  app.get('/login', (req, res) => {
+    // If user logged in redirect to admin page
+    if (req.user) {
+      res.redirect("/admin");
+    }
+
+    // Fall through to login page
+    res.sendFile(path.join(__dirname, '../views/login.html'));
+  });
+
+  // Handle signup page
+  app.get('/login', (req, res) => {
+    // If user logged in redirect to admin page
+    if (req.user) {
+      res.redirect("/admin");
+    }
+
+    // Fall through to signup page
+    res.sendFile(path.join(__dirname, '../views/signup.html'));
+  });
+
   // Admin page for logged in users
   app.get('/admin', is_authenticated, (req,res) => {
     res.sendFile(path.join(__dirname, '../views/index.html'));
