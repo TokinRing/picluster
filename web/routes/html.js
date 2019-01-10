@@ -8,7 +8,7 @@ module.exports = (app) => {
     if (req.user) {
       res.redirect("/admin");
     }
-    res.sendFile(path.join(__dirname, '/signup.html'));
+    res.sendFile(path.join(__dirname, '../signup.html'));
   });
 
   app.get('/login', (req, res) => {
@@ -16,10 +16,10 @@ module.exports = (app) => {
     if (req.user) {
       res.redirect("/admin");
     }
-    res.sendFile(path.join(__dirname, '/login.html'));
+    res.sendFile(path.join(__dirname, '../login.html'));
   });
 
   app.get('/admin', is_authenticated, (req,res) => {
-    res.sendFile(path.join(__dirname, '/index.html'));
+    res.sendFile(path.join(__dirname, '../index.html'));
   });
 };
