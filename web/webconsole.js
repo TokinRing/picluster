@@ -6,6 +6,7 @@ const multer = require('multer');
 const express = require('express');
 const request = require('request');
 const bodyParser = require('body-parser');
+const session = require('express-session');
 
 // Import passport
 const passport = require("./config/passport");
