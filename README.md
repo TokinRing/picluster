@@ -40,6 +40,7 @@
 
 - Docker
 - Node.js
+- Python2
 - OpenSSL
 - pq
 - git
@@ -47,12 +48,12 @@
 
 ### Ubuntu
 ```
-apt-get install openssl git node docker pq curl
+apt-get install openssl git node docker pq curl python2.7
 ```
 
 ### Arch Linux
 ```
-pacman -S openssl git node docker pq curl
+pacman -S openssl git node docker pq curl python2
 ```
 
 If you are using Docker 1.12.x and earlier, please use [PiCluster v1.0](https://github.com/picluster/picluster/tree/1.0)

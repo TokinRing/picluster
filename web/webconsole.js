@@ -14,7 +14,7 @@ const passport = require("./config/passport");
 const db = require("./models");
 
 // Require middleware for checking user login status
-const is_authenticated = require("../config/middleware/is_authenticated");
+const is_authenticated = require("./config/middleware/is_authenticated");
 
 let config = JSON.parse(fs.readFileSync((process.env.PICLUSTER_CONFIG ? process.env.PICLUSTER_CONFIG : '../config.json'), 'utf8'));
 
