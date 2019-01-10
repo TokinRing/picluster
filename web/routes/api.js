@@ -1,22 +1,22 @@
 /*jshint esversion: 6 */
 
 // Require our models and configured passport
-const db = require("../models");
+const models = require("../models");
 const passport = require("../config/passport");
 
 module.exports = (app) => {
   // Use passport.authenticate middleware with local strategy
-  // If user has valid credentials, send to members page else throw error
+  // If credentials are valid send to admin page else throw error
   app.post("/api/login", passport.authenticate("local"), function(req, res) {
-    // Send user back to the members page since the redirect will happen there
-    res.json("/members");
+    // Send user back to the admin page, redirect will happen there
+    res.json("/admin");
   });
 
-  // Route for signing up a user. If user is created successfully, login the user, else send an error
+  // Route for user signup. If successfully created, login else throw error
   app.post("/api/signup", function(req, res) {
     console.log(req.body);
-    db.User.create({
-      email: req.body.email,
+    models.User.create({
+      username: req.body.username,
       password: req.body.password
     }).then(function() {
       res.redirect(307, "/api/login");
@@ -28,7 +28,7 @@ module.exports = (app) => {
     });
   });
 
-  // Route for logging user out
+  // Route for user logout
   app.get("/logout", function(req, res) {
     req.logout();
     res.redirect("/");

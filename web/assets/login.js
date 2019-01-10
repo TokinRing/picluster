@@ -4,7 +4,7 @@ $(document).ready(function() {
   var usernameInput = $("input#username-input");
   var passwordInput = $("input#password-input");
 
-  // Validate email and password exist on submission
+  // Validate username/password existence on submission
   loginForm.on("submit", function(event) {
     event.preventDefault();
     var user_data = {
@@ -16,8 +16,8 @@ $(document).ready(function() {
       return;
     }
 
-    // If username/password exist run loginUser function
-    loginUser(user_data.username, user_data.password
+    // If username/password exist, pass to loginUser function
+    loginUser(user_data.username, user_data.password);
 
     // Clear the form
     usernameInput.val("");

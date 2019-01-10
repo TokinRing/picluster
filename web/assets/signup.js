@@ -4,7 +4,7 @@ $(document).ready(function() {
   var usernameInput = $("input#username-input");
   var passwordInput = $("input#password-input");
 
-  // When signup button is clicked, check the email/password are not blank
+  // Validate username/password existence and execute query on submission
   signUpForm.on("submit", function(event) {
     event.preventDefault();
     var user_data = {
@@ -16,7 +16,7 @@ $(document).ready(function() {
       return;
     }
 
-    // If email and password are present, pass to signUpUser function
+    // If username/password are present, pass to signUpUser function
     signUpUser(user_data.username, user_data.password);
 
     // Reset username/password fields
@@ -24,7 +24,7 @@ $(document).ready(function() {
     passwordInput.val("");
   });
 
-  // POST to the signup route. If succesful, redirect to the members page
+  // POST to the signup route. If succesful, redirect to admin page
   function signUpUser(username, password) {
     $.post("/api/signup", {
       username: username,
