@@ -1,3 +1,5 @@
+/*jshint esversion: 6 */
+/*jshint strict:false */
 'use strict';
 
 const fs = require('fs');
@@ -42,5 +44,5 @@ function getModels(config, force = false) {
 
 
 module.exports = {
-  getModels(config)
+  getModels
 };
