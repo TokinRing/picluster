@@ -8,7 +8,7 @@ const fs = require('fs');
 module.exports = (app) => {
   generate_api_token: () => {
     const possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-    const api_token_length = 64;
+    const api_token_length = 32;
     let api_token = "";
 
     for (let i = 0; i <= api_token_length; i++) {
