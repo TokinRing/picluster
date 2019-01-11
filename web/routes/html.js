@@ -165,6 +165,10 @@ module.exports = (app) => {
     res.sendFile(path.join(__dirname, '../views/log.html'));
   });
 
+  app.get('/menu.html', (req, res) => {
+    res.sendFile(path.join(__dirname, '../views/menu.html'));
+  });
+
   app.get('/nodes-list.html', (req, res) => {
     res.sendFile(path.join(__dirname, '../views/nodes-list.html'));
   });
