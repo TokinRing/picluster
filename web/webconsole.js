@@ -3,7 +3,6 @@ const http = require('http');
 const https = require('https');
 const fs = require('fs');
 const path = require('path');
-const multer = require('multer');
 const express = require('express');
 const request = require('request');
 const bodyParser = require('body-parser');
@@ -46,9 +45,6 @@ app.use(passport.session());
 require("./routes/html.js")(app);
 require("./routes/api.js")(app);
 
-const upload = multer({
-  dest: '../'
-});
 const scheme = config.ssl ? 'https://' : 'http://';
 const ssl_self_signed = config.ssl_self_signed === false;
 const request_timeout = 5000;
@@ -70,6 +66,7 @@ let {
   theme
 } = config;
 
+//TODO: Still needed here?
 let logo_slug = path.join(__dirname, '/assets/images/theme/', theme, '/logo.png');
 
 // wtf is this stored as an object? wtf expand on 3 lines what can be done in 1?
@@ -89,7 +86,7 @@ let {
 let nodedata = '';
 
 /*
-Removing for now
+TODO: Add docs once iframe mess is purged
 if (fs.existsSync(path.normalize(doc_dir))) {
   app.use('/docs', express.static(path.join(__dirname, doc_dir)));
 }
@@ -97,23 +94,6 @@ if (fs.existsSync(path.normalize(doc_dir))) {
 
 // Call get data to initialize view
 getData();
-
-/* Not needed anymore
-app.post('/', (req, res) => {
-  const get_user = req.body.username;
-  const get_pass = req.body.password;
-
-  if (get_user === user && get_pass === password) {
-    const auth_data = {
-      token,
-      syslog
-    };
-    res.send(auth_data);
-  } else {
-    res.end('Access Denied!');
-  }
-});
-*/
 
 if (config.ssl && config.ssl_cert && config.ssl_key) {
   console.log('SSL Web Console enabled');

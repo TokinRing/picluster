@@ -2,6 +2,8 @@
 // API calls stored here. Broken down into 2 sections:
 // GET and POST
 
+const multer = require('multer');
+
 // Require our models and configured passport
 const models = require("../models");
 const passport = require("../config/passport");
@@ -12,6 +14,11 @@ const apilib = require("../lib/api-lib");
 
 // Require middleware to check user login status
 const is_authenticated = require('../config/middleware/is_authenticated');
+
+// Specify upload destination path
+const upload = multer({
+  dest: '../'
+});
 
 module.exports = (app) => {
   ////
