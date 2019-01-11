@@ -2,6 +2,9 @@
 // This is where abstract and modular functions for the api go
 // include with ```const api-lib = require("../lib/api-lib");```
 
+const path = require('path');
+const fs = require('fs');
+
 let config = JSON.parse(fs.readFileSync((process.env.PICLUSTER_CONFIG ? process.env.PICLUSTER_CONFIG : '../config.json'), 'utf8'));
 let user = config.web_username;
 let password = config.web_password;
