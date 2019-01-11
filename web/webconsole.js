@@ -48,40 +48,18 @@ require("./routes/api.js")(app);
 const scheme = config.ssl ? 'https://' : 'http://';
 const ssl_self_signed = config.ssl_self_signed === false;
 const request_timeout = 5000;
-
-// wtf is this stored as an object? wtf expand on 3 lines what can be done in 1?
-const {
-  web_port
-} = config;
-
+const {web_port} = config;
 let syslog = config.syslog ? config.syslog : '';
-
-// wtf is this stored as an object? wtf expand on 3 lines what can be done in 1?
-const {
-  doc_dir
-} = config;
-
-// wtf is this stored as an object? wtf expand on 3 lines what can be done in 1?
-let {
-  theme
-} = config;
-
-//TODO: Still needed here?
-let logo_slug = path.join(__dirname, '/assets/images/theme/', theme, '/logo.png');
-
-// wtf is this stored as an object? wtf expand on 3 lines what can be done in 1?
-let {
-  token
-} = config;
-
+const {doc_dir} = config;
+let {theme} = config;
+let {token} = config;
 let user = config.web_username;
 let password = config.web_password;
 let server = config.web_connect;
+let {server_port} = config;
 
-// wtf is this stored as an object? wtf expand on 3 lines what can be done in 1?
-let {
-  server_port
-} = config;
+//TODO: Still needed here?
+let logo_slug = path.join(__dirname, '/assets/images/theme/', theme, '/logo.png');
 
 /*
 TODO: Add docs once iframe mess is purged

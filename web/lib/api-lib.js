@@ -2,6 +2,17 @@
 // This is where abstract and modular functions for the api go
 // include with ```const api-lib = require("../lib/api-lib");```
 
+let config = JSON.parse(fs.readFileSync((process.env.PICLUSTER_CONFIG ? process.env.PICLUSTER_CONFIG : '../config.json'), 'utf8'));
+let user = config.web_username;
+let password = config.web_password;
+let server = config.web_connect;
+const scheme = config.ssl ? 'https://' : 'http://';
+const ssl_self_signed = config.ssl_self_signed === false;
+const request_timeout = 5000;
+
+// There, one lined it.
+let {server_port} = config;
+
 // TODO: function needs styling correction and refactoring
 function sendFile(file, temp_file) {
   const formData = {
