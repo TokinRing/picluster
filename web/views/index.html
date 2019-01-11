@@ -30,7 +30,7 @@
 			callback();
 		}
 
-		/**
+		/** TODO: Migrate to link generation engine
 				function build_doc_links() {
 					var output = '';
 
@@ -62,15 +62,6 @@
 					$('#iframe_a').attr('src', '/docs.html?doc_id=' + doc_id);
 				}
 		**/
-
-		function initialize_iframe_height() {
-			document.getElementById("div_iframe").style.height = document.getElementById("iframe_a").contentWindow.document.body.scrollHeight + "px";
-		}
-
-		function resize_iframe_height(iframe) {
-			document.getElementById("div_iframe").style.height = "calc(100% - 4vw)";
-		}
-
 
 		$(document).ready(function() {
 			$('#exec').click(function() {
@@ -176,6 +167,7 @@
 			e.stopPropagation();
 		});
 
+		/** Not needed now that authentication is handled with middleware
 		function hideshow(id) {
 			var element = document.getElementById(id);
 			element.style.display = element.style.display == 'block' ? 'none' : 'block';
@@ -187,6 +179,7 @@
 			hideshow('menu');
 			hideshow('content');
 		});
+		*/
 
 		function getToken() {
 			return token;
@@ -194,26 +187,6 @@
 
 		function getVersion(){
 			return version;
-		}
-
-		function login() {
-			var username = document.getElementById("user").value;;
-			var password = document.getElementById("password").value;
-			$.post("/", {
-				username: username,
-				password: password
-			}, function(auth) {
-				token = auth.token ? (
-					hideshow('login'),
-					hideshow('login'),
-					hideshow('menu'),
-					hideshow('content'),
-					auth.token
-				) : (
-					alert('Access Denied!'),
-					hideshow('login')
-				)
-			});
 		}
 	</script>
 
