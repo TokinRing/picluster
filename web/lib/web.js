@@ -5,8 +5,8 @@
 const path = require('path');
 const fs = require('fs');
 
-module.exports = (app) => {
-  generate_api_token: function generate_api_token() {
+module.exports = {
+  generate_api_token: () => {
     const possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
     const api_token_length = 32;
     let api_token = "";
@@ -16,20 +16,20 @@ module.exports = (app) => {
     }
 
     return api_token;
-  };
+  },
 
   get_file_list_by_extension: (dirpath, extention) => {
     const files = fs.readdirSync(dirpath);
-    const output = [];
+    let file_list = [];
 
     for (const i in files) {
       if (path.extname(files[i]) === extention) {
-        output.push(files[i]);
+        file_list.push(files[i]);
       }
     }
 
-    return output;
-  };
+    return file_list;
+  },
 
   /*
   Removing for now
@@ -59,7 +59,7 @@ module.exports = (app) => {
     } catch (error) {
       console.log('\nError parsing JSON while trying to update config');
     }
-  };
+  },
 
   updateConfig: (payload) => {
     let updated_config_file = '';
@@ -79,5 +79,6 @@ module.exports = (app) => {
         }
       });
     }, 10000);
-  };
+  }
+
 };

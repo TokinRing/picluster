@@ -14,7 +14,7 @@ const request_timeout = 5000;
 let {token} = config;
 let {server_port} = config;
 
-module.exports = (app) => {
+module.exports = {
   // TODO: function needs styling correction and refactoring
   sendFile: (file, temp_file) => {
     const formData = {
@@ -41,7 +41,7 @@ module.exports = (app) => {
         console.log('Upload successful!');
       }
     });
-  };
+  },
 
   getData: () => {
     setTimeout(() => {
@@ -63,7 +63,7 @@ module.exports = (app) => {
       });
       getData();
     }, 5000); // TODO: Change to a constant from a config value
-  };
+  },
 
   display_log: (callback) => {
     const options = {
@@ -82,7 +82,7 @@ module.exports = (app) => {
         });
       }, request_timeout);
     });
-  };
+  },
 
   clear_log: (callback) => {
     const options = {
@@ -97,5 +97,5 @@ module.exports = (app) => {
         console.log('\nError clearing log: ' + error);
       }
     });
-  };
+  }
 };
