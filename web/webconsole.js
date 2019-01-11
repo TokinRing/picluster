@@ -83,8 +83,6 @@ let {
   server_port
 } = config;
 
-let nodedata = '';
-
 /*
 TODO: Add docs once iframe mess is purged
 if (fs.existsSync(path.normalize(doc_dir))) {
@@ -93,7 +91,7 @@ if (fs.existsSync(path.normalize(doc_dir))) {
  */
 
 // Call get data to initialize view
-getData();
+apilib.getData();
 
 if (config.ssl && config.ssl_cert && config.ssl_key) {
   console.log('SSL Web Console enabled');
