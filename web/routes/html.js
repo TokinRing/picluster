@@ -55,15 +55,15 @@ module.exports = (app) => {
     res.sendFile(path.join(__dirname, '../views/login.html'));
   });
 
-  // Handle login page
-  app.get('/login', (req, res) => {
+  // Handle signup page
+  app.get('/signup', (req, res) => {
     // If user logged in redirect to admin page
     if (req.user) {
       res.redirect("/admin");
     }
 
-    // Fall through to login page
-    res.sendFile(path.join(__dirname, '../views/login.html'));
+    // Fall through to signup page
+    res.sendFile(path.join(__dirname, '../views/signup.html'));
   });
 
   // Handle signup page
