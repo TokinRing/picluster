@@ -52,6 +52,9 @@ function getData() {
   }, 5000); // TODO: Change to a constant from a config value
 }
 
+// Call get data to initialize view
+getData();
+
 function display_log(callback) {
   const options = {
     url: `${scheme}${server}:${server_port}/log?token=${token}`,

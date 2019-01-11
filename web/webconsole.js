@@ -90,9 +90,6 @@ if (fs.existsSync(path.normalize(doc_dir))) {
 }
  */
 
-// Call get data to initialize view
-apilib.getData();
-
 if (config.ssl && config.ssl_cert && config.ssl_key) {
   console.log('SSL Web Console enabled');
   const ssl_options = {
