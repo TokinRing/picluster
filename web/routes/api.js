@@ -32,12 +32,13 @@ module.exports = (app) => {
   });
 
   // Route for user signup. If successfully created, login else throw error
-  app.post("/api/signup", function(req, res) {
+  app.post("/api/signup", (req, res) => {
     console.log(req.body);
+    let temp_token = weblib.generate_api_token;
     models.User.create({
       username: req.body.username,
       password: req.body.password,
-      api_token: weblib.generate_api_token
+      api_token: temp_token
     }).then(function() {
       res.redirect(307, "/api/login");
     }).catch(function(err) {
