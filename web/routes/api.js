@@ -37,7 +37,7 @@ module.exports = (app) => {
     models.User.create({
       username: req.body.username,
       password: req.body.password,
-      api_token: weblib.generate_api_token
+      api_token: weblib.generate_api_token()
     }).then(function() {
       res.redirect(307, "/api/login");
     }).catch(function(err) {
