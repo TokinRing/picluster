@@ -53,13 +53,8 @@ let syslog = config.syslog ? config.syslog : '';
 const {doc_dir} = config;
 let {theme} = config;
 let {token} = config;
-let user = config.web_username;
-let password = config.web_password;
 let server = config.web_connect;
 let {server_port} = config;
-
-//TODO: Still needed here?
-let logo_slug = path.join(__dirname, '/assets/images/theme/', theme, '/logo.png');
 
 /*
 TODO: Add docs once iframe mess is purged
@@ -67,6 +62,9 @@ if (fs.existsSync(path.normalize(doc_dir))) {
   app.use('/docs', express.static(path.join(__dirname, doc_dir)));
 }
  */
+
+ // Call get data to initialize view
+ apilib.getData();
 
 if (config.ssl && config.ssl_cert && config.ssl_key) {
   console.log('SSL Web Console enabled');

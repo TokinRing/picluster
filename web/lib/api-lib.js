@@ -7,22 +7,16 @@ const fs = require('fs');
 const request = require('request');
 
 let config = JSON.parse(fs.readFileSync((process.env.PICLUSTER_CONFIG ? process.env.PICLUSTER_CONFIG : '../config.json'), 'utf8'));
-let user = config.web_username;
-let password = config.web_password;
 let server = config.web_connect;
 const scheme = config.ssl ? 'https://' : 'http://';
 const ssl_self_signed = config.ssl_self_signed === false;
 const request_timeout = 5000;
-let {
-  token
-} = config;
-let {
-  server_port
-} = config;
+let {token} = config;
+let {server_port} = config;
 
 module.exports = (app) => {
   // TODO: function needs styling correction and refactoring
-  function sendFile(file, temp_file) {
+  sendFile: (file, temp_file) => {
     const formData = {
       name: 'file',
       token,
@@ -47,9 +41,9 @@ module.exports = (app) => {
         console.log('Upload successful!');
       }
     });
-  }
+  };
 
-  function getData() {
+  getData: () => {
     setTimeout(() => {
       const options = {
         url: `${scheme}${server}:${server_port}/nodes?token=${token}`,
@@ -69,12 +63,9 @@ module.exports = (app) => {
       });
       getData();
     }, 5000); // TODO: Change to a constant from a config value
-  }
+  };
 
-  // Call get data to initialize view
-  getData();
-
-  function display_log(callback) {
+  display_log: (callback) => {
     const options = {
       url: `${scheme}${server}:${server_port}/log?token=${token}`,
       rejectUnauthorized: ssl_self_signed
@@ -91,9 +82,9 @@ module.exports = (app) => {
         });
       }, request_timeout);
     });
-  }
+  };
 
-  function clear_log(callback) {
+  clear_log: (callback) => {
     const options = {
       url: `${scheme}${server}:${server_port}/clearlog?token=${token}`,
       rejectUnauthorized: ssl_self_signed
@@ -106,5 +97,5 @@ module.exports = (app) => {
         console.log('\nError clearing log: ' + error);
       }
     });
-  }
+  };
 };

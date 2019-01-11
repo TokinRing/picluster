@@ -21,9 +21,12 @@
     "node-gyp": "",
     "passport": "^0.4.0",
     "passport-local": "^1.0.0",
+    "pg": "^7.7.1",
+    "pg-hstore": "^2.3.2",
     "request": "",
     "request-debug": "",
     "sequelize": "^4.42.0",
+    "sqlite3": "^4.0.4",
     "sys": ""
   }
 }

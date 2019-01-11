@@ -6,7 +6,7 @@ const path = require('path');
 const fs = require('fs');
 
 module.exports = (app) => {
-  function generate_api_token() {
+  generate_api_token: () => {
     const possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
     const api_token_length = 64;
     let api_token = "";
@@ -16,9 +16,9 @@ module.exports = (app) => {
     }
 
     return api_token;
-  }
+  };
 
-  function get_file_list_by_extention(dirpath, extention) {
+  get_file_list_by_extension: (dirpath, extention) => {
     const files = fs.readdirSync(dirpath);
     const output = [];
 
@@ -29,7 +29,7 @@ module.exports = (app) => {
     }
 
     return output;
-  }
+  };
 
   /*
   Removing for now
@@ -47,12 +47,10 @@ module.exports = (app) => {
   }
     */
 
-  function reloadVariables() {
+  reloadVariables: () => {
     try {
       config = JSON.parse(fs.readFileSync((process.env.PICLUSTER_CONFIG ? process.env.PICLUSTER_CONFIG : '../config.json'), 'utf8'));
       token = config.token;
-      user = config.web_username;
-      password = config.web_password;
       server = config.web_connect;
       server_port = config.server_port;
       syslog = config.syslog;
@@ -61,9 +59,9 @@ module.exports = (app) => {
     } catch (error) {
       console.log('\nError parsing JSON while trying to update config');
     }
-  }
+  };
 
-  function updateConfig(payload) {
+  updateConfig: (payload) => {
     let updated_config_file = '';
 
     if (process.env.PICLUSTER_CONFIG) {
@@ -81,5 +79,5 @@ module.exports = (app) => {
         }
       });
     }, 10000);
-  }
+  };
 };
