@@ -8,7 +8,6 @@ const session = require('express-session');
 const request = require('request');
 const bodyParser = require('body-parser');
 
-
 // Import configured passport
 const passport = require("./config/passport");
 
@@ -16,7 +15,7 @@ const passport = require("./config/passport");
 let models = require("./models");
 
 // Import the picluster web libs
-let lib = require("./lib/picluster-web-lib");
+let weblib = require("./lib/web-lib");
 let apilib = require("./lib/api-lib");
 
 // Require middleware to check user login status

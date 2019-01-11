@@ -9,7 +9,7 @@ const models = require("../models");
 const passport = require("../config/passport");
 
 // Pull in libs
-const lib = require("../lib/picluster-web-lib");
+const weblib = require("../lib/web-lib");
 const apilib = require("../lib/api-lib");
 
 // Require middleware to check user login status
@@ -26,9 +26,8 @@ module.exports = (app) => {
   ////
 
   // Use passport.authenticate middleware with local strategy
-  // If credentials are valid send to admin page else throw error
-  app.post("/api/login", passport.authenticate("local"), function(req, res) {
-    // Send user back to the admin page, redirect will happen there
+  // If credentials are valid send to admin page
+  app.post("/api/login", passport.authenticate("local"), (req, res) => {
     res.json("/admin");
   });
 
@@ -38,7 +37,7 @@ module.exports = (app) => {
     models.User.create({
       username: req.body.username,
       password: req.body.password,
-      api_token: generate_api_token
+      api_token: weblib.generate_api_token()
     }).then(function() {
       res.redirect(307, "/api/login");
     }).catch(function(err) {

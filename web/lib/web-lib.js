@@ -1,6 +1,6 @@
 /*jshint esversion: 6 */
 // This is where abstract and modular functions for the web gui go
-// include with ```const lib = require("../lib/picluster-web-lib");```
+// include with ```const weblib = require("../lib/web-lib");```
 
 const path = require('path');
 const fs = require('fs');
