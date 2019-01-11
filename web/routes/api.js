@@ -5,8 +5,13 @@
 // Require our models and configured passport
 const models = require("../models");
 const passport = require("../config/passport");
+
+// Pull in libs
 const lib = require("../lib/picluster-web-lib");
 const apilib = require("../lib/api-lib");
+
+// Require middleware to check user login status
+const is_authenticated = require('../config/middleware/is_authenticated');
 
 module.exports = (app) => {
   ////
