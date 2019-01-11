@@ -4,6 +4,7 @@
 
 const path = require('path');
 const fs = require('fs');
+const request = require('request');
 
 let config = JSON.parse(fs.readFileSync((process.env.PICLUSTER_CONFIG ? process.env.PICLUSTER_CONFIG : '../config.json'), 'utf8'));
 let user = config.web_username;

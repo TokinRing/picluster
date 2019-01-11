@@ -4,9 +4,10 @@ const https = require('https');
 const fs = require('fs');
 const path = require('path');
 const express = require('express');
+const session = require('express-session');
 const request = require('request');
 const bodyParser = require('body-parser');
-const session = require('express-session');
+
 
 // Import configured passport
 const passport = require("./config/passport");
