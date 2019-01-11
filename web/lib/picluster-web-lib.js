@@ -2,6 +2,9 @@
 // This is where abstract and modular functions for the web gui go
 // include with ```const lib = require("../lib/picluster-web-lib");```
 
+const path = require('path');
+const fs = require('fs');
+
 function generate_api_token() {
   const possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
   const api_token_length = 64;
@@ -13,3 +16,68 @@ function generate_api_token() {
 
   return api_token;
 }
+
+function get_file_list_by_extention(dirpath, extention) {
+  const files = fs.readdirSync(dirpath);
+  const output = [];
+
+  for (const i in files) {
+    if (path.extname(files[i]) === extention) {
+      output.push(files[i]);
+    }
+  }
+
+  return output;
+}
+
+/*
+Removing for now
+
+function serve_doc_pages() {
+  const doc_pages = get_file_list_by_extention(path.join(__dirname, doc_dir.toString()), '.md');
+
+  for (const i in doc_pages) {
+    if (i) {
+      app.get('/doc' + i, (req, res) => {
+        res.sendFile(path.join(__dirname + '/' + doc_dir + '/' + doc_pages[i]));
+      });
+    }
+  }
+}
+  */
+
+  function reloadVariables() {
+    try {
+      config = JSON.parse(fs.readFileSync((process.env.PICLUSTER_CONFIG ? process.env.PICLUSTER_CONFIG : '../config.json'), 'utf8'));
+      token = config.token;
+      user = config.web_username;
+      password = config.web_password;
+      server = config.web_connect;
+      server_port = config.server_port;
+      syslog = config.syslog;
+      theme = config.theme;
+      logo_slug = path.join(__dirname, '/assets/images/theme/', theme, '/logo.png');
+    } catch (error) {
+      console.log('\nError parsing JSON while trying to update config');
+    }
+  }
+
+  function updateConfig(payload) {
+    let updated_config_file = '';
+
+    if (process.env.PICLUSTER_CONFIG) {
+      updated_config_file = process.env.PICLUSTER_CONFIG;
+    } else {
+      updated_config_file = '../config.json';
+    }
+
+    setTimeout(() => {
+      fs.writeFile(updated_config_file, payload, err => {
+        if (err) {
+          console.log(err);
+        } else {
+          reloadVariables();
+        }
+      });
+    }, 10000);
+  }

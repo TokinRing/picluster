@@ -2,11 +2,18 @@
 const path = require('path');
 const fs = require('fs');
 
+////
+// TODO: saveFile needs refactoring
+///
+
 // Parse JSON config
 let config = JSON.parse(fs.readFileSync((process.env.PICLUSTER_CONFIG ? process.env.PICLUSTER_CONFIG : '../config.json'), 'utf8'));
 
 // Require middleware to check user login status
 const is_authenticated = require('../config/middleware/is_authenticated');
+
+// Require api libs
+const apilib = require("../lib/api-lib");
 
 // See! With ONE LINE! How hard is that? :p
 let theme = config.theme;
@@ -191,4 +198,7 @@ module.exports = (app) => {
   app.get('/terminal.html', (req, res) => {
     res.sendFile(path.join(__dirname, '../views/terminal.html'));
   });
+
+  // TODO: Migrate to html routes, once that goddamn iframe is removed
+  // serve_doc_pages();
 };
