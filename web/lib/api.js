@@ -1,6 +1,6 @@
 /*jshint esversion: 6 */
 // This is where abstract and modular functions for the api go
-// include with ```const api-lib = require("../lib/api-lib");```
+// include with ```const apilib = require("../lib/api");```
 
 const path = require('path');
 const fs = require('fs');

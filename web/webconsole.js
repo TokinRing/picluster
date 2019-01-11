@@ -14,9 +14,9 @@ const passport = require("./config/passport");
 // Import the models folder
 let models = require("./models");
 
-// Import the picluster web libs
-let weblib = require("./lib/web-lib");
-let apilib = require("./lib/api-lib");
+// Import the picluster libs
+let weblib = require("./lib/web");
+let apilib = require("./lib/api");
 
 // Require middleware to check user login status
 const is_authenticated = require("./config/middleware/is_authenticated");

@@ -13,7 +13,7 @@ let config = JSON.parse(fs.readFileSync((process.env.PICLUSTER_CONFIG ? process.
 const is_authenticated = require('../config/middleware/is_authenticated');
 
 // Require api libs
-const apilib = require("../lib/api-lib");
+const apilib = require("../lib/api");
 
 // See! With ONE LINE! How hard is that? :p
 let theme = config.theme;
