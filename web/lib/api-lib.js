@@ -12,8 +12,7 @@ let server = config.web_connect;
 const scheme = config.ssl ? 'https://' : 'http://';
 const ssl_self_signed = config.ssl_self_signed === false;
 const request_timeout = 5000;
-
-// There, one lined it.
+let {token} = config;
 let {server_port} = config;
 
 // TODO: function needs styling correction and refactoring
