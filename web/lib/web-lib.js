@@ -5,46 +5,47 @@
 const path = require('path');
 const fs = require('fs');
 
-function generate_api_token() {
-  const possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-  const api_token_length = 64;
-  let api_token = "";
+module.exports = (app) => {
+  function generate_api_token() {
+    const possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+    const api_token_length = 64;
+    let api_token = "";
 
-  for (let i = 0; i <= api_token_length; i++) {
-    api_token += possible.charAt(Math.floor(Math.random() * possible.length));
+    for (let i = 0; i <= api_token_length; i++) {
+      api_token += possible.charAt(Math.floor(Math.random() * possible.length));
+    }
+
+    return api_token;
   }
 
-  return api_token;
-}
+  function get_file_list_by_extention(dirpath, extention) {
+    const files = fs.readdirSync(dirpath);
+    const output = [];
 
-function get_file_list_by_extention(dirpath, extention) {
-  const files = fs.readdirSync(dirpath);
-  const output = [];
+    for (const i in files) {
+      if (path.extname(files[i]) === extention) {
+        output.push(files[i]);
+      }
+    }
 
-  for (const i in files) {
-    if (path.extname(files[i]) === extention) {
-      output.push(files[i]);
+    return output;
+  }
+
+  /*
+  Removing for now
+
+  function serve_doc_pages() {
+    const doc_pages = get_file_list_by_extention(path.join(__dirname, doc_dir.toString()), '.md');
+
+    for (const i in doc_pages) {
+      if (i) {
+        app.get('/doc' + i, (req, res) => {
+          res.sendFile(path.join(__dirname + '/' + doc_dir + '/' + doc_pages[i]));
+        });
+      }
     }
   }
-
-  return output;
-}
-
-/*
-Removing for now
-
-function serve_doc_pages() {
-  const doc_pages = get_file_list_by_extention(path.join(__dirname, doc_dir.toString()), '.md');
-
-  for (const i in doc_pages) {
-    if (i) {
-      app.get('/doc' + i, (req, res) => {
-        res.sendFile(path.join(__dirname + '/' + doc_dir + '/' + doc_pages[i]));
-      });
-    }
-  }
-}
-  */
+    */
 
   function reloadVariables() {
     try {
@@ -81,3 +82,4 @@ function serve_doc_pages() {
       });
     }, 10000);
   }
+};
