@@ -165,9 +165,9 @@
 
 			// Render menu dropdown the right way
 			$('#menu nav li').hover(function() {
-				$('.dropdown', this).stop().slideDown(100);
+				$('ul', this).stop().slideDown(100);
 			}, function() {
-				$('.dropdown', this).stop().slideUp(100);
+				$('ul', this).stop().slideUp(100);
 			});
 		});
 
@@ -241,36 +241,8 @@
 	</div>
 
 	<script>
+		// TODO: There has to be a better place for this
 		//build_docs_nav_menu();
-
-		/** Previous authentication variables unnecessary now
-		var modal = document.getElementById('login');
-		var span = document.getElementsByClassName("close")[0];
-		var submit_button = document.getElementById("submit_button");
-
-
-
-		span.onclick = function() {
-			modal.style.display = "none";
-		}
-
-		submit_button.onclick = function() {
-			modal.style.display = "none";
-			login();
-		}
-
-		modal.style.display = "block";
-
-		$("html").click(function() {
-			$(".dropdown").hide();
-		});
-
-		$("nav ul li a:not(:only-child)").click(function(navmenu) {
-			$(this).siblings(".dropdown").toggle();
-
-			$(".dropdown").not($(this).siblings()).hide();
-			navmenu.stopPropagation();
-		});
 	</script>
 
 	<div id="content">
@@ -278,11 +250,11 @@
 		<div style="clear: both;"></div>
 	</div>
 
+	<!-- its time to get rid of this lop of shit
 	<div id="div_iframe">
-		<!-- its time to get rid of this lop of shit
 		<iframe src="/blank.html" id="iframe_a" name="iframe_a">
-		-->
 	</div>
+	-->
 </body>
 
 </html>
