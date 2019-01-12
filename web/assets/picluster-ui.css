@@ -219,7 +219,6 @@ textarea {
   text-align: center;
 }
 
-/* using jquery over css
 .dropdown {
   display: none;
   position: absolute;
@@ -228,6 +227,7 @@ textarea {
   box-shadow: 0 4px 10px #565051;
 }
 
+/*  using jquery over css
 .dropdown::after {
   content: '';
   position: absolute;
