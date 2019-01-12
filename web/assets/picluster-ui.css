@@ -263,7 +263,8 @@ textarea {
 #login {}
 
 #menu {
-  position: fixed;
+  position: relative;
+  display: inline-block;
   width: 100%;
   z-index: 1;
 }
