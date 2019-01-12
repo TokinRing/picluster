@@ -155,6 +155,12 @@
 
 			//build_doc_links();
 
+			// Render menu dropdown the right way
+			$("#menu nav li").hover(function() {
+				$(".dropdown", this).slideDown(100);
+			}, function() {
+				$(".dropdown", this).stop().slideUp(100);
+			});
 		});
 
 		/** yea, lets do this whole "menu" rendering the right way
@@ -195,13 +201,6 @@
 		// Load menu html into div
 		$(function() {
 			$("#menu").load("menu.html");
-		});
-
-		// Render menu dropdown the right way
-		$("#menu nav li").hover(function() {
-			$(".dropdown", this).slideDown(100);
-		}, function() {
-			$(".dropdown", this).stop().slideUp(100);
 		});
 	</script>
 </head>
