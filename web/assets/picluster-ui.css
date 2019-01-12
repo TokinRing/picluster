@@ -34,25 +34,28 @@ input {
 }
 
 nav {
+  /*
   margin: 0 auto;
   max-width: 100%;
   max-height: 100%;
+  */
+  float: left;
   background: #565051;
   z-index: 10;
 }
 
-/*
 nav::after {
   display: block;
   content: '';
   clear: both;
 }
-*/
 
 nav ul {
+  /*
   padding: 0;
   margin: 0;
   list-style: none;
+  */
   text-align: center;
 }
 
@@ -70,10 +73,12 @@ nav ul li a {
   padding: 1vw;
   display: block;
   color: rgba(255, 255, 255, .9);
+  /*
   text-decoration: none;
   font-size: 2vw;
   border-top: 2px solid transparent;
   border-bottom: 2px solid transparent;
+  */
 }
 
 /*
@@ -102,11 +107,14 @@ nav ul li ul li {
 }
 
 nav ul li ul li a {
-  display: block padding: 0.9rem;
+  display: block;
+  padding: 0.9rem;
+  color: #4a5666;
+  /*
   line-height: 1.7rem;
   background: transparent;
-  color: #4a5666;
   border-bottom: 1px solid #DDE0E7;
+  */
 }
 
 nav ul li ul li:hover a {
