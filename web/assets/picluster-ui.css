@@ -34,11 +34,9 @@ input {
 }
 
 nav {
-  /*
   margin: 0 auto;
   max-width: 100%;
   max-height: 100%;
-  */
   float: left;
   background: #565051;
   z-index: 10;
@@ -64,7 +62,7 @@ nav ul {
 nav ul li {
   float: left;
   display: inline;
-  /*position: relative;*/
+  position: relative;
 }
 
 nav ul li:hover {
@@ -75,15 +73,13 @@ nav ul li a {
   padding: 1vw;
   display: block;
   color: rgba(255, 255, 255, .9);
-  /*
   text-decoration: none;
   font-size: 2vw;
   border-top: 2px solid transparent;
   border-bottom: 2px solid transparent;
-  */
 }
 
-/*
+
 nav ul li a:hover,
 nav ul li a:focus {
   background: #565051;
@@ -93,6 +89,7 @@ nav ul li a:focus {
   color: white;
 }
 
+/*
 nav ul li a:not(:only-child)::after {
   padding-left: 4px;
   content: ' ▾';
