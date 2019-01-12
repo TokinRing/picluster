@@ -161,10 +161,10 @@
 			//build_doc_links();
 
 			// Provide menu with javascript disabled
-			$('nav li ul').hide().removeClass('dropdown');
+			//$('nav li ul').hide().removeClass('dropdown');
 
 			// Render menu dropdown the right way
-			$('nav li').hover(function() {
+			$('nav ul li').hover(function() {
 				$('ul', this).stop().slideDown(100);
 			}, function() {
 				$('ul', this).stop().slideUp(100);
