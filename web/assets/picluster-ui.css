@@ -122,10 +122,6 @@ nav ul li:hover ul.dropdown {
   display: block;
 }
 
-ul.dropdown li {
-  z-index: 1;
-}
-
 button {
   background-color: #565051;
   border: none;
@@ -206,13 +202,13 @@ textarea {
   text-align: center;
 }
 
+/* using jquery over css
 .dropdown {
   display: none;
   position: absolute;
   margin-top: 3px;
   background: linear-gradient(to bottom right, white, #F8F8F8) !important;
   box-shadow: 0 4px 10px #565051;
-  overflow-y: scroll;
 }
 
 .dropdown::after {
@@ -230,6 +226,7 @@ textarea {
 .dropdown:hover::after {
   border-bottom: 8px solid #F6F7F9;
 }
+*/
 
 .close {
   color: white;
