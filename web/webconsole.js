@@ -65,7 +65,7 @@ if (fs.existsSync(path.normalize(doc_dir))) {
  */
 
 // Call get data to initialize view
-apilib.getData();
+apilib.getData;
 
 // TODO: Refactor SSL logic into middleware
 if (config.ssl && config.ssl_cert && config.ssl_key) {

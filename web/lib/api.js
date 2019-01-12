@@ -16,7 +16,7 @@ let {server_port} = config;
 
 module.exports = {
   // TODO: function needs styling correction and refactoring
-  sendFile: function sendFile(file, temp_file) {
+  sendFile: (file, temp_file) => {
     const formData = {
       name: 'file',
       token,
