@@ -8,25 +8,25 @@ const session = require('express-session');
 const request = require('request');
 const bodyParser = require('body-parser');
 
-// Import configured passport
+// Import configured passport, models and libs
 const passport = require("./config/passport");
-
-// Import the models folder
 let models = require("./models");
-
-// Import the picluster libs
 let weblib = require("./lib/web");
 let apilib = require("./lib/api");
-
-// Require middleware to check user login status
 const is_authenticated = require("./config/middleware/is_authenticated");
 
+// Load config (...for now)
 let config = JSON.parse(fs.readFileSync((process.env.PICLUSTER_CONFIG ? process.env.PICLUSTER_CONFIG : '../config.json'), 'utf8'));
 
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = config.ssl_self_signed ? '0' : '1';
 
+// Initialize app
 const app = express();
+
+// TODO: look into log warnings on startup
 app.use(bodyParser());
+
+// Serve static assets (js, css, images, etc)
 app.use('/assets', express.static(path.join(__dirname, 'assets'), {
   maxage: '48h'
 }));
@@ -41,10 +41,11 @@ app.use(session({ secret: config.session_secret, resave: true, saveUninitialized
 app.use(passport.initialize());
 app.use(passport.session());
 
-// Require api and html routes
+// Require api and html routes in app
 require("./routes/html.js")(app);
 require("./routes/api.js")(app);
 
+// Config variables
 const scheme = config.ssl ? 'https://' : 'http://';
 const ssl_self_signed = config.ssl_self_signed === false;
 const request_timeout = 5000;
@@ -66,6 +67,7 @@ if (fs.existsSync(path.normalize(doc_dir))) {
 // Call get data to initialize view
 apilib.getData();
 
+// TODO: Refactor SSL logic into middleware
 if (config.ssl && config.ssl_cert && config.ssl_key) {
   console.log('SSL Web Console enabled');
   const ssl_options = {

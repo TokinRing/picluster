@@ -97,7 +97,7 @@ nav ul li a:not(:only-child)::after {
 */
 
 nav ul li ul {
-  /*display: none;*/
+  display: none;
   position: absolute;
   width: 190px;
 }
