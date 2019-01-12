@@ -226,7 +226,6 @@ textarea {
   box-shadow: 0 4px 10px #565051;
 }
 
-/*  using jquery over css
 .dropdown::after {
   content: '';
   position: absolute;
@@ -242,7 +241,6 @@ textarea {
 .dropdown:hover::after {
   border-bottom: 8px solid #F6F7F9;
 }
-*/
 
 .close {
   color: white;
