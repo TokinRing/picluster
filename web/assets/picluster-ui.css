@@ -114,11 +114,11 @@ nav ul li ul li a:focus {
   color: #111;
 }
 
-nav ul li ul.fallback {
+nav ul li ul.dropdown {
   display: none;
 }
 
-nav ul li:hover ul.fallback {
+nav ul li:hover ul.dropdown {
   display: block;
 }
 
