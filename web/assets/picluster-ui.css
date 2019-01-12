@@ -62,7 +62,7 @@ nav ul {
 nav ul li {
   float: left;
   display: inline;
-  position: relative;
+  /*position: relative;*/
 }
 
 nav ul li:hover {
@@ -79,7 +79,7 @@ nav ul li a {
   border-bottom: 2px solid transparent;
 }
 
-
+/*
 nav ul li a:hover,
 nav ul li a:focus {
   background: #565051;
@@ -88,6 +88,7 @@ nav ul li a:focus {
 nav ul li a:focus {
   color: white;
 }
+*/
 
 /*
 nav ul li a:not(:only-child)::after {
@@ -106,7 +107,7 @@ nav ul li ul {
 }
 
 nav ul li ul li {
-  min-width: 190px;
+  min-width: 110px;
 }
 
 nav ul li ul li a {

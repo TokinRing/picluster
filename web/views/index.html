@@ -106,7 +106,7 @@
 				$('#iframe_a').attr('src', '/rsyslog.html');
 			});
 			$('#nodes-list').click(function() {
-				$('#iframe_a').attr('src', '/nodes-list.html');
+				$('#content').load('/nodes-list.html');
 			});
 			$('#containers-layout').click(function() {
 				$('#iframe_a').attr('src', '/containers-layout.html');
@@ -241,7 +241,7 @@
 
 	<nav>
 		<ul>
-			<li id="nav_logo"><a href='/' target="iframe_a" id="logo"><img src="/assets/images/sphere.png" id="nav_logo_image"></a>
+			<li id="nav_logo"><a href='/' id="logo"><img src="/assets/images/sphere.png" id="nav_logo_image"></a>
 			<li id="nav_system"><a href="#!">Nodes</a>
 				<ul class="dropdown">
 					<li><a href="#" id="nodes-list">List</a></li>
