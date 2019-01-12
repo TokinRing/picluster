@@ -1,16 +1,3 @@
-<script>
-	$(document).ready(function() {
-		// Provide menu with javascript disabled
-		$('nav li ul').hide().removeClass('fallback');
-
-		// Render menu dropdown the right way
-		$("nav li").hover(function() {
-			$("ul", this).stop.slideDown(100);
-		}, function() {
-			$("ul", this).stop().slideUp(100);
-		});
-	});
-</script>
 <nav>
 	<ul>
 		<li id="nav_logo"><a href='/blank.html' target="iframe_a" id="logo"><img src="/assets/images/sphere.png" id="nav_logo_image"></a>
