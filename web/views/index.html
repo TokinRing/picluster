@@ -5,6 +5,7 @@
 	<script src="/assets/jquery.min.js"></script>
 	<link rel="stylesheet" href="/assets/jquery-ui.css">
 	<script src="/assets/jquery-ui.js"></script>
+	<script type="text/javascript" src="assets/user.js"></script>
 	<link rel="stylesheet" href="/assets/picluster-ui.css">
 	<script src="/assets/moment.js"></script>
 	<link rel="apple-touch-icon" sizes="180x180" href="/assets/images/apple-touch-icon.png">
@@ -156,6 +157,7 @@
 
 		});
 
+		/** yea, lets do this whole "menu" rendering the right way
 		$("html").click(function() {
 			$(".dropdown").hide();
 		});
@@ -166,6 +168,7 @@
 			$(".dropdown").not($(this).siblings()).hide();
 			e.stopPropagation();
 		});
+		*/
 
 		/** Not needed now that authentication is handled with middleware
 		function hideshow(id) {
@@ -185,17 +188,21 @@
 			return token;
 		}
 
-		function getVersion(){
+		function getVersion() {
 			return version;
 		}
-	</script>
 
-	<script type="text/javascript" src="assets/user.js"></script>
+		// Load menu html into div
+		$(function() {
+			$("#menu").load("menu.html");
+		});
 
-	<script>
-	$(function(){
-		$("#menu").load("menu.html");
-	});
+		// Render menu dropdown the right way
+		$("#menu li").hover(function() {
+			$(".dropdown", this).slideDown(100);
+		}, function() {
+			$(".dropdown", this).stop().slideUp(100);
+		});
 	</script>
 </head>
 
@@ -232,34 +239,36 @@
 	</div>
 
 	<script>
+		//build_docs_nav_menu();
+
+		/**
 		var modal = document.getElementById('login');
 		var span = document.getElementsByClassName("close")[0];
 		var submit_button = document.getElementById("submit_button");
 
-		//build_docs_nav_menu();
 
-		span.onclick = function () {
+
+		span.onclick = function() {
 			modal.style.display = "none";
 		}
 
-		submit_button.onclick = function () {
+		submit_button.onclick = function() {
 			modal.style.display = "none";
 			login();
 		}
 
 		modal.style.display = "block";
 
-		$("html").click(function () {
+		$("html").click(function() {
 			$(".dropdown").hide();
 		});
 
-		$("nav ul li a:not(:only-child)").click(function (navmenu) {
+		$("nav ul li a:not(:only-child)").click(function(navmenu) {
 			$(this).siblings(".dropdown").toggle();
 
 			$(".dropdown").not($(this).siblings()).hide();
 			navmenu.stopPropagation();
 		});
-
 	</script>
 
 	<div id="content">
