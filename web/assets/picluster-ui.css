@@ -55,7 +55,12 @@ nav ul {
 
 nav ul li {
   float: left;
-  position: relative;
+  display: inline;
+  /*position: relative;*/
+}
+
+nav ul li:hover {
+  background: #565051;
 }
 
 nav ul li a {
@@ -82,22 +87,39 @@ nav ul li a:not(:only-child)::after {
   content: ' ▾';
 }
 
+nav ul li ul {
+  position: absolute;
+  width: 190px;
+}
+
 nav ul li ul li {
   min-width: 190px;
 }
 
 nav ul li ul li a {
-  padding: 0.9rem;
+  display: block padding: 0.9rem;
   line-height: 1.7rem;
   background: transparent;
   color: #4a5666;
   border-bottom: 1px solid #DDE0E7;
 }
 
+nav ul li ul li:hover a {
+  background: #F7F7F7;
+}
+
 nav ul li ul li a:hover,
 nav ul li ul li a:focus {
   background: #e7e9ef;
   color: #111;
+}
+
+nav ul li ul.fallback {
+  display: none;
+}
+
+nav ul li:hover ul.fallback {
+  display: block;
 }
 
 ul.dropdown li {
@@ -124,6 +146,7 @@ textarea {
     top: -300px;
     opacity: 0
   }
+
   to {
     top: 0;
     opacity: 1
@@ -135,6 +158,7 @@ textarea {
     top: -300px;
     opacity: 0
   }
+
   to {
     top: 0;
     opacity: 1
@@ -230,7 +254,7 @@ textarea {
 }
 
 #div_iframe {
-  width:100%;
+  width: 100%;
   padding-top: 4.3vw;
   height: calc(100% - 4vw);
   z-index: -1;
@@ -240,7 +264,7 @@ textarea {
   display: block;
   border-width: 0px;
   height: 100%;
-  width:100%;
+  width: 100%;
   overflow-y: scroll;
 }
 
