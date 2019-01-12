@@ -100,6 +100,9 @@ nav ul li ul {
   display: none;
   position: absolute;
   width: 190px;
+  margin-top: 3px;
+  background: linear-gradient(to bottom right, white, #F8F8F8) !important;
+  box-shadow: 0 4px 10px #565051;
 }
 
 nav ul li ul li {
