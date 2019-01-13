@@ -451,6 +451,12 @@ textarea {
   width: 75px;
 }
 
+.signup {
+  display: inline;
+  float: right;
+  position: absolute;
+}
+
 /**
 * ID elements
 */
