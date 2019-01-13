@@ -4,21 +4,19 @@
 
 const multer = require('multer');
 
-// Require our models and configured passport
+// Require models, configured passport and libs
 const models = require("../models");
 const passport = require("../config/passport");
-
-// Pull in libs
 const weblib = require("../lib/web");
 const apilib = require("../lib/api");
-
-// Require middleware to check user login status
 const is_authenticated = require('../config/middleware/is_authenticated');
 
 // Specify upload destination path
 const upload = multer({
   dest: '../'
 });
+
+let nodedata = '';
 
 module.exports = (app) => {
   ////
