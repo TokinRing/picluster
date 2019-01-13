@@ -1,15 +1,15 @@
 $(document).ready(function() {
   // Get form and input references
-  var signUpForm = $("form.signup");
-  var usernameInput = $("input#username-input");
-  var passwordInput = $("input#password-input");
+  var signup_form = $("form.signup");
+  var username_input = $("input#username-input");
+  var password_input = $("input#password-input");
 
   // Validate username/password existence and execute query on submission
-  signUpForm.on("submit", function(event) {
+  signup-form.on("submit", function(event) {
     event.preventDefault();
     var user_data = {
-      username: usernameInput.val().trim(),
-      password: passwordInput.val().trim()
+      username: username_input.val().trim(),
+      password: password_input.val().trim()
     };
 
     if (!user_data.username || !user_data.password) {
@@ -20,8 +20,19 @@ $(document).ready(function() {
     signUpUser(user_data.username, user_data.password);
 
     // Reset username/password fields
-    usernameInput.val("");
-    passwordInput.val("");
+    username_input.val("");
+    password_input.val("");
+  });
+
+  // Validate username/password existence on submission
+  signup_btn.click(function() {
+    // Clear the form
+    username_input.val("");
+    password_input.val("");
+
+    // Redirect to login page
+    window.location = "/";
+    return false;
   });
 
   // POST to the signup route. If succesful, redirect to admin page
