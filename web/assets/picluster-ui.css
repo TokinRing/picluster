@@ -84,7 +84,6 @@ nav::after {
   clear: both;
 }
 */
-
 nav ul {
   /*
   padding: 0;
@@ -124,14 +123,12 @@ nav ul li a:focus {
   color: white;
 }
 */
-
 /*
 nav ul li a:not(:only-child)::after {
   padding-left: 4px;
   content: ' ▾';
 }
 */
-
 nav ul li ul {
   display: none;
   position: absolute;
@@ -171,7 +168,6 @@ nav ul li ul li a:focus {
   color: #111;
 }
 */
-
 nav ul li ul.dropdown {
   display: none;
 }
@@ -318,6 +314,7 @@ textarea {
   width: 227px;
   float: left;
 }
+
 .login-form-submit {
   display: inline;
   float: right;
@@ -379,7 +376,8 @@ textarea {
   height: 98.5%;
   width: 100%;
   background-color: rgb(0, 0, 0);
-  background-color: rgba(0, 0, 0, 0.4);3
+  background-color: rgba(0, 0, 0, 0.4);
+  3
 }
 
 .modal-description {
@@ -457,6 +455,12 @@ textarea {
   position: absolute;
 }
 
+.signup-form-submit {
+  display: inline;
+  float: right;
+  position: absolute;
+}
+
 /**
 * ID elements
 */
@@ -507,323 +511,346 @@ textarea {
 
 #nav_docs {}
 
-  #container_searching{}
-  #function_searching {}
-  #image_searching {}
-  #node_searching {}
+#container_searching {}
 
-  #landing_page {
-    text-align: center;
-    color: black;
-  }
+#function_searching {}
 
-  #modal_container {
-    height: 98.5%;
-  }
+#image_searching {}
 
-  #query {
-      font-size: 20px;
-  }
+#node_searching {}
 
-  #submit_button {
-    display: inline;
-    font-size: 16px;
-    padding: 10px 14px;
-    text-align: center;
-  }
+#landing_page {
+  text-align: center;
+  color: black;
+}
 
-  #submit_button_div {
-    text-align: center;
-  }
+#modal_container {
+  height: 98.5%;
+}
 
-  #log_search {
-    width: 100%;
-    text-align: center;
-  }
+#query {
+  font-size: 20px;
+}
 
-  #log_search_bar {
-    width:30%;
-    display: inline;
-  }
+#submit_button {
+  display: inline;
+  font-size: 16px;
+  padding: 10px 14px;
+  text-align: center;
+}
 
-  #log_search_button {
-    width: 30%;
-    display: inline;
-  }
+#submit_button_div {
+  text-align: center;
+}
 
-  #log_type {
-    width: 100%;
-    text-align: center;
-  }
+#log_search {
+  width: 100%;
+  text-align: center;
+}
 
-  #log_type_error {}
-  #log_type_failure {}
-  #log_type_warning {}
-  #log_type_today {}
+#log_search_bar {
+  width: 30%;
+  display: inline;
+}
 
-  #log_output {
-    width: 100%;
-    height: 79%;
-    padding: 0;
-    margin: 0;
-  }
+#log_search_button {
+  width: 30%;
+  display: inline;
+}
 
-  #upload-widget {
-    font-size: 18px;
-    background-color: #565051;
-    border: none;
-    color: white;
-    padding: 15px 32px;
-    text-align: center;
-    text-decoration: none;
-    display: block;
-  }
+#log_type {
+  width: 100%;
+  text-align: center;
+}
 
-  #terminal_modal {
-    background-color: #000;
-  }
+#log_type_error {}
 
-  #terminal_container {
-    max-width: 100%;
-  }
+#log_type_failure {}
 
-  #terminal {
-    width: 100%;
-  }
+#log_type_warning {}
 
-  #terminal .prompt {
-    color: #D75F00;
-    padding: 0px;
-  }
+#log_type_today {}
 
-  #terminal_container {
-    height: 89%;
-  }
+#log_output {
+  width: 100%;
+  height: 79%;
+  padding: 0;
+  margin: 0;
+}
 
-  #host {
-    font-size: 18px;
-    width: 50%;
-    display: inline;
-    margin-right: 5px;
-  }
+#upload-widget {
+  font-size: 18px;
+  background-color: #565051;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: block;
+}
 
-  #node {
-    font-size: 18px;
-    width: 50%;
-    display: inline;
-    margin-right: 5px;
-  }
+#terminal_modal {
+  background-color: #000;
+}
 
-  #node_add {
-    width: 75%;
-    display: inline-block;
-  }
+#terminal_container {
+  max-width: 100%;
+}
 
-  #node_remove {
-    width: 75%;
-    display: inline-block;
-  }
+#terminal {
+  width: 100%;
+}
 
-  #node_list {
-    font-size: 18px;
-    margin-right: 5px;
-  }
+#terminal .prompt {
+  color: #D75F00;
+  padding: 0px;
+}
 
-  #node_failover_constraint {
-    margin-bottom: 10px;
-  }
+#terminal_container {
+  height: 89%;
+}
 
-  #node_list_action_selector {
-    width: 22%;
-    display: inline-block;
-    vertical-align: top;
-    margin-right: 5px;
-  }
+#host {
+  font-size: 18px;
+  width: 50%;
+  display: inline;
+  margin-right: 5px;
+}
 
-  #container_list {
-    font-size: 16px;
-  }
+#node {
+  font-size: 18px;
+  width: 50%;
+  display: inline;
+  margin-right: 5px;
+}
 
-  #container_list_fieldset {}
-  #container_list_options_fieldset {}
+#node_add {
+  width: 75%;
+  display: inline-block;
+}
 
-  #container_list_action_selector {
-    width: 21%;
-    display: inline-block;
-    vertical-align: top;
-    margin-right: 5px;
-  }
+#node_remove {
+  width: 75%;
+  display: inline-block;
+}
 
-  #container_list_add {
-    width: 75%;
-    display: inline-block;
-  }
+#node_list {
+  font-size: 18px;
+  margin-right: 5px;
+}
 
-  #container_list_modify {
-    width: 75%;
-    display: inline-block;
-  }
+#node_failover_constraint {
+  margin-bottom: 10px;
+}
 
-  #container-add-fieldset {}
-  #container_heatbeat_fieldset {}
+#node_list_action_selector {
+  width: 22%;
+  display: inline-block;
+  vertical-align: top;
+  margin-right: 5px;
+}
 
-  #container {
-    font-size: 16px;
-  }
+#container_list {
+  font-size: 16px;
+}
 
-  #image_list_action_selector {
-    width: 21%;
-    display: inline-block;
-    vertical-align: top;
-    margin-right: 5px;
-  }
+#container_list_fieldset {}
 
-  #image_list_build {
-    width: 75%;
-    display: inline-block;
-  }
+#container_list_options_fieldset {}
 
-  #image_list_pull {
-    width: 75%;
-    display: inline-block;
-  }
+#container_list_action_selector {
+  width: 21%;
+  display: inline-block;
+  vertical-align: top;
+  margin-right: 5px;
+}
 
-  #image_list_upload {
-    width: 75%;
-    display: inline-block;
-  }
+#container_list_add {
+  width: 75%;
+  display: inline-block;
+}
 
-  #functions {
-    margin-top: 5px;
-    margin-bottom: 10px;
-  }
+#container_list_modify {
+  width: 75%;
+  display: inline-block;
+}
 
-  #function_list {
-    font-size: 18px;
-  }
+#container-add-fieldset {}
 
-  #function_list_selector {
-    width: 150px;
-    margin-right: 20px;
-    display: inline;
-  }
+#container_heatbeat_fieldset {}
 
-  #function_list_submit {
-    width: 100px;
-    display: inline;
-  }
+#container {
+  font-size: 16px;
+}
 
-  #function_output {
-    width: 100%;
-    height: 50%;
+#image_list_action_selector {
+  width: 21%;
+  display: inline-block;
+  vertical-align: top;
+  margin-right: 5px;
+}
 
-  }
+#image_list_build {
+  width: 75%;
+  display: inline-block;
+}
 
-  #function_url {
-    width: 100%;
-  }
+#image_list_pull {
+  width: 75%;
+  display: inline-block;
+}
 
-  #function-args {
-    width: 100%;
-  }
+#image_list_upload {
+  width: 75%;
+  display: inline-block;
+}
 
-  #image_list {
-    font-size: 18px;
-  }
+#functions {
+  margin-top: 5px;
+  margin-bottom: 10px;
+}
 
-  #image_list_fieldset {}
-  #image_list_options_fieldset {}
+#function_list {
+  font-size: 18px;
+}
 
-  #command_entry {
-    font-size: 18px;
-  }
+#function_list_selector {
+  width: 150px;
+  margin-right: 20px;
+  display: inline;
+}
 
-  #command_output {
-    width: 100%;
-    min-height: 100%;
-    padding: 0;
-    margin: 0;
-  }
+#function_list_submit {
+  width: 100px;
+  display: inline;
+}
 
-  #exec_output {
-    width: 100%;
-    min-height: 80%;
-    padding: 0;
-    margin: 0;
-  }
+#function_output {
+  width: 100%;
+  height: 50%;
+}
 
-  #windowfont {
-    font-size: 18px;
-  }
+#function_url {
+  width: 100%;
+}
 
-  #config_editor {
-    width: 100%;
-    height: 80%;
-  }
+#function-args {
+  width: 100%;
+}
 
-  #payload {
-    width: 100%;
-    height: 100%;
-  }
+#image_list {
+  font-size: 18px;
+}
 
-  #node_status_logo {
-    font-size: 72px;
-    max-width: 72px;
-    text-align: center;
-  }
+#image_list_fieldset {}
 
-  #source,
-  #issues,
-  #status_circle {
-    display: inline-block;
-    height: 100px;
-    text-align: center;
-    text-decoration: none;
-    vertical-align: top;
-    width: 100px;
-  }
+#image_list_options_fieldset {}
 
-  #source img,
-  #issues img {
-    height: 75px;
-    vertical-align: top;
-    width: auto;
-  }
+#command_entry {
+  font-size: 18px;
+}
 
-  #running-class {
-    cursor: pointer;
-    float: none;
-    margin: 0 auto;
-  }
+#command_output {
+  width: 100%;
+  min-height: 100%;
+  padding: 0;
+  margin: 0;
+}
 
-  #source_issues_circle {
-    text-align: center;
-  }
+#exec_output {
+  width: 100%;
+  min-height: 80%;
+  padding: 0;
+  margin: 0;
+}
 
-  #rerun_div {
-    text-align: center;
-  }
+#windowfont {
+  font-size: 18px;
+}
 
-  #config-reload-modal-body {}
-  #containers-add-modal-body {}
-  #containers-layout-modal-body {}
-  #containers-manage-modal-body {}
-  #docs-modal-body {}
-  #functions-clear-modal-body {}
-  #functions-create-modal-body {}
-  #functions-current-modal-body {}
-  #functions-viewer-modal-body {}
-  #heartbeat-modal-body {}
-  #images-manage-modal-body {}
+#config_editor {
+  width: 100%;
+  height: 80%;
+}
 
-  #images-prune-modal-body {
-    overflow-y: scroll;
-    white-space: nowrap;
-  }
+#payload {
+  width: 100%;
+  height: 100%;
+}
 
-  #images-pull-modal-body {}
-  #images-upload-modal-body {}
-  #killvip-modal-body {}
-  #nodes-add-modal-body {}
-  #nodes-list-modal-body {}
-  #nodes-removed-modal-body {}
+#node_status_logo {
+  font-size: 72px;
+  max-width: 72px;
+  text-align: center;
+}
+
+#source,
+#issues,
+#status_circle {
+  display: inline-block;
+  height: 100px;
+  text-align: center;
+  text-decoration: none;
+  vertical-align: top;
+  width: 100px;
+}
+
+#source img,
+#issues img {
+  height: 75px;
+  vertical-align: top;
+  width: auto;
+}
+
+#running-class {
+  cursor: pointer;
+  float: none;
+  margin: 0 auto;
+}
+
+#source_issues_circle {
+  text-align: center;
+}
+
+#rerun_div {
+  text-align: center;
+}
+
+#config-reload-modal-body {}
+
+#containers-add-modal-body {}
+
+#containers-layout-modal-body {}
+
+#containers-manage-modal-body {}
+
+#docs-modal-body {}
+
+#functions-clear-modal-body {}
+
+#functions-create-modal-body {}
+
+#functions-current-modal-body {}
+
+#functions-viewer-modal-body {}
+
+#heartbeat-modal-body {}
+
+#images-manage-modal-body {}
+
+#images-prune-modal-body {
+  overflow-y: scroll;
+  white-space: nowrap;
+}
+
+#images-pull-modal-body {}
+
+#images-upload-modal-body {}
+
+#killvip-modal-body {}
+
+#nodes-add-modal-body {}
+
+#nodes-list-modal-body {}
+
+#nodes-removed-modal-body {}
