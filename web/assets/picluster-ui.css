@@ -474,6 +474,7 @@ textarea {
   display: inline-block;
   width: 100%;
   z-index: 1;
+  background: #555;
 }
 
 #div_iframe {
