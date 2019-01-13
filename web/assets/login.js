@@ -26,7 +26,7 @@ $(document).ready(function() {
   });
 
   // Validate username/password existence on submission
-  signup_btn.click( function(event) {
+  signup_btn.click(function(event) {
     // Clear the form
     username_input.val("");
     password_input.val("");
