@@ -1,7 +1,7 @@
 $(document).ready(function() {
   // Get form and input references
   var login_form = $("form.login");
-  var signup_btn = $(".signup-form-submit");
+  var signup_btn = $(".signup-link-btn");
   var username_input = $("input#username-input");
   var password_input = $("input#password-input");
 
