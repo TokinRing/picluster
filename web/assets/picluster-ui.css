@@ -316,6 +316,7 @@ textarea {
   display: inline;
   margin: auto 0;
   width: 227px;
+  float: left;
 }
 .login-form-submit {
   display: inline;
