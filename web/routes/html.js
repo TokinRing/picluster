@@ -3,26 +3,27 @@ const path = require('path');
 const fs = require('fs');
 
 ////
-// TODO: saveFile needs refactoring
+// TODO: sendFile needs refactoring
 ///
 
-// Parse JSON config
+// Parse JSON config and set variable
 let config = JSON.parse(fs.readFileSync((process.env.PICLUSTER_CONFIG ? process.env.PICLUSTER_CONFIG : '../config.json'), 'utf8'));
+let {theme} = config;
 
-// Require middleware to check user login status
-const is_authenticated = require('../config/middleware/is_authenticated');
-
-// Require api libs
+// Require libs and middleware
 const apilib = require("../lib/api");
-
-// See! With ONE LINE! How hard is that? :p
-let theme = config.theme;
+const is_authenticated = require('../config/middleware/is_authenticated');
 
 // Logo slug used for themes
 let logo_slug = path.join(__dirname, '../assets/images/theme/', theme, '/logo.png');
 
 // Export the html routes to main app
 module.exports = (app) => {
+
+  ////
+  // Unauthenticated pages
+  ////
+
   // Handle favicon
   app.get('/favicon.ico', (req, res) => {
     res.sendFile(path.join(__dirname, '../assets/images/favicon.ico'));
@@ -41,7 +42,7 @@ module.exports = (app) => {
     }
 
     // Fall through to login page
-    res.sendFile(path.join(__dirname, '../views/login.html'));
+    res.sendFile(path.join(__dirname, '../login.html'));
   });
 
   // Handle login page
@@ -63,7 +64,7 @@ module.exports = (app) => {
     }
 
     // Fall through to signup page
-    res.sendFile(path.join(__dirname, '../views/signup.html'));
+    res.sendFile(path.join(__dirname, '../signup.html'));
   });
 
   // Handle signup page
@@ -74,15 +75,19 @@ module.exports = (app) => {
     }
 
     // Fall through to signup page
-    res.sendFile(path.join(__dirname, '../views/signup.html'));
+    res.sendFile(path.join(__dirname, '../signup.html'));
   });
+
+  ////
+  // Authenticated pages
+  ////
 
   // Admin page for logged in users
   app.get('/admin', is_authenticated, (req,res) => {
-    res.sendFile(path.join(__dirname, '../views/index.html'));
+    res.sendFile(path.join(__dirname, '../index.html'));
   });
 
-  app.get('/blank.html', (req, res) => {
+  app.get('/blank.html', is_authenticated, (req, res) => {
     res.sendFile(path.join(__dirname, '../views/blank.html'));
   });
 
@@ -90,28 +95,28 @@ module.exports = (app) => {
     res.sendFile(path.join(__dirname, '../views/config-edit.html'));
   });
 
-  app.get('/config-reload.html', (req, res) => {
+  app.get('/config-reload.html', is_authenticated, (req, res) => {
     res.sendFile(path.join(__dirname, '../views/config-reload.html'));
   });
 
-  app.get('/containers-layout.html', (req, res) => {
+  app.get('/containers-layout.html', is_authenticated, (req, res) => {
     res.sendFile(path.join(__dirname, '../views/containers-layout.html'));
   });
 
-  app.get('/containers-manage.html', (req, res) => {
+  app.get('/containers-manage.html', is_authenticated, (req, res) => {
     res.sendFile(path.join(__dirname, '../views/containers-manage.html'));
   });
 
   // TODO: Add or remove? not used anywhere, but is defined
-  app.get('/containers-add.html', (req, res) => {
+  app.get('/containers-add.html', is_authenticated, (req, res) => {
     res.sendFile(path.join(__dirname, '../views/containers-add.html'));
   });
 
-  app.get('/docs.html', (req, res) => {
+  app.get('/docs.html', is_authenticated, (req, res) => {
     res.sendFile(path.join(__dirname, '../views/docs.html'));
   });
 
-  app.get('/elasticsearch.html', (req, res) => {
+  app.get('/elasticsearch.html', is_authenticated, (req, res) => {
     res.sendFile(path.join(__dirname, '../views/elasticsearch.html'));
   });
 
@@ -119,87 +124,87 @@ module.exports = (app) => {
     res.sendFile(path.join(__dirname, '../views/exec.html'));
   });
 
-  app.get('/functions-clear.html', (req, res) => {
+  app.get('/functions-clear.html', is_authenticated, (req, res) => {
     res.sendFile(path.join(__dirname, '../views/functions-clear.html'));
   });
 
-  app.get('/functions-create.html', (req, res) => {
+  app.get('/functions-create.html', is_authenticated, (req, res) => {
     res.sendFile(path.join(__dirname, '../views/functions-create.html'));
   });
 
-  app.get('/functions-current.html', (req, res) => {
+  app.get('/functions-current.html', is_authenticated, (req, res) => {
     res.sendFile(path.join(__dirname, '../views/functions-current.html'));
   });
 
-  app.get('/functions-viewer.html', (req, res) => {
+  app.get('/functions-viewer.html', is_authenticated, (req, res) => {
     res.sendFile(path.join(__dirname, '../views/functions-viewer.html'));
   });
 
-  app.get('/heartbeat.html', (req, res) => {
+  app.get('/heartbeat.html', is_authenticated, (req, res) => {
     res.sendFile(path.join(__dirname, '../views/heartbeat.html'));
   });
 
-  app.get('/images-layout.html', (req, res) => {
+  app.get('/images-layout.html', is_authenticated, (req, res) => {
     res.sendFile(path.join(__dirname, '../views/images-layout.html'));
   });
 
-  app.get('/images-manage.html', (req, res) => {
+  app.get('/images-manage.html', is_authenticated, (req, res) => {
     res.sendFile(path.join(__dirname, '../views/images-manage.html'));
   });
 
-  app.get('/images-prune.html', (req, res) => {
+  app.get('/images-prune.html', is_authenticated, (req, res) => {
     res.sendFile(path.join(__dirname, '../views/images-prune.html'));
   });
 
   // TODO: Add or remove? not used anywhere, but is defined
-  app.get('/images-pull.html', (req, res) => {
+  app.get('/images-pull.html', is_authenticated, (req, res) => {
     res.sendFile(path.join(__dirname, '../views/images-pull.html'));
   });
 
   // TODO: Add or remove? not used anywhere, but is defined
-  app.get('/images-upload.html', (req, res) => {
+  app.get('/images-upload.html', is_authenticated, (req, res) => {
     res.sendFile(path.join(__dirname, '../views/images-upload.html'));
   });
 
-  app.get('/log.html', (req, res) => {
+  app.get('/log.html', is_authenticated, (req, res) => {
     res.sendFile(path.join(__dirname, '../views/log.html'));
   });
 
-  app.get('/menu.html', (req, res) => {
+  app.get('/menu.html', is_authenticated, (req, res) => {
     res.sendFile(path.join(__dirname, '../views/menu.html'));
   });
 
-  app.get('/nodes-list.html', (req, res) => {
+  app.get('/nodes-list.html', is_authenticated, (req, res) => {
     res.sendFile(path.join(__dirname, '../views/nodes-list.html'));
   });
 
-  app.get('/nodes-manage.html', (req, res) => {
+  app.get('/nodes-manage.html', is_authenticated, (req, res) => {
     res.sendFile(path.join(__dirname, '../views/nodes-manage.html'));
   });
 
   // TODO: Add or remove? not used anywhere, but is defined
-  app.get('/nodes-add.html', (req, res) => {
+  app.get('/nodes-add.html', is_authenticated, (req, res) => {
     res.sendFile(path.join(__dirname, '../views/nodes-add.html'));
   });
 
   // TODO: Add or remove? not used anywhere, but is defined
-  app.get('/nodes-remove.html', (req, res) => {
+  app.get('/nodes-remove.html', is_authenticated, (req, res) => {
     res.sendFile(path.join(__dirname, '../views/nodes-remove.html'));
   });
 
-  app.get('/rsyslog.html', (req, res) => {
+  app.get('/rsyslog.html', is_authenticated, (req, res) => {
     res.sendFile(path.join(__dirname, '../views/rsyslog.html'));
   });
 
-  app.get('/swarm.html', (req, res) => {
+  app.get('/swarm.html', is_authenticated, (req, res) => {
     res.sendFile(path.join(__dirname, '../views/swarm.html'));
   });
 
-  app.get('/syslog.html', (req, res) => {
+  app.get('/syslog.html', is_authenticated, (req, res) => {
     res.sendFile(path.join(__dirname, '../views/syslog.html'));
   });
 
-  app.get('/terminal.html', (req, res) => {
+  app.get('/terminal.html', is_authenticated, (req, res) => {
     res.sendFile(path.join(__dirname, '../views/terminal.html'));
   });
 
