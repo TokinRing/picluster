@@ -473,10 +473,6 @@ textarea {
   position: absolute;
 }
 
-.signup-btn {
-  position: fixed;
-}
-
 /**
 * ID elements
 */
@@ -554,6 +550,10 @@ textarea {
   font-size: 16px;
   padding: 10px 14px;
   text-align: center;
+}
+
+#signup-btn {
+  position: fixed;
 }
 
 #submit_button_div {
