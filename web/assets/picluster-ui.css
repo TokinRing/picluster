@@ -26,11 +26,11 @@ a:link {
 }
 
 a:visited {
-  color: black;
+  color: white;
 }
 
 button {
-  background-color: #565051;
+  background-color: #555;
   border: none;
   color: white;
   padding: 18px 35px;
@@ -73,7 +73,7 @@ nav {
   max-width: 100%;
   max-height: 100%;
   float: left;
-  background: #565051;
+  background: #555;
   z-index: 10;
 }
 
@@ -100,7 +100,7 @@ nav ul li {
 }
 
 nav ul li:hover {
-  background: #565051;
+  background: #555;
 }
 
 nav ul li a {
@@ -116,7 +116,7 @@ nav ul li a {
 /*
 nav ul li a:hover,
 nav ul li a:focus {
-  background: #565051;
+  background: #555;
 }
 
 nav ul li a:focus {
@@ -138,7 +138,7 @@ nav ul li ul {
   text-align: left;
   /*
   background: linear-gradient(to bottom right, white, #F8F8F8) !important;
-  box-shadow: 0 4px 10px #565051;
+  box-shadow: 0 4px 10px #555;
   */
 }
 
@@ -280,7 +280,7 @@ textarea {
   width: 190px;
   margin-top: 3px;
   background: linear-gradient(to bottom right, white, #F8F8F8) !important;
-  box-shadow: 0 4px 10px #565051;
+  box-shadow: 0 4px 10px #555;
 }
 
 .dropdown::after {
@@ -418,7 +418,7 @@ textarea {
 
 .modal-header {
   padding: 2px 16px;
-  background-color: #565051;
+  background-color: #555;
   color: white;
 }
 
@@ -435,7 +435,7 @@ textarea {
 
 .modal-login-header {
   padding: 2px 16px;
-  background-color: #565051;
+  background-color: #555;
   color: white;
 }
 
@@ -584,7 +584,7 @@ textarea {
 
 #upload-widget {
   font-size: 18px;
-  background-color: #565051;
+  background-color: #555;
   border: none;
   color: white;
   padding: 15px 32px;
