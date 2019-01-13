@@ -458,7 +458,6 @@ textarea {
 .signup-form-submit {
   display: inline;
   float: right;
-  position: absolute;
 }
 
 /**
