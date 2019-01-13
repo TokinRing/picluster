@@ -305,11 +305,13 @@ textarea {
 
 .form-group {}
 
-.login {
-  text-align: center;
+.login {}
+
+.login-form {
+  width: 345px;
+  margin: auto;
 }
 
-.login-form {}
 .login-form-fields {
   display: inline;
   margin: auto 0;
