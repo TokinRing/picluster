@@ -306,6 +306,7 @@ textarea {
 .login-form {
   width: 345px;
   margin: auto;
+  height: 55px;
 }
 
 .login-form-fields {
