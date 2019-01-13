@@ -1,9 +1,3 @@
-	<script src="/assets/jquery.min.js"></script>
-	<link rel="stylesheet" href="/assets/jquery-ui.css">
-	<script src="/assets/jquery-ui.js"></script>
-	<script src="/assets/distLogo.js"></script>
-	<link rel="stylesheet" href="/assets/circle.css">
-	<link rel="stylesheet" href="/assets/picluster-ui.css">
 	<script>
 		function exec() {
 			var div = document.getElementById('nodes-list-modal-body');
@@ -158,19 +152,7 @@
 	</div>
 
 	<script>
-		var output_modal = document.getElementById('output');
-		var output_span = document.getElementsByClassName("close")[0];
-
-		output_span.onclick = function () {
-			output_modal.style.display = "none";
-		}
-
-		output_modal.style.display = "block";
-
 		exec()
-
-	</script>
-	<script>
 		window_reloader();
 
 		function window_reloader() {
