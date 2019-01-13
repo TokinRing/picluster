@@ -1,7 +1,7 @@
 $(document).ready(function() {
   // Get form and input references
   var login_form = $("form.login");
-  var signup_btn = $("#signup_btn");
+  var signup_btn = $(".signup-form-submit");
   var username_input = $("input#username-input");
   var password_input = $("input#password-input");
 
@@ -26,13 +26,14 @@ $(document).ready(function() {
   });
 
   // Validate username/password existence on submission
-  signup_btn.click(function(event) {
+  signup_btn.click(function() {
     // Clear the form
     username_input.val("");
     password_input.val("");
 
     // Redirect to signup page
     window.location = "/signup";
+    return false;
   });
 
   // POST to api/login route, if successful redirect to admin page
