@@ -1,7 +1,7 @@
 $(document).ready(function() {
   // Get form and input references
   var login_form = $("form.login");
-  var signup_form = $("form.signup");
+  var signup_btn = $("#signup_btn");
   var username_input = $("input#username-input");
   var password_input = $("input#password-input");
 
@@ -26,7 +26,7 @@ $(document).ready(function() {
   });
 
   // Validate username/password existence on submission
-  signup_form.on("submit", function(event) {
+  signup_btn.click( function(event) {
     // Clear the form
     username_input.val("");
     password_input.val("");
