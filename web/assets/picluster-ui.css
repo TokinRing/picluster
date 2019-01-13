@@ -473,7 +473,9 @@ textarea {
   position: absolute;
 }
 
-
+.signup-btn {
+  position: fixed;
+}
 
 /**
 * ID elements
