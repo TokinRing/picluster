@@ -301,27 +301,41 @@ textarea {
 
 .form-group {}
 
-.login {}
+.login , .signup{}
 
-.login-form {
+.login-form, .signup-form {
   width: 469px;
   margin: auto;
   height: 55px;
   padding-bottom: 10px;
 }
 
-.login-form-fields {
+.login-form-fields, .signup-form-fields {
   display: inline;
   margin: auto 0;
   width: 227px;
   float: left;
 }
 
-.login-form-submit {
+.login-form-submit, .signup-form-submit {
   display: inline;
   float: right;
   position: absolute;
   padding-left: 3px;
+}
+
+.login-link-btn, .signup-link-btn {
+  display: inline;
+  float: right;
+  padding-left: 115px;
+  background-color: #555;
+  border: none;
+  color: white;
+  padding: 18px 35px;
+  text-align: center;
+  text-decoration: none;
+  /* display: inline-block; */
+  font-size: 16px;
 }
 
 .node_card {
@@ -450,6 +464,7 @@ textarea {
   height: 75px;
   margin: 0 auto;
   width: 75px;
+  width: 227px;
 }
 
 .signup {
@@ -458,19 +473,7 @@ textarea {
   position: absolute;
 }
 
-.signup-link-btn {
-  display: inline;
-  float: right;
-  padding-left: 115px;
-  background-color: #555;
-  border: none;
-  color: white;
-  padding: 18px 35px;
-  text-align: center;
-  text-decoration: none;
-  /* display: inline-block; */
-  font-size: 16px;
-}
+
 
 /**
 * ID elements
