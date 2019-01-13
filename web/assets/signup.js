@@ -32,7 +32,7 @@ $(document).ready(function() {
     password_input.val("");
 
     // Redirect to login page
-    window.location = "/";
+    window.location = "/login";
     return false;
   });
 
