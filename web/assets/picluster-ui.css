@@ -315,11 +315,12 @@ textarea {
 .login-form-fields {
   display: inline;
   margin: auto 0;
-  position: absolute;
+  width: 227px;
 }
 .login-form-submit {
   display: inline;
   float: right;
+  position: absolute;
 }
 
 .node_card {
