@@ -20,27 +20,12 @@
 	<meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
 	<meta name="theme-color" content="#ffffff">
 	<script>
+		// TODO: Handle variables in DB
 		var manage_container = '';
 		var manage_image = '';
 		var manage_function = '';
 		var manage_function_uuid = '';
 		var token = '';
-
-		/*
-		function clear(callback) {
-			var iframe = document.getElementById('iframe_a').contentWindow.document;
-			iframe.write('<html>');
-			iframe.close();
-			callback();
-		}
-		*/
-
-		/*
-		// Load menu html into div
-		$(function() {
-			$("#menu").load("menu.html");
-		});
-		*/
 
 		/** TODO: Refactor into link generation engine
 				function build_doc_links() {
@@ -48,7 +33,7 @@
 
 					$.get("/listdocs", function(doc_list) {
 						for (var i in doc_list) {
-							output += "$('#doc'" + i + ").click(function() { $('iframe_a').attr('src', '/docs.html?doc_id=doc'" + i + ") });";
+							output += "$('#doc'" + i + ").click(function() { $('iframe_a').load('/docs.html?doc_id=doc'" + i + ") });";
 						}
 					});
 
@@ -71,103 +56,99 @@
 				}
 
 				function stinky_linker(doc_id) {
-					$('#iframe_a').attr('src', '/docs.html?doc_id=' + doc_id);
+					$('#content').load('/docs.html?doc_id=' + doc_id);
 				}
 		**/
 
 		$(document).ready(function() {
-			$('#exec').click(function() {
-				$('#iframe_a').attr('src', '/exec.html?token=' + token);
-			});
-			$('#terminal').click(function() {
-				$('#iframe_a').attr('src', '/terminal.html?token=' + token);
-			});
-			$('#images-layout').click(function() {
-				$('#iframe_a').attr('src', '/images-layout.html');
-			});
-			$('#syslog').click(function() {
-				$('#iframe_a').attr('src', '/syslog.html');
-			});
-			$('#monitoring').click(function() {
-				$('#iframe_a').attr('src', '/monitoring.html?token=' + token);
-			});
-			$('#elasticsearch-config').click(function() {
-				$('#iframe_a').attr('src', '/elasticsearch.html?token=' + token);
-			});
-			$('#functions-viewer').click(function() {
-				$('#iframe_a').attr('src', '/functions-viewer.html');
-			});
-			$('#functions-create').click(function() {
-				$('#iframe_a').attr('src', '/functions-create.html');
-			});
-			$('#functions-remove').click(function() {
-				$('#iframe_a').attr('src', '/functions-clear.html');
-			});
-			$('#functions-current').click(function() {
-				$('#iframe_a').attr('src', '/functions-current.html');
-			});
-			$('#rsyslog').click(function() {
-				$('#iframe_a').attr('src', '/rsyslog.html');
-			});
+			// Nodes dropdown
 			$('#nodes-list').click(function() {
 				$('#content').load('/nodes-list.html');
 			});
-			$('#containers-layout').click(function() {
-				$('#iframe_a').attr('src', '/containers-layout.html');
-			});
-			$('#containers-add').click(function() {
-				$('#iframe_a').attr('src', '/containers-add.html');
-			});
-			$('#node-add').click(function() {
-				$('#iframe_a').attr('src', '/nodes-add.html');
-			});
-			$('#node-remove').click(function() {
-				$('#iframe_a').attr('src', '/nodes-remove.html');
-			});
-			$('#node-manage').click(function() {
-				$('#iframe_a').attr('src', '/nodes-manage.html');
+			$('#nodes-manage').click(function() {
+				$('#content').load('/nodes-manage.html');
 			});
 			$('#swarm').click(function() {
-				$('#iframe_a').attr('src', '/swarm.html');
+				$('#content').load('/swarm.html');
 			});
-			$('#config-edit').click(function() {
-				$('#iframe_a').attr('src', '/config-edit.html?token=' + token);
-			});
-			$('#log').click(function() {
-				$('#iframe_a').attr('src', '/log.html');
-			});
-			$('#heartbeat').click(function() {
-				$('#iframe_a').attr('src', '/heartbeat.html');
-			});
-			//$('#docs').click(function() {
-			//		$('#iframe_a').attr('src', '/docs.html');
-			//	});
-			$('#images-upload').click(function() {
-				$('#iframe_a').attr('src', '/images-upload.html');
-			});
-			$('#images-pull').click(function() {
-				$('#iframe_a').attr('src', '/images-pull.html');
-			});
-			$('#images-manage').click(function() {
-				$('#iframe_a').attr('src', '/images-manage.html');
+
+			// Containers dropdown
+			$('#containers-layout').click(function() {
+				$('#content').load('/containers-layout.html');
 			});
 			$('#containers-manage').click(function() {
-				$('#iframe_a').attr('src', '/containers-manage.html');
+				$('#content').load('/containers-manage.html');
+			});
+
+			// Images dropdown
+			$('#images-layout').click(function() {
+				$('#content').load('/images-layout.html');
+			});
+			$('#images-manage').click(function() {
+				$('#content').load('/images-manage.html');
+			});
+
+			// Functions dropdown
+			$('#functions-create').click(function() {
+				$('#content').load('/functions-create.html');
+			});
+			$('#functions-remove').click(function() {
+				$('#content').load('/functions-clear.html');
+			});
+			$('#functions-current').click(function() {
+				$('#content').load('/functions-current.html');
+			});
+			$('#functions-viewer').click(function() {
+				$('#content').load('/functions-viewer.html');
+			});
+
+			// Operation dropdown
+			$('#config-edit').click(function() {
+				$('#content').load('/config-edit.html?token=' + token);
+			});
+			$('#exec').click(function() {
+				$('#content').load('/exec.html?token=' + token);
+			});
+			$('#heartbeat').click(function() {
+				$('#content').load('/heartbeat.html');
 			});
 			$('#images-prune').click(function() {
-				$('#iframe_a').attr('src', '/images-prune.html');
+				$('#content').load('/images-prune.html');
 			});
 			$('#terminal').click(function() {
-				$('#iframe_a').attr('src', '/terminal.html');
+				$('#content').load('/terminal.html');
 			});
+			$('#monitoring').click(function() {
+				$('#content').load('/monitoring.html?token=' + token);
+			});
+			$('#elasticsearch-config').click(function() {
+				$('#content').load('/elasticsearch.html?token=' + token);
+			});
+
+			// Logs dropdown
+			$('#log').click(function() {
+				$('#content').load('/log.html');
+			});
+			$('#syslog').click(function() {
+				$('#content').load('/syslog.html');
+			});
+			$('#rsyslog').click(function() {
+				$('#content').load('/rsyslog.html');
+			});
+
+			// Docs dropdown
+			//$('#docs').click(function() {
+			//		$('#content').load('/docs.html');
+			//	});
+
 			//$('#doc1').click(function() {
-			//	$('#iframe_a').attr('src', '/docs.html?doc_id=doc1');
+			//	$('#content').load('/docs.html?doc_id=doc1');
 			//});
 
 			//build_doc_links();
 
 			// Provide menu with javascript disabled
-			//$('nav li ul').hide().removeClass('dropdown');
+			$('nav li ul').hide().removeClass('dropdown');
 
 			// Render menu dropdown the right way
 			$('nav li').hover(function() {
@@ -204,6 +185,7 @@
 		});
 		*/
 
+		/* Not used. Why do they need to be here?
 		function getToken() {
 			return token;
 		}
@@ -211,38 +193,11 @@
 		function getVersion() {
 			return version;
 		}
+		*/
 	</script>
 </head>
 
 <body>
-	<!--
-	<div id="login" class="modal-login">
-		<div class="modal-login-content">
-			<div class="modal-login-header">
-				<span class="close">&times;</span>
-				<h2>PiCluster 2.6 Login</h2>
-			</div>
-
-			<div class="modal-login-body">
-				<div>
-					<img src="/logo.png" height="250" width="200">
-					<br><label>Please login to continue<label>
-							<br>
-							<div>
-								<input type="text" style="width: 250px;" id="user" name="username">
-								<br>
-								<input type="password" style="width: 250px;" size="18" id="password" name="password">
-								<br>
-								<br>
-								<button id="submit_button">Connect</button>
-								<br>
-							</div>
-				</div>
-			</div>
-		</div>
-	</div>
--->
-
 	<div id="menu">
 		<nav>
 			<ul>
@@ -250,7 +205,7 @@
 				<li><a href="#!">Nodes</a>
 					<ul class="dropdown">
 						<li><a href="#" id="nodes-list">List</a></li>
-						<li><a href="#" id="node-manage">Manage</a></li>
+						<li><a href="#" id="nodes-manage">Manage</a></li>
 						<li><a href="#" id="swarm">Swarm Setup</a></li>
 					</ul>
 				</li>
@@ -296,12 +251,7 @@
 		</nav>
 	</div>
 
-	<div id="content">
-		<!--
-		<div class="left"></div>
-		<div style="clear: both;"></div>
-		-->
-	</div>
+	<div id="content"></div>
 
 	<!-- its time to get rid of this lop of shit
 	<div id="div_iframe">
