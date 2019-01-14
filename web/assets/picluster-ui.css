@@ -21,6 +21,7 @@ body {
   overflow: auto;
 }
 
+/*
 a:link {
   color: black;
 }
@@ -28,6 +29,7 @@ a:link {
 a:visited {
   color: black;
 }
+*/
 
 button {
   background-color: #555;
@@ -106,7 +108,7 @@ nav ul li:hover {
 nav ul li a {
   padding: 1vw;
   display: block;
-  color: rgba(255, 255, 255, .9);
+  color: white;
   text-decoration: none;
   font-size: 2vw;
   border-top: 2px solid transparent;
@@ -149,7 +151,7 @@ nav ul li ul li {
 nav ul li ul li a {
   display: block;
   padding: 0.9rem;
-  color: #4a5666;
+  color: black;
   /*
   line-height: 1.7rem;
   background: transparent;
