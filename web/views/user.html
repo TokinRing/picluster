@@ -1,38 +1,10 @@
 <!-- NOTE: This is a blank template to use as referent for future views -->
+<script>
+	$.get("/api/user_data").then(function(data) {
+		$(".username").text(data.username);
+	});
+</script>
 
 <div id="landing_page">
-	<img id="logo" src="/logo.png">
-	<br>
 	<b>Welcome to PiCluster, <span class="username"></span>!</b>
 </div>
-
-<div id="source_issues_circle">
-	<a href='https://github.com/picluster/picluster' id='source' target="_blank">
-		<img src="/assets/images/GitHub-Mark-120px-plus.png">
-		<br>
-		GitHub
-	</a>
-	<a href='https://github.com/picluster/picluster/issues' id='issues' target="_blank">
-		<img src="/assets/images/Debug-Bug-icon.png">
-		<br>
-		Report Issue
-	</a>
-	<a href="containers-layout.html" id="status_circle">
-		<div class="page">
-			<div class="clearfix">
-				<div id="running-class" class="c100 p0 small">
-					<span id='running_containers'>0%</span>
-					<div class="slice">
-						<div class="bar"></div>
-						<div class="fill"></div>
-					</div>
-				</div>
-			</div>
-		</div>
-		Running
-	</a>
-</div>
-
-<script>
-	getContainerStatus();
-</script>
