@@ -52,7 +52,7 @@ module.exports = (sequelize, DataTypes) => {
     // Master IP Address
     // TODO: Make IP detection function and add to lib
     master_address: {
-      type: DataTypes.String
+      type: DataTypes.STRING
     },
 
     // Master port
