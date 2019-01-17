@@ -10,10 +10,10 @@ const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 
 // Import configured passport, models and libs
-const passport = require("./config/passport");
 let models = require("./models");
 let weblib = require("./lib/web");
 let apilib = require("./lib/api");
+const passport = require("./config/passport");
 const is_authenticated = require("./config/middleware/is_authenticated");
 
 // Load config (...for now)
@@ -28,7 +28,7 @@ const app = express();
 app.use(bodyParser());
 
 // It's time to go to the dark side, they have cookies.
-app.use(express.cookieParser());
+app.use(cookieParser());
 
 // Serve static assets (js, css, images, etc)
 app.use('/assets', express.static(path.join(__dirname, 'assets'), {
