@@ -14,7 +14,8 @@ let models = {};
 
 // Models to include by module
 let modules = [
-  require('./user.js')
+  require('./user.js'),
+  require('./config.js')
 ];
 
 // Initialize sequelize DataType
@@ -36,7 +37,7 @@ Object.keys(models).forEach(function(modelName) {
   }
 });
 
-// Store instance and DataType
+// Store instance and class
 models.sequelize = sequelize;
 models.Sequelize = Sequelize;
 
