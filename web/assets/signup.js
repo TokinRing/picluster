@@ -1,7 +1,7 @@
 $(document).ready(function() {
   // Get form and input references
   var signup_form = $("form.signup");
-  var login_btn = $(".login-link-btn")
+  var login_btn = $(".login-link-btn");
   var username_input = $("input#username-input");
   var password_input = $("input#password-input");
 
@@ -43,7 +43,6 @@ $(document).ready(function() {
       password: password
     }).then(function(data) {
       window.location.replace(data);
-      // Handles errors by throwing up an alert
     }).catch(function(err) {
       console.log(err);
     });

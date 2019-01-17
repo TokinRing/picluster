@@ -43,7 +43,6 @@ $(document).ready(function() {
       password: password
     }).then(function(data) {
       window.location.replace(data);
-      // Handles errors by throwing up an alert
     }).catch(function(err) {
       console.log(err);
     });

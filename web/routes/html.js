@@ -36,9 +36,9 @@ module.exports = (app) => {
 
   // Handle base requests, defaults to login page
   app.get('/', (req, res) => {
-    // If user logged in redirect to admin page
+    // If user logged in redirect to send index boilerplate
     if (req.user) {
-      res.redirect("/admin");
+      res.sendFile(path.join(__dirname, '../index.html'));
     }
 
     // Fall through to login page
@@ -49,29 +49,18 @@ module.exports = (app) => {
   app.get('/login', (req, res) => {
     // If user logged in redirect to admin page
     if (req.user) {
-      res.redirect("/admin");
+      res.redirect("/");
     }
 
     // Fall through to login page
-    res.sendFile(path.join(__dirname, '../views/login.html'));
+    res.sendFile(path.join(__dirname, '../login.html'));
   });
 
   // Handle signup page
   app.get('/signup', (req, res) => {
     // If user logged in redirect to admin page
     if (req.user) {
-      res.redirect("/admin");
-    }
-
-    // Fall through to signup page
-    res.sendFile(path.join(__dirname, '../signup.html'));
-  });
-
-  // Handle signup page
-  app.get('/login', (req, res) => {
-    // If user logged in redirect to admin page
-    if (req.user) {
-      res.redirect("/admin");
+      res.redirect("/");
     }
 
     // Fall through to signup page
@@ -81,12 +70,6 @@ module.exports = (app) => {
   ////
   // Authenticated pages
   ////
-
-  // Admin page for logged in users
-  app.get('/admin', is_authenticated, (req,res) => {
-    res.sendFile(path.join(__dirname, '../index.html'));
-  });
-
   app.get('/blank.html', is_authenticated, (req, res) => {
     res.sendFile(path.join(__dirname, '../views/blank.html'));
   });
