@@ -26,6 +26,9 @@ const app = express();
 // TODO: look into log warnings on startup
 app.use(bodyParser());
 
+// It's time to go to the dark side, they have cookies.
+app.use(express.cookieParser());
+
 // Serve static assets (js, css, images, etc)
 app.use('/assets', express.static(path.join(__dirname, 'assets'), {
   maxage: '48h'

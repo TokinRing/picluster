@@ -9,6 +9,7 @@
 	<link rel="stylesheet" href="/assets/circle.css">
 	<script type="text/javascript" src="assets/user.js"></script>
 	<link rel="stylesheet" href="/assets/picluster-ui.css">
+	<link rel="stylesheet" href="/assets/picluster.js">
 	<script src="/assets/moment.js"></script>
 	<link rel="apple-touch-icon" sizes="180x180" href="/assets/images/apple-touch-icon.png">
 	<link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon-32x32.png">
@@ -58,7 +59,7 @@
 				function stinky_linker(doc_id) {
 					$('#content').load('/docs.html?doc_id=' + doc_id);
 				}
-		**/
+		*/
 
 		$(document).ready(function() {
 			// Nodes dropdown
@@ -147,14 +148,14 @@
 
 			//build_doc_links();
 
-			// Provide menu with javascript disabled
+			// Provide dropdown menu when javascript disabled
 			$('nav li ul').hide().removeClass('dropdown');
 
 			// Render menu dropdown the right way
 			$('nav li').hover(function() {
-				$('ul', this).stop().slideDown(1200);
+				$('ul', this).stop().slideDown(250);
 			}, function() {
-				$('ul', this).stop().slideUp(1200);
+				$('ul', this).stop().slideUp(250);
 			});
 		});
 
