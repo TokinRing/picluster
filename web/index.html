@@ -137,6 +137,14 @@
 				$('#content').load('/rsyslog.html');
 			});
 
+			// User dropdown
+			$('#user').click(function() {
+				$('#content').load('/user.html');
+			});
+			$('#logout').click(function() {
+				$('#content').load('/api/logout');
+			});
+
 			// Docs dropdown
 			//$('#docs').click(function() {
 			//		$('#content').load('/docs.html');
@@ -246,6 +254,12 @@
 						<li><a href="#" id="log">PiCluster Logs</a></li>
 						<li><a href="#" id="syslog">Syslog</a></li>
 						<li><a href="#" id="rsyslog">Rsyslog</a></li>
+					</ul>
+				</li>
+				<li><a href="#!">User</a>
+					<ul class="dropdown">
+						<li><a href="#" id="user">User</a></li>
+						<li><a href="#" id="logout">Logout</a></li>
 					</ul>
 				</li>
 			</ul>
