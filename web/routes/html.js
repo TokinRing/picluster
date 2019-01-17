@@ -208,6 +208,10 @@ module.exports = (app) => {
     res.sendFile(path.join(__dirname, '../views/terminal.html'));
   });
 
+  app.get('/user.html', is_authenticated, (req, res) => {
+    res.sendFile(path.join(__dirname, '../views/user.html'));
+  });
+
   // TODO: Migrate to html routes, once that goddamn iframe is removed
   // serve_doc_pages();
 };
