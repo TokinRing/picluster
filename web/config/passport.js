@@ -1,3 +1,4 @@
+/*jshint esversion:6*/
 // Import passport and use the passport-local strategy
 const passport = require("passport");
 const LocalStrategy = require("passport-local").Strategy;

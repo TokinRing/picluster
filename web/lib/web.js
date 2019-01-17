@@ -6,7 +6,7 @@ const path = require('path');
 const fs = require('fs');
 
 module.exports = {
-  generate_api_token: () => {
+  generate_token: () => {
     const possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
     const api_token_length = 32;
     let api_token = "";

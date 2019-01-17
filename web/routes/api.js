@@ -18,6 +18,10 @@ const upload = multer({
 
 let nodedata = '';
 
+const config = Config.all;
+
+console.log(config);
+
 module.exports = (app) => {
   ////
   // POST Section
@@ -35,7 +39,7 @@ module.exports = (app) => {
     models.User.create({
       username: req.body.username,
       password: req.body.password,
-      api_token: weblib.generate_api_token()
+      api_token: weblib.generate_token()
     }).then(function() {
       res.redirect(307, "/api/login");
     }).catch(function(err) {
@@ -47,6 +51,7 @@ module.exports = (app) => {
   });
 
   // Handle POSTing new config data
+  // TODO: Remove this API handle once system config view is made
   app.post('/sendconfig', is_authenticated, (req, res) => {
     // wtf is this stored as an object? wtf expand on 3 lines what can be done in 1?
     const {
@@ -582,6 +587,21 @@ module.exports = (app) => {
 
   // Route for getting user data used client side
   app.get("/api/user_data", function(req, res) {
+    if (!req.user) {
+      // The user is not logged in, send back an empty object
+      res.json({});
+    } else {
+      // Send back the username and id
+      res.json({
+        username: req.user.username,
+        id: req.user.id,
+        api_token: req.user.api_token
+      });
+    }
+  });
+
+  // Route for getting config data used client side
+  app.get("/api/config_data", function(req, res) {
     if (!req.user) {
       // The user is not logged in, send back an empty object
       res.json({});

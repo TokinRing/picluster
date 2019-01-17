@@ -1,5 +1,5 @@
 /*jshint esversion:6*/
-const ip = require('ip')
+const ip = require('ip');
 // Config model
 module.exports = (sequelize, DataTypes) => {
   // Define a new model for Config objects
