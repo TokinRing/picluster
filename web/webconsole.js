@@ -7,6 +7,7 @@ const express = require('express');
 const session = require('express-session');
 const request = require('request');
 const bodyParser = require('body-parser');
+const cookieParser = require('cookie-parser');
 
 // Import configured passport, models and libs
 const passport = require("./config/passport");
