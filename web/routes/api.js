@@ -589,7 +589,8 @@ module.exports = (app) => {
       // Send back the username and id
       res.json({
         username: req.user.username,
-        id: req.user.id
+        id: req.user.id,
+        api_token: req.user.api_token
       });
     }
   });
