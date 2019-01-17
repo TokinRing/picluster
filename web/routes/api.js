@@ -18,7 +18,7 @@ const upload = multer({
 
 let nodedata = '';
 
-const config = Config.all;
+const config = models.Config.all;
 
 console.log(config);
 
