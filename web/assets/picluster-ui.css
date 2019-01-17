@@ -322,7 +322,7 @@ textarea {
 .login-form-submit, .signup-form-submit {
   display: inline;
   float: right;
-  position: absolute;
+  /* position: absolute; */
   padding-left: 3px;
 }
 
