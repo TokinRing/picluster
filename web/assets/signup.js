@@ -6,7 +6,7 @@ $(document).ready(function() {
   var password_input = $("input#password-input");
 
   // Validate username/password existence and execute query on submission
-  signup-form.on("submit", function(event) {
+  signup_form.on("submit", function(event) {
     event.preventDefault();
     var user_data = {
       username: username_input.val().trim(),
