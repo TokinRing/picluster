@@ -37,6 +37,6 @@ module.exports = (sequelize, DataTypes) => {
     user.password = bcrypt.hashSync(user.password, bcrypt.genSaltSync(10), null);
   });
 
-  // Return the sequelized User object
+  // Return the sequelized User model object
   return User;
 };

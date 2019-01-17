@@ -5,6 +5,7 @@
 const path = require('path');
 const fs = require('fs');
 const request = require('request');
+const ip = require('ip');
 
 let config = JSON.parse(fs.readFileSync((process.env.PICLUSTER_CONFIG ? process.env.PICLUSTER_CONFIG : '../config.json'), 'utf8'));
 let server = config.web_connect;
@@ -97,5 +98,9 @@ module.exports = {
         console.log('\nError clearing log: ' + error);
       }
     });
-  }
+  },
+
+  get_ip: () => {
+    return ip.address();
+  },
 };
