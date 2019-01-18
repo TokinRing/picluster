@@ -25,13 +25,10 @@ $(document).ready(function() {
     password_input.val("");
   });
 
-  // Validate username/password existence on submission
+  // Clear the form and redirect to signup page
   signup_btn.click(function() {
-    // Clear the form
     username_input.val("");
     password_input.val("");
-
-    // Redirect to signup page
     window.location = "/signup";
     return false;
   });

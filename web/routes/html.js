@@ -37,15 +37,18 @@ module.exports = (app) => {
   });
 
   // Handle base requests, defaults to login page
-  app.get('/', is_authenticated, (req, res) => {
-    res.sendFile(path.join(__dirname, '../index.html'));
+  app.get('/', (req, res) => {
+    if (req.user) {
+      res.redirect("/admin")
+    }
+    res.sendFile(path.join(__dirname, '../login.html'));
   });
 
   // Handle login page
   app.get('/login', (req, res) => {
     // If user logged in redirect to index page
     if (req.user) {
-      res.redirect("/");
+      res.redirect("/admin");
     }
 
     // Fall through to login page
@@ -56,7 +59,7 @@ module.exports = (app) => {
   app.get('/signup', (req, res) => {
     // If user logged in redirect to admin page
     if (req.user) {
-      res.redirect("/");
+      res.redirect("/admin");
     }
 
     // Fall through to signup page
@@ -66,6 +69,10 @@ module.exports = (app) => {
   ////
   // Authenticated pages
   ////
+  app.get('/admin', is_authenticated, (req, res) => {
+    res.sendFile(path.join(__dirname, '../index.html'));
+  });
+
   app.get('/blank.html', is_authenticated, (req, res) => {
     res.sendFile(path.join(__dirname, '../views/blank.html'));
   });
