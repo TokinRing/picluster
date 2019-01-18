@@ -25,7 +25,8 @@ process.env.NODE_TLS_REJECT_UNAUTHORIZED = config.ssl_self_signed ? '0' : '1';
 const app = express();
 
 // TODO: look into log warnings on startup
-app.use(bodyParser());
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
 
 // It's time to go to the dark side, they have cookies.
 app.use(cookieParser());

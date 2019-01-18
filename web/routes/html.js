@@ -8,7 +8,9 @@ const fs = require('fs');
 
 // Parse JSON config and set variable
 let config = JSON.parse(fs.readFileSync((process.env.PICLUSTER_CONFIG ? process.env.PICLUSTER_CONFIG : '../config.json'), 'utf8'));
-let {theme} = config;
+let {
+  theme
+} = config;
 
 // Require libs and middleware
 const apilib = require("../lib/api");
@@ -35,19 +37,13 @@ module.exports = (app) => {
   });
 
   // Handle base requests, defaults to login page
-  app.get('/', (req, res) => {
-    // If user logged in redirect to send index boilerplate
-    if (req.user) {
-      res.sendFile(path.join(__dirname, '../index.html'));
-    }
-
-    // Fall through to login page
-    res.sendFile(path.join(__dirname, '../login.html'));
+  app.get('/', is_authenticated, (req, res) => {
+    res.sendFile(path.join(__dirname, '../index.html'));
   });
 
   // Handle login page
   app.get('/login', (req, res) => {
-    // If user logged in redirect to admin page
+    // If user logged in redirect to index page
     if (req.user) {
       res.redirect("/");
     }
