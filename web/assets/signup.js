@@ -1,39 +1,39 @@
 $(document).ready(function() {
   // Get form and input references
   var signup_form = $("form.signup");
+  var new_username = $("input#new-username");
+  var new_password = $("input#new-password");
   var login_btn = $(".login-link-btn");
-  var username_input = $("input#new-username-input");
-  var password_input = $("input#new-password-input");
 
   // Validate username/password existence and execute query on submission
   signup_form.on("submit", function(event) {
     // Prevent submit button default POST function
     event.preventDefault();
 
-    var user_data = {
-      username: username_input.val().trim(),
-      password: password_input.val().trim()
+    var new_user_data = {
+      username: new_username.val().trim(),
+      password: new_password.val().trim()
     };
 
-    if (!user_data.username || !user_data.password) {
+    if (!new_user_data.username || !new_user_data.password) {
       return;
     }
 
-    console.log(user_data);
+    console.log(new_user_data);
 
     // If username/password are present, pass to signUpUser function
-    signUpUser(user_data.username, user_data.password);
+    signUpUser(new_user_data.username, new_user_data.password);
 
     // Reset username/password fields
-    username_input.val("");
-    password_input.val("");
+    new_username.val("");
+    new_password.val("");
   });
 
   // Validate username/password existence on submission
   login_btn.click(function() {
     // Clear the form
-    username_input.val("");
-    password_input.val("");
+    new_username.val("");
+    new_password.val("");
 
     // Redirect to login page
     window.location = "/login";

@@ -1,18 +1,18 @@
 $(document).ready(function() {
   // Get form and input references
   var login_form = $("form.login");
+  var username = $("input#username");
+  var password = $("input#password");
   var signup_btn = $(".signup-link-btn");
-  var username_input = $("input#username-input");
-  var password_input = $("input#password-input");
 
   // Validate username/password existence on submission
   login_form.on("submit", function(event) {
     // Prevent submit button default POST function
     event.preventDefault();
-    
+
     var user_data = {
-      username: username_input.val().trim(),
-      password: password_input.val().trim()
+      username: username.val().trim(),
+      password: password.val().trim()
     };
 
     if (!user_data.username || !user_data.password) {
@@ -23,14 +23,14 @@ $(document).ready(function() {
     loginUser(user_data.username, user_data.password);
 
     // Clear the form
-    username_input.val("");
-    password_input.val("");
+    username.val("");
+    password.val("");
   });
 
   // Clear the form and redirect to signup page
   signup_btn.click(function() {
-    username_input.val("");
-    password_input.val("");
+    username.val("");
+    password.val("");
     window.location = "/signup";
     return false;
   });
