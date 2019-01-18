@@ -313,21 +313,21 @@ textarea {
 }
 
 .login-form-fields, .signup-form-fields {
-  display: inline;
+  display: inline-block;
   margin: auto 0;
   width: 227px;
   float: left;
 }
 
 .login-form-submit, .signup-form-submit {
-  display: inline;
+  display: inline-block;
   float: right;
   /* position: absolute; */
   padding-left: 3px;
 }
 
 .login-link-btn, .signup-link-btn {
-  display: inline;
+  display: inline-block;
   float: right;
   padding-left: 115px;
   background-color: #555;
@@ -470,9 +470,11 @@ textarea {
 }
 
 .signup {
+  /*
   display: inline;
   float: right;
   position: absolute;
+  */
 }
 
 /**
