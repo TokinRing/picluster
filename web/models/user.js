@@ -29,6 +29,8 @@ module.exports = (sequelize, DataTypes) => {
 
   // Check if unhashed password entered is same as stored hashed password
   User.prototype.validPassword = (password) => {
+    console.log("stored: " + password + ". sent: " + this.password);
+    
     return bcrypt.compareSync(password, this.password);
   };
 
