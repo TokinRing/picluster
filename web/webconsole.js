@@ -62,6 +62,11 @@ let {token} = config;
 let server = config.web_connect;
 let {server_port} = config;
 
+// Handle promise errors
+process.on('unhandledRejection', (err, promise) => {
+    console.error('Unhandled rejection (promise: ', promise, ', reason: ', err, ').');
+});
+
 /*
 TODO: Add docs once iframe mess is purged
 if (fs.existsSync(path.normalize(doc_dir))) {
