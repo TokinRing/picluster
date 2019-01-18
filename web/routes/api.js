@@ -30,6 +30,7 @@ module.exports = (app) => {
   // Use passport.authenticate middleware with local strategy
   // If credentials are valid send to admin page
   app.post("/api/login", passport.authenticate("local"), (req, res) => {
+    console.log(req.body);
     res.json("/admin");
   });
 

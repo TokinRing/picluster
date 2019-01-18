@@ -39,7 +39,7 @@ module.exports = (app) => {
   // Handle base requests, defaults to login page
   app.get('/', (req, res) => {
     if (req.user) {
-      res.redirect("/admin")
+      res.redirect("/admin");
     }
     res.sendFile(path.join(__dirname, '../login.html'));
   });
