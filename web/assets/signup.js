@@ -17,6 +17,8 @@ $(document).ready(function() {
       return;
     }
 
+    console.log(user_data);
+
     // If username/password are present, pass to signUpUser function
     signUpUser(user_data.username, user_data.password);
 
