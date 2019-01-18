@@ -7,7 +7,9 @@ $(document).ready(function() {
 
   // Validate username/password existence on submission
   login_form.on("submit", function(event) {
+    // Prevent submit button default POST function
     event.preventDefault();
+    
     var user_data = {
       username: username_input.val().trim(),
       password: password_input.val().trim()
