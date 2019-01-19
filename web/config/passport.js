@@ -4,7 +4,7 @@ const passport = require("passport");
 const LocalStrategy = require("passport-local").Strategy;
 
 //Import models folder
-const db = require("../models");
+const models = require("../models");
 
 // Setup the Local Strategy to login with a username and password
 passport.use(new LocalStrategy(
@@ -14,7 +14,7 @@ passport.use(new LocalStrategy(
   },
   function(username, password, done) {
     // Find a matching username in DB when user tries to sign in
-    db.User.findOne({
+    models.User.findOne({
       where: {
         username: username
       }

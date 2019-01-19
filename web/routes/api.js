@@ -30,30 +30,13 @@ module.exports = (app) => {
   // Use passport.authenticate middleware with local strategy
   // If credentials are valid send to admin page
   app.route('/login')
-    .get(is_authenticated, (req, res) => {
+    .get((req, res) => {
       res.sendFile(path.join(__dirname, '../login.html'));
     })
-    .post((req, res) => {
+    .post(passport.authenticate("local"), (req, res) => {
       console.log("body is: " + req.body);
 
-      let username = req.body.username;
-      let password = req.body.password;
-
-      models.User.findOne({
-          where: {
-            username: username
-          }
-        })
-        .then((user) => {
-          if (!user) {
-            res.redirect('/login');
-          } else if (!user.validPassword(password)) {
-            res.redirect('/login');
-          } else {
-            req.session.user = user.dataValues;
-            res.redirect('/admin');
-          }
-        });
+      res.json("/admin");
     });
 
   // Route for user signup. If successfully created, login else throw error
