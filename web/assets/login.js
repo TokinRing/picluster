@@ -38,7 +38,7 @@ $(document).ready(function() {
   // POST to api/login route, if successful redirect to admin page
   function loginUser(username, password) {
     console.log(username, password);
-    $.post("/api/login", {
+    $.post("/login", {
       username: username,
       password: password
     }).then(function(data) {

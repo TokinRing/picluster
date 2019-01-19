@@ -56,16 +56,6 @@ module.exports = (app) => {
     res.sendFile(path.join(__dirname, '../login.html'));
   });
 
-  // Handle signup page
-  app.get('/signup', (req, res) => {
-    // If user logged in redirect to admin page
-    if (req.user) {
-      res.redirect("/admin");
-    }
-
-    // Fall through to signup page
-
-  });
 
   ////
   // Authenticated pages
