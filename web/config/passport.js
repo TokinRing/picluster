@@ -18,22 +18,22 @@ passport.use(new LocalStrategy(
       where: {
         username: username
       }
-    }).then((dbUser) => {
+    }).then((user) => {
       // If no matching username found return fail message
-      if (!dbUser) {
+      if (!user) {
         return done(null, false, {
           message: "Username not found."
         });
       }
       // If username is matched but the password the given is incorrect
-      else if (!dbUser.validPassword(password)) {
+      else if (!user.validPassword(password)) {
         return done(null, false, {
           message: "Incorrect password."
         });
       }
 
       // If its all good man, return the user
-      return done(null, dbUser);
+      return done(null, user);
     });
   }
 ));
