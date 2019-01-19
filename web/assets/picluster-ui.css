@@ -305,7 +305,7 @@ textarea {
 
 .login , .signup{}
 
-.login-form, .signup-form {
+.form-container {
   width: 469px;
   margin: auto;
   height: 55px;
