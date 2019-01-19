@@ -45,7 +45,7 @@ module.exports = (app) => {
       res.sendFile(path.join(__dirname, '../signup.html'));
     })
     .post((req, res) => {
-      console.log(req.body);
+      console.log("user:" + req.body.username + ". pass: " + req.body.password);
       models.User.create({
         username: req.body.username,
         password: req.body.password,
