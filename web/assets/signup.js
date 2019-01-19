@@ -41,10 +41,10 @@ $(document).ready(function() {
   });
 
   // POST to the signup route. If succesful, redirect to admin page
-  function signUpUser(username, password) {
-    $.post("/api/signup", {
-      username: username,
-      password: password
+  function signUpUser(new_username, new_password) {
+    $.post("/signup", {
+      username: new_username,
+      password: new_password
     }).then(function(data) {
       window.location.replace(data);
     }).catch(function(err) {
