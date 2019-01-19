@@ -41,7 +41,7 @@ module.exports = (app) => {
 
   // Route for user signup. If successfully created, login else throw error
   app.route('/signup')
-    .get(is_authenticated, (req, res) => {
+    .get((req, res) => {
       res.sendFile(path.join(__dirname, '../signup.html'));
     })
     .post((req, res) => {
