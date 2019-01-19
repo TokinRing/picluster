@@ -42,7 +42,13 @@ app.use('/node_modules', express.static(path.join(__dirname, 'node_modules'), {
 }));
 
 // Use sessions to track of user login status
-app.use(session({ secret: config.session_secret, resave: true, saveUninitialized: true }));
+app.use(session({
+  key: 'user_sid',
+  secret: config.session_secret,
+  resave: false,
+  saveUninitialized: false,
+  cookie: { expires: 600000 }
+}));
 app.use(passport.initialize());
 app.use(passport.session());
 

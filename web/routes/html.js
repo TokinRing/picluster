@@ -38,10 +38,11 @@ module.exports = (app) => {
 
   // Handle base requests, defaults to login page
   app.get('/', (req, res) => {
-    if (req.user) {
+    if (req.session.user && req.cookies.user_sid) {
       res.redirect("/admin");
     }
-    res.sendFile(path.join(__dirname, '../login.html'));
+
+    res.redirect("/login");
   });
 
   // Handle login page
@@ -63,7 +64,7 @@ module.exports = (app) => {
     }
 
     // Fall through to signup page
-    res.sendFile(path.join(__dirname, '../signup.html'));
+
   });
 
   ////

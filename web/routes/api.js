@@ -35,21 +35,25 @@ module.exports = (app) => {
   });
 
   // Route for user signup. If successfully created, login else throw error
-  app.post("/api/signup", (req, res) => {
-    console.log(req.body);
-    models.User.create({
-      username: req.body.username,
-      password: req.body.password,
-      api_token: weblib.generate_token()
-    }).then(function() {
-      res.redirect(307, "/api/login");
-    }).catch(function(err) {
-      console.log(err);
-      res.json(err);
-      // TODO: look into why this is here
-      // res.status(422).json(err.errors[0].message);
+  app.route('/signup')
+    .get(is_authenticated, (req, res) => {
+      res.sendFile(path.join(__dirname, '../signup.html'));
+    })
+    .post((req, res) => {
+      console.log(req.body);
+      models.User.create({
+        username: req.body.username,
+        password: req.body.password,
+        api_token: weblib.generate_token()
+      }).then(function() {
+        res.redirect(307, "/login");
+      }).catch(function(err) {
+        console.log(err);
+        res.json(err);
+        // TODO: look into why this is here
+        // res.status(422).json(err.errors[0].message);
+      });
     });
-  });
 
   // Handle POSTing new config data
   // TODO: Remove this API handle once system config view is made

@@ -18,7 +18,7 @@ passport.use(new LocalStrategy(
       where: {
         username: username
       }
-    }).then(function(dbUser) {
+    }).then((dbUser) => {
       // If no matching username found return fail message
       if (!dbUser) {
         return done(null, false, {
