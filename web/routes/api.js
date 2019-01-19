@@ -1,7 +1,8 @@
 /*jshint esversion: 6 */
 // API calls stored here. Broken down into 2 sections:
 // GET and POST
-
+const fs = require('fs');
+const path = require('path');
 const multer = require('multer');
 
 // Require models, configured passport and libs
