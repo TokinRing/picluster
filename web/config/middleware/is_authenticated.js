@@ -7,9 +7,9 @@
 module.exports = (req, res, next) => {
   // If the user is logged in, continue with the request
   if (req.session.user && req.cookies.user_sid) {
-    return res.redirect("/admin");
+    return next();
   }
 
   // If user is not logged in, redirect to the login page
-  return res.redirect("/login");
+  return res.redirect("/");
 };
