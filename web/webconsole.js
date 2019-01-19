@@ -26,7 +26,7 @@ const app = express();
 
 // TODO: look into log warnings on startup
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ extended: true }));
 
 // It's time to go to the dark side, they have cookies.
 app.use(cookieParser());
