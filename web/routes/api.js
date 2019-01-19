@@ -39,7 +39,7 @@ module.exports = (app) => {
       let username = req.body.username;
       let password = req.body.password;
 
-      User.findOne({
+      models.User.findOne({
           where: {
             username: username
           }
