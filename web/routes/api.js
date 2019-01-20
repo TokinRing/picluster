@@ -597,7 +597,9 @@ module.exports = (app) => {
   // Route for user logout
   app.get("/logout", (req, res) => {
     req.logout();
-    res.redirect("/");
+    req.session.destroy((err) => {
+        res.redirect('/');
+    });
   });
 
   // Route for getting user data used client side
