@@ -32,15 +32,12 @@ module.exports = (sequelize, DataTypes) => {
         user.password = bcrypt.hashSync(user.password, bcrypt.genSaltSync(10));
       }
     },
-    // Check if unhashed password entered is same as stored hashed password
-    instanceMethods: {
-      validPassword:  function(password) {
-        console.log("sent: " + password + ". stored: " + user.password);
-
-        return bcrypt.compareSync(password, this.password);
-      }
-    }
   });
+
+  // Check if unhashed password entered is same as stored hashed password
+User.prototype.validPassword = async (password) => {
+  return await bcrypt.compareSync(password, this.password);
+};
 
   // Return the sequelized User model object
   return User;
