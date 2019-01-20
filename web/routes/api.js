@@ -589,8 +589,7 @@ module.exports = (app) => {
   app.get("/logout", (req, res) => {
     if (req.user && req.cookies.user_sid) {
       res.clearCookie('user_sid');
-      res.window.location.href('/');
-      window.location.reload();
+      res.redirect('/');
     }
 
     res.redirect('/login');
