@@ -145,9 +145,6 @@
 			$('#user').click(function() {
 				$('#content').load('/user.html');
 			});
-			$('#logout').click(function() {
-				window.location.replace("/logout");
-			});
 
 			// Docs dropdown
 			//$('#docs').click(function() {
@@ -263,7 +260,7 @@
 				<li><a href="#!">User</a>
 					<ul class="dropdown">
 						<li><a href="#" id="user">User</a></li>
-						<li><a href="#" id="logout">Logout</a></li>
+						<li><a href="/logout" id="logout">Logout</a></li>
 					</ul>
 				</li>
 			</ul>
