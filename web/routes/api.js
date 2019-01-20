@@ -587,9 +587,10 @@ module.exports = (app) => {
 
   // Route for user logout
   app.get("/logout", (req, res) => {
-    if (req.session.user && req.cookies.user_sid) {
+    if (req.user && req.cookies.user_sid) {
       res.clearCookie('user_sid');
-      res.redirect('/');
+      res.window.location.href('/');
+      window.location.reload();
     }
 
     res.redirect('/login');
@@ -652,30 +653,7 @@ module.exports = (app) => {
   // Handle remote image tags from docker hub
   app.get('/remoteimagetags', is_authenticated, (req, res) => {
 
-    // wtf is this stored as an object? wtf expand on 3 lines what can be done in 1?
-    const {
-      registry
-    } = req.query;
-
-    // wtf is this stored as an object? wtf expand on 3 lines what can be done in 1?
-    const {
-      image
-    } = req.query;
-
-    // wtf is this stored as an object? wtf expand on 3 lines what can be done in 1?
-    const {
-      page
-    } = req.query || 1;
-
-    // wtf is this stored as an object? wtf expand on 3 lines what can be done in 1?
-    const {
-      username
-    } = req.query || '';
-
-    // wtf is this stored as an object? wtf expand on 3 lines what can be done in 1?
-    const {
-      password
-    } = req.query || '';
+    const { registry, image, page, username, password } = req.query;
 
     if (!registry || !image) {
       return res.status(400).end('\nError: Invalid Credentials');
