@@ -30,11 +30,21 @@ module.exports = (app) => {
   // Use passport.authenticate middleware with local strategy
   // If credentials are valid send to admin page
   app.route('/login')
-    .get(async (req, res) => {
-      await res.sendFile(path.join(__dirname, '../login.html'));
+    .get(async (req, res, next) => {
+      try {
+        await res.sendFile(path.join(__dirname, '../login.html'));
+        next();
+      } catch (err) {
+        next(err)
+      }
     })
-    .post(passport.authenticate("local"), async (req, res) => {
-      await res.redirect("/admin");
+    .post(passport.authenticate("local"), async (req, res, next) => {
+      try {
+        await res.redirect("/admin");
+        next();
+      } catch (err) {
+        next(err)
+      }
     });
 
   // Route for user register. If successfully created, login else throw error
@@ -584,14 +594,19 @@ module.exports = (app) => {
   ////
 
   // Route for user logout
-  app.get("/logout", async (req, res) => {
-    // Clear the cookie is user is logged in and has a cookie
-    if (req.user && req.cookies.user_sid) {
-      await res.clearCookie('user_sid');
-    }
+  app.get("/logout", async (req, res, next) => {
+    try {
+      // Clear the cookie is user is logged in and has a cookie
+      if (req.user && req.cookies.user_sid) {
+        await res.clearCookie('user_sid');
+      }
 
-    // Redirect to base
-    await res.redirect('/');
+      // Redirect to base
+      await res.redirect('/');
+      next();
+    } catch (err) {
+      next(err)
+    }
   });
 
   // Route for getting user data used client side
