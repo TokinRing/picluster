@@ -19,7 +19,7 @@ passport.use(new LocalStrategy(
           username: username
         }
       })
-      .then((user) => {
+      .then((user, err) => {
         // If an error occurs, throw error
         if (err) {
           return done(err);

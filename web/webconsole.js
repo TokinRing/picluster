@@ -11,7 +11,7 @@ const cookieParser = require('cookie-parser');
 const morgan = require('morgan');
 
 // Import configured passport, models and libs
-let models = require("./models");
+let models = require("./models/index");
 let weblib = require("./lib/web");
 let apilib = require("./lib/api");
 const passport = require("./config/passport");
