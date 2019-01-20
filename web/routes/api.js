@@ -595,9 +595,9 @@ module.exports = (app) => {
   ////
 
   // Route for user logout
-  app.get("/api/logout", (req, res) => {
+  app.get("/logout", (req, res) => {
     req.logout();
-    res.redirect("/login");
+    res.redirect("/");
   });
 
   // Route for getting user data used client side

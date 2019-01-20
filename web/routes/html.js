@@ -8,9 +8,7 @@ const fs = require('fs');
 
 // Parse JSON config and set variable
 let config = JSON.parse(fs.readFileSync((process.env.PICLUSTER_CONFIG ? process.env.PICLUSTER_CONFIG : '../config.json'), 'utf8'));
-let {
-  theme
-} = config;
+let { theme } = config;
 
 // Require libs and middleware
 const lib = require("../lib/libpicluster");
@@ -26,15 +24,6 @@ module.exports = (app) => {
   // Unauthenticated pages
   ////
 
-  // Handle favicon
-  app.get('/favicon.ico', (req, res) => {
-    res.sendFile(path.join(__dirname, '../assets/images/favicon.ico'));
-  });
-
-  // Handle logo
-  app.get('/logo.png', (req, res) => {
-    res.sendFile(logo_slug);
-  });
 
   // Handle base requests, defaults to login page
   app.get('/', (req, res) => {
@@ -45,17 +34,15 @@ module.exports = (app) => {
     res.redirect("/login");
   });
 
-  // Handle login page
-  app.get('/login', (req, res) => {
-    // If user logged in redirect to index page
-    if (req.user) {
-      res.redirect("/admin");
-    }
-
-    // Fall through to login page
-    res.sendFile(path.join(__dirname, '../login.html'));
+  // Handle favicon
+  app.get('/favicon.ico', (req, res) => {
+    res.sendFile(path.join(__dirname, '../assets/images/favicon.ico'));
   });
 
+  // Handle logo
+  app.get('/logo.png', (req, res) => {
+    res.sendFile(logo_slug);
+  });
 
   ////
   // Authenticated pages
