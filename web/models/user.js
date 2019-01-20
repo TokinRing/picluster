@@ -28,10 +28,10 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     hooks: {
       // Before a User is created, automatically hash their password
-      beforeCreate: function(user) {
-        user.password = bcrypt.hashSync(user.password, bcrypt.genSaltSync(10));
+      beforeCreate: async (user) => {
+        user.password = await bcrypt.hashSync(user.password, bcrypt.genSaltSync(10));
       }
-    },
+    }
   });
 
   // Check if unhashed password entered is same as stored hashed password

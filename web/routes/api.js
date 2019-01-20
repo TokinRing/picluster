@@ -45,10 +45,10 @@ module.exports = (app) => {
       res.redirect("/admin");
     });
 
-  // Route for user signup. If successfully created, login else throw error
-  app.route('/signup')
+  // Route for user register. If successfully created, login else throw error
+  app.route('/register')
     .get((req, res) => {
-      res.sendFile(path.join(__dirname, '../signup.html'));
+      res.sendFile(path.join(__dirname, '../register.html'));
     })
     .post((req, res) => {
       console.log("user:" + req.body.username + ". pass: " + req.body.password);

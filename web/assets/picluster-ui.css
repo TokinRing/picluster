@@ -303,7 +303,7 @@ textarea {
 
 .form-group {}
 
-.login , .signup{}
+.login , .register{}
 
 .form-container {
   width: 469px;
@@ -312,21 +312,21 @@ textarea {
   padding-bottom: 10px;
 }
 
-.login-form-fields, .signup-form-fields {
+.login-form-fields, .register-form-fields {
   display: inline-block;
   margin: auto 0;
   width: 227px;
   float: left;
 }
 
-.login-form-submit, .signup-form-submit {
+.login-form-submit, .register-form-submit {
   display: inline-block;
   float: right;
   /* position: absolute; */
   padding-left: 3px;
 }
 
-.login-link-btn, .signup-link-btn {
+.login-link-btn, .register-link-btn {
   display: inline-block;
   float: right;
   padding-left: 115px;
@@ -469,7 +469,7 @@ textarea {
   width: 227px;
 }
 
-.signup {
+.register {
   /*
   display: inline;
   float: right;
@@ -556,7 +556,7 @@ textarea {
   text-align: center;
 }
 
-#signup-btn {
+#register-btn {
   /* position: fixed; */
 }
 

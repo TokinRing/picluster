@@ -1,11 +1,11 @@
 $(document).ready(function() {
   // Get form and input references
-  var signup_form = $("form#signup");
+  var register_form = $("form#register");
   var new_username = $("input#new-username");
   var new_password = $("input#new-password");
 
   // Validate username/password existence and execute query on submission
-  signup_form.on("submit", function(event) {
+  register_form.on("submit", function(event) {
     // Prevent submit button default POST function
     event.preventDefault();
 
@@ -28,9 +28,9 @@ $(document).ready(function() {
     new_password.val("");
   });
 
-  // POST to the signup route. If succesful, redirect to admin page
+  // POST to the register route. If succesful, redirect to admin page
   function signUpUser(new_username, new_password) {
-    $.post("/signup", {
+    $.post("/register", {
       username: new_username,
       password: new_password
     }).then(function(data) {
