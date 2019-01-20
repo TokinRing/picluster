@@ -47,9 +47,9 @@ module.exports = (app) => {
         username: req.body.new_username,
         password: req.body.new_password,
         api_token: lib.generate_token()
-      }).then(function() {
+      }).then(async () => {
         await res.redirect("/admin");
-      }).catch(function(err) {
+      }).catch(async (err) => {
         await res.json(err);
         // TODO: look into why this is here
         // res.status(422).json(err.errors[0].message);
