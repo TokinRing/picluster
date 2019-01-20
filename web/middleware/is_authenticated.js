@@ -6,7 +6,7 @@
 
 module.exports = (req, res, next) => {
   // If the user is logged in, continue with the request
-  if (req.user && req.cookies.user_sid) {
+  if (req.user) {
     return next();
   }
 
