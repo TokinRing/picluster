@@ -65,10 +65,12 @@ module.exports = {
       getData();
     }, 5000); // TODO: Change to a constant from a config value
   },
-  
+
+  /*
   async_handler: fn = (req, res, next) =>
     Promise.resolve(fn(req, res, next)).catch(next),
-
+  */
+  
   display_log: (callback) => {
     const options = {
       url: `${scheme}${server}:${server_port}/log?token=${token}`,
