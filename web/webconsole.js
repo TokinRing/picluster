@@ -8,6 +8,7 @@ const session = require('express-session');
 const request = require('request');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
+const morgan = require('morgan');
 
 // Import configured passport, models and libs
 let models = require("./models");
@@ -23,6 +24,10 @@ process.env.NODE_TLS_REJECT_UNAUTHORIZED = config.ssl_self_signed ? '0' : '1';
 
 // Initialize app
 const app = express();
+
+// Log requests with morgan
+// TODO: Create log engine for debug use
+app.use(morgan('dev'));
 
 // TODO: look into log warnings on startup
 app.use(bodyParser.json());
