@@ -4,7 +4,7 @@ const passport = require("passport");
 const LocalStrategy = require("passport-local").Strategy;
 
 //Import models folder
-const models = require("../models");
+const models = require("./models");
 
 // Setup the Local Strategy to login with a username and password
 passport.use(new LocalStrategy(
