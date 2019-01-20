@@ -32,10 +32,10 @@ module.exports = (app) => {
   app.route('/login')
     .get(async (req, res) => {
       await res.sendFile(path.join(__dirname, '../login.html'));
-    }))
+    })
     .post(passport.authenticate("local"), async (req, res) => {
       await res.redirect("/admin");
-    }));
+    });
 
   // Route for user register. If successfully created, login else throw error
   app.route('/register')
