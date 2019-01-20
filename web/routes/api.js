@@ -48,7 +48,7 @@ module.exports = (app) => {
         password: req.body.new_password,
         api_token: lib.generate_token()
       }).then(async () => {
-        await res.redirect("/admin");
+        await res.redirect("/login");
       }).catch(async (err) => {
         await res.json(err);
       });
@@ -585,12 +585,13 @@ module.exports = (app) => {
 
   // Route for user logout
   app.get("/logout", async (req, res) => {
+    // Clear the cookie is user is logged in and has a cookie
     if (req.user && req.cookies.user_sid) {
       await res.clearCookie('user_sid');
-      await res.redirect('/');
     }
 
-    await res.redirect('/login');
+    // Redirect to base
+    await res.redirect('/');
   });
 
   // Route for getting user data used client side
