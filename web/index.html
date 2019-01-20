@@ -23,7 +23,7 @@
 	<meta name="msapplication-TileColor" content="#ffffff">
 	<meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
 	<meta name="theme-color" content="#ffffff">
-	
+
 	<script>
 		// TODO: Handle variables in DB
 		var manage_container = '';
@@ -146,7 +146,7 @@
 				$('#content').load('/user.html');
 			});
 			$('#logout').click(function() {
-				$('#content').load('/logout');
+				window.location.replace("/logout");
 			});
 
 			// Docs dropdown
