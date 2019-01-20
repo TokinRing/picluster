@@ -30,10 +30,10 @@ module.exports = (app) => {
   // Use passport.authenticate middleware with local strategy
   // If credentials are valid send to admin page
   app.route('/login')
-    .get(async_handler((req, res) => {
+    .get(async (req, res) => {
       await res.sendFile(path.join(__dirname, '../login.html'));
     }))
-    .post(passport.authenticate("local"), async_handler((req, res) => {
+    .post(passport.authenticate("local"), async (req, res) => {
       await res.redirect("/admin");
     }));
 
