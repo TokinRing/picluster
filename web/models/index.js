@@ -1,5 +1,6 @@
 /*jshint esversion: 6 */
 /*jshint strict:false */
+/*jshint node: true */
 'use strict';
 
 const fs = require('fs');
@@ -18,10 +19,11 @@ let modules = [
   require('./config.js')
 ];
 
-// Initialize sequelize DataType
+// Initialize sequelize connection
 let sequelize = new Sequelize(config.db.database, config.db.username, config.db.password, {
   host: config.db.host,
-  dialect: config.db.dialect
+  dialect: config.db.dialect,
+  operatorsAliases: false,
 });
 
 // Sequelize each of the model modules
@@ -42,4 +44,4 @@ models.sequelize = sequelize;
 models.Sequelize = Sequelize;
 
 // Export object containting models
-module.exports = models
+module.exports = models;
