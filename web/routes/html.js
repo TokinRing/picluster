@@ -38,7 +38,7 @@ module.exports = (app) => {
 
   // Handle base requests, defaults to login page
   app.get('/', (req, res) => {
-    if (req.session.user && req.cookies.user_sid) {
+    if (req.user) {
       res.redirect("/admin");
     }
 
