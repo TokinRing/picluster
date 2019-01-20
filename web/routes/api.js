@@ -33,17 +33,17 @@ module.exports = (app) => {
     .get(async (req, res, next) => {
       try {
         await res.sendFile(path.join(__dirname, '../login.html'));
-        next();
+        return next();
       } catch (err) {
-        next(err)
+        return next(err)
       }
     })
     .post(passport.authenticate("local"), async (req, res, next) => {
       try {
         await res.redirect("/admin");
-        next();
+        return next();
       } catch (err) {
-        next(err)
+        return next(err)
       }
     });
 
@@ -598,14 +598,14 @@ module.exports = (app) => {
     try {
       // Clear the cookie is user is logged in and has a cookie
       if (req.user && req.cookies.user_sid) {
-        await res.clearCookie('user_sid');
+        return await res.clearCookie('user_sid');
       }
 
       // Redirect to base
       await res.redirect('/');
-      next();
+      return next();
     } catch (err) {
-      next(err)
+      return next(err)
     }
   });
 
