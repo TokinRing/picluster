@@ -584,13 +584,13 @@ module.exports = (app) => {
   ////
 
   // Route for user logout
-  app.get("/logout", (req, res) => {
+  app.get("/logout", async (req, res) => {
     if (req.user && req.cookies.user_sid) {
-      res.clearCookie('user_sid');
-      res.redirect('/');
+      await res.clearCookie('user_sid');
+      await res.redirect('/');
     }
 
-    res.redirect('/login');
+    await res.redirect('/login');
   });
 
   // Route for getting user data used client side
@@ -650,7 +650,13 @@ module.exports = (app) => {
   // Handle remote image tags from docker hub
   app.get('/remoteimagetags', is_authenticated, (req, res) => {
 
-    const { registry, image, page, username, password } = req.query;
+    const {
+      registry,
+      image,
+      page,
+      username,
+      password
+    } = req.query;
 
     if (!registry || !image) {
       return res.status(400).end('\nError: Invalid Credentials');
