@@ -26,18 +26,18 @@ module.exports = (sequelize, DataTypes) => {
       unique: true
     }
   }, {
-    hooks:{
+    hooks: {
       // Before a User is created, automatically hash their password
-      beforeCreate: async function(user) {
+      beforeCreate: function(user) {
         user.password = bcrypt.hashSync(user.password, bcrypt.genSaltSync(10));
       }
     },
     // Check if unhashed password entered is same as stored hashed password
     instanceMethods: {
-      validPassword: async function(password) {
+      validPassword:  function(password) {
         console.log("sent: " + password + ". stored: " + user.password);
 
-        return await bcrypt.compareSync(password, this.password);
+        return bcrypt.compareSync(password, this.password);
       }
     }
   });

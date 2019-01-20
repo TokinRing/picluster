@@ -42,7 +42,7 @@ module.exports = (app) => {
     ), (req, res) => {
       console.log("body is: " + req.body);
 
-      res.json("/admin");
+      res.redirect("/admin");
     });
 
   // Route for user signup. If successfully created, login else throw error
