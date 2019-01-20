@@ -45,8 +45,8 @@ app.use('/node_modules', express.static(path.join(__dirname, 'node_modules'), {
 app.use(session({
   key: 'user_sid',
   secret: config.session_secret,
-  resave: false,
-  saveUninitialized: false,
+  resave: true,
+  saveUninitialized: true,
   cookie: { expires: 600000 }
 }));
 app.use(passport.initialize());
