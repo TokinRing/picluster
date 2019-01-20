@@ -30,12 +30,12 @@ module.exports = (app) => {
   // Use passport.authenticate middleware with local strategy
   // If credentials are valid send to admin page
   app.route('/login')
-    .get(async (req, res) => {
+    .get(async_handler((req, res) => {
       await res.sendFile(path.join(__dirname, '../login.html'));
-    })
-    .post(passport.authenticate("local"), async (req, res) => {
+    }))
+    .post(passport.authenticate("local"), async_handler((req, res) => {
       await res.redirect("/admin");
-    });
+    }));
 
   // Route for user register. If successfully created, login else throw error
   app.route('/register')
@@ -51,8 +51,6 @@ module.exports = (app) => {
         await res.redirect("/admin");
       }).catch(async (err) => {
         await res.json(err);
-        // TODO: look into why this is here
-        // res.status(422).json(err.errors[0].message);
       });
     });
 
