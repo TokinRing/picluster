@@ -30,36 +30,27 @@ module.exports = (app) => {
   // Use passport.authenticate middleware with local strategy
   // If credentials are valid send to admin page
   app.route('/login')
-    .get((req, res) => {
-      res.sendFile(path.join(__dirname, '../login.html'));
+    .get(async (req, res) => {
+      await res.sendFile(path.join(__dirname, '../login.html'));
     })
-    .post(passport.authenticate(
-      "local", {
-        successRedirect: '/admin',
-        failureRedirect: '/login'
-      }
-    ), (req, res) => {
-      console.log("body is: " + req.body);
-
-      res.redirect("/admin");
+    .post(passport.authenticate("local"), async (req, res) => {
+      await res.redirect("/admin");
     });
 
   // Route for user register. If successfully created, login else throw error
   app.route('/register')
-    .get((req, res) => {
-      res.sendFile(path.join(__dirname, '../register.html'));
+    .get(async (req, res) => {
+      await res.sendFile(path.join(__dirname, '../register.html'));
     })
-    .post((req, res) => {
-      console.log("user:" + req.body.new_username + ". pass: " + req.body.new_password);
+    .post(async (req, res) => {
       models.User.create({
         username: req.body.new_username,
         password: req.body.new_password,
         api_token: lib.generate_token()
       }).then(function() {
-        res.redirect("/admin");
+        await res.redirect("/admin");
       }).catch(function(err) {
-        console.log(err);
-        res.json(err);
+        await res.json(err);
         // TODO: look into why this is here
         // res.status(422).json(err.errors[0].message);
       });
@@ -596,10 +587,12 @@ module.exports = (app) => {
 
   // Route for user logout
   app.get("/logout", (req, res) => {
-    req.logout();
-    req.session.destroy((err) => {
-        res.redirect('/');
-    });
+    if (req.session.user && req.cookies.user_sid) {
+      res.clearCookie('user_sid');
+      res.redirect('/');
+    }
+
+    res.redirect('/login');
   });
 
   // Route for getting user data used client side
