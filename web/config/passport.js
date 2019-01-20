@@ -15,26 +15,33 @@ passport.use(new LocalStrategy(
   function(username, password, done) {
     // Find a matching username in DB when user tries to sign in
     models.User.findOne({
-      where: {
-        username: username
-      }
-    }).then((user) => {
-      // If no matching username found return fail message
-      if (!user) {
-        return done(null, false, {
-          message: "Username not found."
-        });
-      }
-      // If username is matched but the password the given is incorrect
-      else if (!user.validPassword(password)) {
-        return done(null, false, {
-          message: "Incorrect password."
-        });
-      }
+        where: {
+          username: username
+        }
+      })
+      .then((user) => {
+        // If an error occurs, throw error
+        if (err) {
+          return done(err);
+        }
 
-      // If its all good man, return the user
-      return done(null, user);
-    });
+        // If no matching username found return fail message
+        if (!user) {
+          return done(null, false, {
+            message: "Username not found."
+          });
+        }
+
+        // If username is matched but the password the given is incorrect
+        else if (!user.validPassword(password)) {
+          return done(null, false, {
+            message: "Incorrect password."
+          });
+        }
+
+        // If its all good man, return the user
+        return done(null, user);
+      });
   }
 ));
 

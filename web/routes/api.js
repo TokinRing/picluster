@@ -34,7 +34,12 @@ module.exports = (app) => {
     .get((req, res) => {
       res.sendFile(path.join(__dirname, '../login.html'));
     })
-    .post(passport.authenticate("local"), (req, res) => {
+    .post(passport.authenticate(
+      "local", {
+        successRedirect: '/admin',
+        failureRedirect: '/login'
+      }
+    ), (req, res) => {
       console.log("body is: " + req.body);
 
       res.json("/admin");

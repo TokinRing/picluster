@@ -3,7 +3,7 @@
 <head>
 	<script src="/assets/jquery.min.js"></script>
 	<script type="text/javascript" src="assets/picluster.js"></script>
-	<script type="text/javascript" src="assets/login.js"></script>
+	<!--<script type="text/javascript" src="assets/login.js"></script>-->
 	<link rel="stylesheet" href="/assets/picluster-ui.css">
 	<link rel="stylesheet" href="/assets/circle.css">
 </head>
@@ -19,7 +19,7 @@
 		<div class="row">
 			<div class="col-md-6 col-md-offset-3">
 				<div class="form-container">
-					<form id="login">
+					<form id="login" action="/login" method="post">
 						<div class="login-form-fields">
 							<input type="username" id="username" placeholder="Username">
 							<input type="password" id="password" placeholder="Password">
