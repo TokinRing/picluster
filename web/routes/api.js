@@ -7,10 +7,9 @@ const multer = require('multer');
 
 // Require models, configured passport and libs
 const models = require("../models");
-const passport = require("../config/passport");
-const weblib = require("../lib/web");
-const apilib = require("../lib/api");
-const is_authenticated = require('../config/middleware/is_authenticated');
+const passport = require("../passport");
+const lib = require("../lib/libpicluster");
+const is_authenticated = require('../middleware/is_authenticated');
 
 // Specify upload destination path
 const upload = multer({
@@ -51,11 +50,11 @@ module.exports = (app) => {
       res.sendFile(path.join(__dirname, '../register.html'));
     })
     .post((req, res) => {
-      console.log("user:" + req.body.username + ". pass: " + req.body.password);
+      console.log("user:" + req.body.new_username + ". pass: " + req.body.new_password);
       models.User.create({
-        username: req.body.username,
-        password: req.body.password,
-        api_token: weblib.generate_token()
+        username: req.body.new_username,
+        password: req.body.new_password,
+        api_token: lib.generate_token()
       }).then(function() {
         res.redirect("/admin");
       }).catch(function(err) {

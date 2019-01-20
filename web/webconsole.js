@@ -11,11 +11,10 @@ const cookieParser = require('cookie-parser');
 const morgan = require('morgan');
 
 // Import configured passport, models and libs
-let models = require("./models/index");
-let weblib = require("./lib/web");
-let apilib = require("./lib/api");
-const passport = require("./config/passport");
-const is_authenticated = require("./config/middleware/is_authenticated");
+let models = require("./models");
+let lib = require("./lib/libpicluster");
+const passport = require("./passport");
+const is_authenticated = require("./middleware/is_authenticated");
 
 // Load config (...for now)
 let config = JSON.parse(fs.readFileSync((process.env.PICLUSTER_CONFIG ? process.env.PICLUSTER_CONFIG : '../config.json'), 'utf8'));
@@ -26,7 +25,7 @@ process.env.NODE_TLS_REJECT_UNAUTHORIZED = config.ssl_self_signed ? '0' : '1';
 const app = express();
 
 // Log requests with morgan
-// TODO: Create log engine for debug use
+// TODO: Create log level engine for debug use
 app.use(morgan('dev'));
 
 // TODO: look into log warnings on startup
@@ -86,7 +85,7 @@ if (fs.existsSync(path.normalize(doc_dir))) {
  */
 
 // Call get data to initialize view
-apilib.getData;
+lib.getData;
 
 // TODO: Refactor SSL logic into middleware
 if (config.ssl && config.ssl_cert && config.ssl_key) {

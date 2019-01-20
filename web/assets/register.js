@@ -1,8 +1,8 @@
 $(document).ready(function() {
   // Get form and input references
   var register_form = $("form#register");
-  var new_username = $("input#new-username");
-  var new_password = $("input#new-password");
+  var new_username = $("input#new_username");
+  var new_password = $("input#new_password");
 
   // Validate username/password existence and execute query on submission
   register_form.on("submit", function(event) {

@@ -13,8 +13,8 @@ let {
 } = config;
 
 // Require libs and middleware
-const apilib = require("../lib/api");
-const is_authenticated = require('../config/middleware/is_authenticated');
+const lib = require("../lib/libpicluster");
+const is_authenticated = require('../middleware/is_authenticated');
 
 // Logo slug used for themes
 let logo_slug = path.join(__dirname, '../assets/images/theme/', theme, '/logo.png');
