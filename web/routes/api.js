@@ -57,7 +57,7 @@ module.exports = (app) => {
         password: req.body.password,
         api_token: weblib.generate_token()
       }).then(function() {
-        res.redirect(307, "/login");
+        res.redirect("/admin");
       }).catch(function(err) {
         console.log(err);
         res.json(err);
