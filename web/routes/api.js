@@ -32,18 +32,16 @@ module.exports = (app) => {
   app.route('/login')
     .get(async (req, res, next) => {
       try {
-        await res.sendFile(path.join(__dirname, '../login.html'));
-        return next();
+        return await res.sendFile(path.join(__dirname, '../login.html'));
       } catch (err) {
-        return next(err)
+        return await res.json(err);
       }
     })
     .post(passport.authenticate("local"), async (req, res, next) => {
       try {
-        await res.redirect("/admin");
-        return next();
+        returnawait res.redirect("/admin");
       } catch (err) {
-        return next(err)
+        return await res.json(err);
       }
     });
 
@@ -51,10 +49,9 @@ module.exports = (app) => {
   app.route('/register')
     .get(async (req, res) => {
       try {
-        await res.sendFile(path.join(__dirname, '../register.html'));
-        return next();
+        return await res.sendFile(path.join(__dirname, '../register.html'));
       } catch (err) {
-        return next(err)
+        return await res.json(err);
       }
     })
     .post(async (req, res) => {
@@ -607,10 +604,9 @@ module.exports = (app) => {
       }
 
       // Redirect to base
-      await res.redirect('/');
-      return next();
+      return await res.redirect('/');
     } catch (err) {
-      return next(err)
+      return await res.json(err);
     }
   });
 
