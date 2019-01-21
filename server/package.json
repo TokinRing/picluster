@@ -6,8 +6,12 @@
   },
   "dependencies": {
     "async": "^2.6.1",
+    "child-process-promise": "",
+    "cpu-stats": "^1.0.0",
+    "diskspace": "^2.0.0",
     "body-parser": "latest",
     "eslint": "^5.6.0",
+    "fd-diskspace": "^1.0.0",
     "express": "",
     "express-jwt": "^5.3.1",
     "fs": "",
@@ -17,6 +21,9 @@
     "node-gyp": "",
     "request": "",
     "request-debug": "^0.2.0",
-    "sys": ""
+    "sys": "",
+    "picluster-getos": "git+https://github.com/picluster/getos.git",
+    "systeminformation": "^3.45.6",
+    "unzip-stream": ""
   }
 }
