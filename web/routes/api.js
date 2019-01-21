@@ -625,10 +625,17 @@ app.get("/api/user_data", is_authenticated, async (req, res) => {
 // TODO: change from frontend auth to backend auth once in place
 app.get("/api/config_data", is_authenticated, async (req, res) => {
   console.log(config);
-  // Send back the info
-  return await res.json({
-    Config.all
-  });
+
+  try {
+    Config.all().then(config => {
+      // Send back the info
+      return await res.json(config);
+    })
+  } catch (err) {
+    // Send back err
+    return await res.json(err);
+  }
+
 });
 
 // Handle sending list of .md files in docs
