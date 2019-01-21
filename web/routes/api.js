@@ -91,12 +91,12 @@ module.exports = (app) => {
       token
     };
 
-    request(options, (error, response, body) => {
-      if (error) {
-        res.end(error);
-      } else {
-        updateConfig(payload);
-        res.end(body);
+    request(options, async (err, res, body) => {
+      try {
+        await updateConfig(payload);
+        return await res.end(body);
+      } catch (err) {
+        return await res.json(err);
       }
     });
   });
@@ -600,7 +600,7 @@ module.exports = (app) => {
     try {
       // Clear the cookie is user is logged in and has a cookie
       if (req.user && req.cookies.user_sid) {
-        return await res.clearCookie('user_sid');
+        await res.clearCookie('user_sid');
       }
 
       // Redirect to base

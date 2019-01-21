@@ -10,10 +10,9 @@ const bodyParser = require('body-parser');
 const multer = require('multer');
 const getos = require('picluster-getos');
 const async = require('async');
-const {
-  exec
-} = require('child-process-promise');
+const { exec } = require('child-process-promise');
 const sysinfo = require('systeminformation');
+
 
 let config = process.env.PICLUSTER_CONFIG ? JSON.parse(fs.readFileSync(process.env.PICLUSTER_CONFIG, 'utf8')) : JSON.parse(fs.readFileSync('../config.json', 'utf8'));
 const app = express();

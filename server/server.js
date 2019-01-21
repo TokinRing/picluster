@@ -1,15 +1,22 @@
 const http = require('http');
 const https = require('https');
 const fs = require('fs');
+const os = require('os');
 const net = require('net');
 const tls = require('tls');
+const unzip = require('unzip-stream');
+const diskspace = require('diskspace');
 const bodyParser = require('body-parser');
 const multer = require('multer');
-const express = require('express');
 const Moment = require('moment');
 const request = require('request');
 const async = require('async');
-const session = require('express-session')
+const getos = require('picluster-getos');
+const express = require('express');
+const session = require('express-session');
+const jwt = require('express-jwt');
+const { exec } = require('child-process-promise');
+const sysinfo = require('systeminformation');
 
 const bootstrap = {
   status: 1
