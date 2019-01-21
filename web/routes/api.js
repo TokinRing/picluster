@@ -50,7 +50,12 @@ module.exports = (app) => {
   // Route for user register. If successfully created, login else throw error
   app.route('/register')
     .get(async (req, res) => {
-      await res.sendFile(path.join(__dirname, '../register.html'));
+      try {
+        await res.sendFile(path.join(__dirname, '../register.html'));
+        return next();
+      } catch (err) {
+        return next(err)
+      }
     })
     .post(async (req, res) => {
       models.User.create({
