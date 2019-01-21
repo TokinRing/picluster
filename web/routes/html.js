@@ -40,7 +40,7 @@ module.exports = (app) => {
   });
 
   // Handle logo
-  app.get('/logo.png', (req, res) => {
+  app.get('/logo.png', async (req, res) => {
     return await res.sendFile(logo_slug);
   });
 
