@@ -26,297 +26,157 @@ module.exports = (app) => {
   // Unauthenticated pages
   ////
 
-
   // Handle base requests, defaults to login page
-  app.get('/', async (req, res) => {
+  app.get('/', await_error_handler(async (req, res) => {
     if (req.user) {
-      try {
-        return await res.redirect("/admin");
-      } catch (err) {
-        return await res.json(err);
-      }
+      return res.redirect("/admin");
     }
 
-    try {
-      return await res.redirect("/login");
-    } catch (err) {
-      return await res.json(err);
-    }
-  });
+    return res.redirect("/login");
+  }));
 
   // Handle favicon
-  app.get('/favicon.ico', async (req, res) => {
-    try {
-      return await res.sendFile(path.join(__dirname, '../assets/images/favicon.ico'));
-    } catch (err) {
-      return await res.json(err);
-    }
-  });
+  app.get('/favicon.ico', await_error_handler(async (req, res) => {
+    return res.sendFile(path.join(__dirname, '../assets/images/favicon.ico'));
+
+  }));
 
   // Handle logo
-  app.get('/logo.png', async (req, res) => {
-    try {
-      return await res.sendFile(logo_slug);
-    } catch (err) {
-      return await res.json(err);
-    }
-  });
+  app.get('/logo.png', await_error_handler(async (req, res) => {
+    return res.sendFile(logo_slug);
+  }));
 
   ////
   // Authenticated pages
   ////
-  app.get('/admin', is_authenticated, async (req, res) => {
-    try {
-      return await res.sendFile(path.join(__dirname, '../index.html'));
-    } catch (err) {
-      return await res.json(err);
-    }
-  });
+  app.get('/admin', is_authenticated, await_error_handler(async (req, res) => {
+    return res.sendFile(path.join(__dirname, '../index.html'));
+  }));
 
-  app.get('/blank.html', is_authenticated, async (req, res) => {
-    try {
-      return await res.sendFile(path.join(__dirname, '../views/blank.html'));
-    } catch (err) {
-      return await res.json(err);
-    }
-  });
+  app.get('/blank.html', is_authenticated, await_error_handler(async (req, res) => {
+    return res.sendFile(path.join(__dirname, '../views/blank.html'));
+  }));
 
-  app.get('/config-system.html', is_authenticated, async (req, res) => {
-    try {
-      return await res.sendFile(path.join(__dirname, '../views/config-system.html'));
-    } catch (err) {
-      return await res.json(err);
-    }
-  });
+  app.get('/config-system.html', is_authenticated, await_error_handler(async (req, res) => {
+    return res.sendFile(path.join(__dirname, '../views/config-system.html'));
+  }));
 
-  app.get('/config-reload.html', is_authenticated, async (req, res) => {
-    try {
-      return await res.sendFile(path.join(__dirname, '../views/config-reload.html'));
-    } catch (err) {
-      return await res.json(err);
-    }
-  });
+  app.get('/config-reload.html', is_authenticated, await_error_handler(async (req, res) => {
+    return res.sendFile(path.join(__dirname, '../views/config-reload.html'));
+  }));
 
-  app.get('/containers-layout.html', is_authenticated, async (req, res) => {
-    try {
-      return await res.sendFile(path.join(__dirname, '../views/containers-layout.html'));
-    } catch (err) {
-      return await res.json(err);
-    }
-  });
+  app.get('/containers-layout.html', is_authenticated, await_error_handler(async (req, res) => {
+    return res.sendFile(path.join(__dirname, '../views/containers-layout.html'));
+  }));
 
-  app.get('/containers-manage.html', is_authenticated, async (req, res) => {
-    try {
-      return await res.sendFile(path.join(__dirname, '../views/containers-manage.html'));
-    } catch (err) {
-      return await res.json(err);
-    }
-  });
+  app.get('/containers-manage.html', is_authenticated, await_error_handler(async (req, res) => {
+    return res.sendFile(path.join(__dirname, '../views/containers-manage.html'));
+  }));
 
   // TODO: Add or remove? not used anywhere, but is defined
-  app.get('/containers-add.html', is_authenticated, async (req, res) => {
-    try {
-      return await res.sendFile(path.join(__dirname, '../views/containers-add.html'));
-    } catch (err) {
-      return await res.json(err);
-    }
-  });
+  app.get('/containers-add.html', is_authenticated, await_error_handler(async (req, res) => {
+    return res.sendFile(path.join(__dirname, '../views/containers-add.html'));
+  }));
 
-  app.get('/docs.html', is_authenticated, async (req, res) => {
-    try {
-      return await res.sendFile(path.join(__dirname, '../views/docs.html'));
-    } catch (err) {
-      return await res.json(err);
-    }
-  });
+  app.get('/docs.html', is_authenticated, await_error_handler(async (req, res) => {
+    return res.sendFile(path.join(__dirname, '../views/docs.html'));
+  }));
 
-  app.get('/elasticsearch.html', is_authenticated, async (req, res) => {
-    try {
-      return await res.sendFile(path.join(__dirname, '../views/elasticsearch.html'));
-    } catch (err) {
-      return await res.json(err);
-    }
-  });
+  app.get('/elasticsearch.html', is_authenticated, await_error_handler(async (req, res) => {
+    return res.sendFile(path.join(__dirname, '../views/elasticsearch.html'));
+  }));
 
-  app.get('/exec.html', is_authenticated, async (req, res) => {
-    try {
-      return await res.sendFile(path.join(__dirname, '../views/exec.html'));
-    } catch (err) {
-      return await res.json(err);
-    }
-  });
+  app.get('/exec.html', is_authenticated, await_error_handler(async (req, res) => {
+    return res.sendFile(path.join(__dirname, '../views/exec.html'));
+  }));
 
-  app.get('/functions-clear.html', is_authenticated, async (req, res) => {
-    try {
-      return await res.sendFile(path.join(__dirname, '../views/functions-clear.html'));
-    } catch (err) {
-      return await res.json(err);
-    }
-  });
+  app.get('/functions-clear.html', is_authenticated, await_error_handler(async (req, res) => {
+    return res.sendFile(path.join(__dirname, '../views/functions-clear.html'));
+  }));
 
-  app.get('/functions-create.html', is_authenticated, async (req, res) => {
-    try {
-      return await res.sendFile(path.join(__dirname, '../views/functions-create.html'));
-    } catch (err) {
-      return await res.json(err);
-    }
-  });
+  app.get('/functions-create.html', is_authenticated, await_error_handler(async (req, res) => {
+    return res.sendFile(path.join(__dirname, '../views/functions-create.html'));
+  }));
 
-  app.get('/functions-current.html', is_authenticated, async (req, res) => {
-    try {
-      return await res.sendFile(path.join(__dirname, '../views/functions-current.html'));
-    } catch (err) {
-      return await res.json(err);
-    }
-  });
+  app.get('/functions-current.html', is_authenticated, await_error_handler(async (req, res) => {
+    return res.sendFile(path.join(__dirname, '../views/functions-current.html'));
+  }));
 
-  app.get('/functions-viewer.html', is_authenticated, async (req, res) => {
-    try {
-      return await res.sendFile(path.join(__dirname, '../views/functions-viewer.html'));
-    } catch (err) {
-      return await res.json(err);
-    }
-  });
+  app.get('/functions-viewer.html', is_authenticated, await_error_handler(async (req, res) => {
+    return res.sendFile(path.join(__dirname, '../views/functions-viewer.html'));
+  }));
 
-  app.get('/heartbeat.html', is_authenticated, async (req, res) => {
-    try {
-      return await res.sendFile(path.join(__dirname, '../views/heartbeat.html'));
-    } catch (err) {
-      return await res.json(err);
-    }
-  });
+  app.get('/heartbeat.html', is_authenticated, await_error_handler(async (req, res) => {
+    return res.sendFile(path.join(__dirname, '../views/heartbeat.html'));
+  }));
 
-  app.get('/images-layout.html', is_authenticated, async (req, res) => {
-    try {
-      return await res.sendFile(path.join(__dirname, '../views/images-layout.html'));
-    } catch (err) {
-      return await res.json(err);
-    }
-  });
+  app.get('/images-layout.html', is_authenticated, await_error_handler(async (req, res) => {
+    return res.sendFile(path.join(__dirname, '../views/images-layout.html'));
+  }));
 
-  app.get('/images-manage.html', is_authenticated, async (req, res) => {
-    try {
-      return await res.sendFile(path.join(__dirname, '../views/images-manage.html'));
-    } catch (err) {
-      return await res.json(err);
-    }
-  });
+  app.get('/images-manage.html', is_authenticated, await_error_handler(async (req, res) => {
+    return res.sendFile(path.join(__dirname, '../views/images-manage.html'));
+  }));
 
-  app.get('/images-prune.html', is_authenticated, async (req, res) => {
-    try {
-      return await res.sendFile(path.join(__dirname, '../views/images-prune.html'));
-    } catch (err) {
-      return await res.json(err);
-    }
-  });
+  app.get('/images-prune.html', is_authenticated, await_error_handler(async (req, res) => {
+    return res.sendFile(path.join(__dirname, '../views/images-prune.html'));
+  }));
 
   // TODO: Add or remove? not used anywhere, but is defined
-  app.get('/images-pull.html', is_authenticated, async (req, res) => {
-    try {
-      return await res.sendFile(path.join(__dirname, '../views/images-pull.html'));
-    } catch (err) {
-      return await res.json(err);
-    }
-  });
+  app.get('/images-pull.html', is_authenticated, await_error_handler(async (req, res) => {
+    return res.sendFile(path.join(__dirname, '../views/images-pull.html'));
+  }));
 
   // TODO: Add or remove? not used anywhere, but is defined
-  app.get('/images-upload.html', is_authenticated, async (req, res) => {
-    try {
-      return await res.sendFile(path.join(__dirname, '../views/images-upload.html'));
-    } catch (err) {
-      return await res.json(err);
-    }
-  });
+  app.get('/images-upload.html', is_authenticated, await_error_handler(async (req, res) => {
+    return res.sendFile(path.join(__dirname, '../views/images-upload.html'));
+  }));
 
-  app.get('/log.html', is_authenticated, async (req, res) => {
-    try {
-      return await res.sendFile(path.join(__dirname, '../views/log.html'));
-    } catch (err) {
-      return await res.json(err);
-    }
-  });
+  app.get('/log.html', is_authenticated, await_error_handler(async (req, res) => {
+    return res.sendFile(path.join(__dirname, '../views/log.html'));
+  }));
 
-  app.get('/menu.html', is_authenticated, async (req, res) => {
-    try {
-      return await res.sendFile(path.join(__dirname, '../views/menu.html'));
-    } catch (err) {
-      return await res.json(err);
-    }
-  });
+  app.get('/menu.html', is_authenticated, await_error_handler(async (req, res) => {
+    return res.sendFile(path.join(__dirname, '../views/menu.html'));
+  }));
 
-  app.get('/nodes-list.html', is_authenticated, async (req, res) => {
-    try {
-      return await res.sendFile(path.join(__dirname, '../views/nodes-list.html'));
-    } catch (err) {
-      return await res.json(err);
-    }
-  });
+  app.get('/nodes-list.html', is_authenticated, await_error_handler(async (req, res) => {
+    return res.sendFile(path.join(__dirname, '../views/nodes-list.html'));
+  }));
 
-  app.get('/nodes-manage.html', is_authenticated, async (req, res) => {
-    try {
-      return await res.sendFile(path.join(__dirname, '../views/nodes-manage.html'));
-    } catch (err) {
-      return await res.json(err);
-    }
-  });
+  app.get('/nodes-manage.html', is_authenticated, await_error_handler(async (req, res) => {
+    return res.sendFile(path.join(__dirname, '../views/nodes-manage.html'));
+  }));
 
   // TODO: Add or remove? not used anywhere, but is defined
-  app.get('/nodes-add.html', is_authenticated, async (req, res) => {
-    try {
-      return await res.sendFile(path.join(__dirname, '../views/nodes-add.html'));
-    } catch (err) {
-      return await res.json(err);
-    }
-  });
+  app.get('/nodes-add.html', is_authenticated, await_error_handler(async (req, res) => {
+    return res.sendFile(path.join(__dirname, '../views/nodes-add.html'));
+  }));
 
   // TODO: Add or remove? not used anywhere, but is defined
-  app.get('/nodes-remove.html', is_authenticated, async (req, res) => {
-    try {
-      return await res.sendFile(path.join(__dirname, '../views/nodes-remove.html'));
-    } catch (err) {
-      return await res.json(err);
-    }
-  });
+  app.get('/nodes-remove.html', is_authenticated, await_error_handler(async (req, res) => {
+    return res.sendFile(path.join(__dirname, '../views/nodes-remove.html'));
+  }));
 
-  app.get('/rsyslog.html', is_authenticated, async (req, res) => {
-    try {
-      return await res.sendFile(path.join(__dirname, '../views/rsyslog.html'));
-    } catch (err) {
-      return await res.json(err);
-    }
-  });
+  app.get('/rsyslog.html', is_authenticated, await_error_handler(async (req, res) => {
+    return res.sendFile(path.join(__dirname, '../views/rsyslog.html'));
+  }));
 
-  app.get('/swarm.html', is_authenticated, async (req, res) => {
-    try {
-      return await res.sendFile(path.join(__dirname, '../views/swarm.html'));
-    } catch (err) {
-      return await res.json(err);
-    }
-  });
+  app.get('/swarm.html', is_authenticated, await_error_handler(async (req, res) => {
+    return res.sendFile(path.join(__dirname, '../views/swarm.html'));
+  }));
 
-  app.get('/syslog.html', is_authenticated, async (req, res) => {
-    try {
-      return await res.sendFile(path.join(__dirname, '../views/syslog.html'));
-    } catch (err) {
-      return await res.json(err);
-    }
-  });
+  app.get('/syslog.html', is_authenticated, await_error_handler(async (req, res) => {
+    return res.sendFile(path.join(__dirname, '../views/syslog.html'));
+  }));
 
-  app.get('/terminal.html', is_authenticated, async (req, res) => {
-    try {
-      return await res.sendFile(path.join(__dirname, '../views/terminal.html'));
-    } catch (err) {
-      return await res.json(err);
-    }
-  });
+  app.get('/terminal.html', is_authenticated, await_error_handler(async (req, res) => {
+    return res.sendFile(path.join(__dirname, '../views/terminal.html'));
+  }));
 
-  app.get('/user.html', is_authenticated, async (req, res) => {
-    try {
-      return await res.sendFile(path.join(__dirname, '../views/user.html'));
-    } catch (err) {
-      return await res.json(err);
-    }
-  });
+  app.get('/user.html', is_authenticated, await_error_handler(async (req, res) => {
+    return res.sendFile(path.join(__dirname, '../views/user.html'));
+  }));
 
   // TODO: Migrate to html routes, once that goddamn iframe is removed
   // serve_doc_pages();
