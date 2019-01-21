@@ -81,9 +81,9 @@ module.exports = (app) => {
     }
   });
 
-  app.get('/config-edit.html', is_authenticated, async (req, res) => {
+  app.get('/config-system.html', is_authenticated, async (req, res) => {
     try {
-      return await res.sendFile(path.join(__dirname, '../views/config-edit.html'));
+      return await res.sendFile(path.join(__dirname, '../views/config-system.html'));
     } catch (err) {
       return await res.json(err);
     }
