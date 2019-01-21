@@ -16,6 +16,17 @@ let {
 const lib = require("../lib/libpicluster");
 const is_authenticated = require('../middleware/is_authenticated');
 
+// Middleware to handle async errors (DRY way to catch errors)
+const await_error_handler = middleware => {
+  return async (req, res, next) => {
+    try {
+      await middleware(req, res, next);
+    } catch (err) {
+      next(err);
+    }
+  };
+};
+
 // Logo slug used for themes
 let logo_slug = path.join(__dirname, '../assets/images/theme/', theme, '/logo.png');
 

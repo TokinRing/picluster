@@ -21,7 +21,16 @@ const upload = multer({
 
 let nodedata = '';
 
-const config = Config.all;
+// Middleware to handle async errors (DRY way to catch errors)
+const await_error_handler = middleware => {
+  return async (req, res, next) => {
+    try {
+      await middleware(req, res, next);
+    } catch (err) {
+      next(err);
+    }
+  };
+};
 
 module.exports = (app) => {
   ////
