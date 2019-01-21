@@ -21,6 +21,17 @@ let config = JSON.parse(fs.readFileSync((process.env.PICLUSTER_CONFIG ? process.
 
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = config.ssl_self_signed ? '0' : '1';
 
+// Middleware to handle async errors (DRY way to catch errors)
+const await_error_handler = middleware => {
+  return async (req, res, next) => {
+    try {
+      await middleware(req, res, next);
+    } catch (err) {
+      next(err);
+    }
+  };
+};
+
 // Initialize app
 const app = express();
 
@@ -76,17 +87,6 @@ let {server_port} = config;
 process.on('unhandledRejection', (err, promise) => {
     console.error('Unhandled rejection (promise: ', promise, ', reason: ', err, ').');
 });
-
-// Middleware to handle async errors (DRY way to catch errors)
-const await_error_handler = middleware => {
-  return async (req, res, next) => {
-    try {
-      await middleware(req, res, next);
-    } catch (err) {
-      next(err);
-    }
-  };
-};
 
 /*
 TODO: Add docs once iframe mess is purged

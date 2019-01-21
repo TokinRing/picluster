@@ -6,7 +6,10 @@ const path = require('path');
 const multer = require('multer');
 
 // Require models, configured passport and libs
-const { User, Config } = require("../models");
+const {
+  User,
+  Config
+} = require("../models");
 const passport = require("../passport");
 const lib = require("../lib/libpicluster");
 const is_authenticated = require('../middleware/is_authenticated');
@@ -38,7 +41,7 @@ module.exports = (app) => {
   // Route for user register. If successfully created, login else throw error
   app.route('/register')
     .get(await_error_handler(async (req, res) => {
-        return await res.sendFile(path.join(__dirname, '../register.html'));
+      return await res.sendFile(path.join(__dirname, '../register.html'));
     }))
     .post(await_error_handler(async (req, res) => {
       User.create({
@@ -581,13 +584,13 @@ module.exports = (app) => {
 
   // Route for user logout
   app.get("/logout", await_error_handler(async (req, res, next) => {
-      // Clear the cookie is user is logged in and has a cookie
-      if (req.user && req.cookies.user_sid) {
-        res.clearCookie('user_sid');
-      }
+    // Clear the cookie is user is logged in and has a cookie
+    if (req.user && req.cookies.user_sid) {
+      res.clearCookie('user_sid');
+    }
 
-      // Redirect to base
-      return await res.redirect('/');
+    // Redirect to base
+    return await res.redirect('/');
   }));
 
   // Route for getting user data used client side
@@ -603,11 +606,12 @@ module.exports = (app) => {
   // Route for getting config data used client side
   // TODO: change from frontend auth to backend auth once in place
   app.get("/api/config_data", is_authenticated, await_error_handler(async (req, res) => {
-
-      await Config.findAll({}).then(config => {
-        // Send back the info
-        return res.json(config);
-      })
+    const config_data = await Config.findAll({});
+    // Send back the info
+    return res.json({
+      error: false,
+      data: config_data
+    });
   }));
 
   // Handle sending list of .md files in docs
