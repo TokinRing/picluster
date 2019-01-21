@@ -39,7 +39,7 @@ module.exports = (app) => {
     })
     .post(passport.authenticate("local"), async (req, res, next) => {
       try {
-        returnawait res.redirect("/admin");
+        return await res.redirect("/admin");
       } catch (err) {
         return await res.json(err);
       }
