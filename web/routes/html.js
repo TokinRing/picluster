@@ -26,29 +26,29 @@ module.exports = (app) => {
 
 
   // Handle base requests, defaults to login page
-  app.get('/', (req, res) => {
+  app.get('/', async (req, res) => {
     if (req.user) {
-      res.redirect("/admin");
+      return await res.redirect("/admin");
     }
 
-    res.redirect("/login");
+    return await res.redirect("/login");
   });
 
   // Handle favicon
-  app.get('/favicon.ico', (req, res) => {
-    res.sendFile(path.join(__dirname, '../assets/images/favicon.ico'));
+  app.get('/favicon.ico', async (req, res) => {
+    return await res.sendFile(path.join(__dirname, '../assets/images/favicon.ico'));
   });
 
   // Handle logo
   app.get('/logo.png', (req, res) => {
-    res.sendFile(logo_slug);
+    return await res.sendFile(logo_slug);
   });
 
   ////
   // Authenticated pages
   ////
-  app.get('/admin', is_authenticated, (req, res) => {
-    res.sendFile(path.join(__dirname, '../index.html'));
+  app.get('/admin', is_authenticated, async (req, res) => {
+    return await res.sendFile(path.join(__dirname, '../index.html'));
   });
 
   app.get('/blank.html', is_authenticated, (req, res) => {

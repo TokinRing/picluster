@@ -63,9 +63,9 @@ module.exports = (app) => {
         password: req.body.new_password,
         api_token: lib.generate_token()
       }).then(async () => {
-        await res.redirect("/login");
+        return await res.redirect("/login");
       }).catch(async (err) => {
-        await res.json(err);
+        return await res.json(err);
       });
     });
 
