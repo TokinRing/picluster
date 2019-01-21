@@ -627,9 +627,9 @@ app.get("/api/config_data", is_authenticated, async (req, res) => {
   console.log(config);
 
   try {
-    Config.all().then(config => {
+    await Config.all().then(config => {
       // Send back the info
-      return await res.json(config);
+      return res.json(config);
     })
   } catch (err) {
     // Send back err
