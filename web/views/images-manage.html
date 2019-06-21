@@ -1,27 +1,46 @@
 <html>
 
 <head>
-	<script src="/assets/jquery.min.js"></script>
-	<link rel="stylesheet" href="/assets/jquery-ui.css">
-	<script src="/assets/jquery-ui.js"></script>
-	<link rel="stylesheet" href="/assets/picluster-iframe.css">
-	<script src="/assets/distLogo.js"></script>
-	<script src="/assets/dropzone.js"></script>
+	<title>PiCluster Web Console</title>
+	<script src="/jquery.js"></script>
+	<script src="/jquery-ui.js"></script>
+	<script src="/picluster.js"></script>
+
+	<script src="/distLogo.js"></script>
+	<script src="/moment.js"></script>
+
+	<link rel="stylesheet" href="/jquery-ui.css">
+	<link rel="stylesheet" href="/picluster-ui.css">
+	<link rel="stylesheet" href="/circle.css">
+
+	<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+	<link rel="manifest" href="/images/manifest.json">
+	<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+
+	<meta name="theme-color" content="#ffffff">
+	<meta name="msapplication-TileColor" content="#ffffff">
+	<meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
+	<meta name="theme-color" content="#ffffff">
+
 	<script>
-		function clearAuth() {
-			document.getElementById('imageauth-user').value = "";
-			document.getElementById('imageauth-password').value = "";
-		}
+		generate_nav("#menu");
+		//build_doc_links();
 
-		function checkAll(checkbox) {
-			var checked = checkbox.checked;
-			var checkboxes = document.getElementsByName('node_list');
+		$(document).ready(function() {
+			// Provide dropdown menu when javascript disabled
+			$('nav li ul').hide().removeClass('dropdown');
 
-			checkboxes.forEach(function(e) {
-				e.checked = checked;
+			// Render menu dropdown the right way
+			$('nav li').hover(function() {
+				$('ul', this).stop().slideDown(125);
+			}, function() {
+				$('ul', this).stop().slideUp(125);
 			});
-		}
-
+		});
+	</script>
+	<script>
 		// Populate container_list drop down
 		$(function() {
 			$.get('/listregistries', {
@@ -37,6 +56,7 @@
 		});
 
 		$(function() {
+			// TODO: refactor reference to /nodes handle to use /api/host/info
 			$.get("/nodes?token=" + parent.token, function(data) {
 				/* for (var i in data.nodes) {
 					option += '<option value="' + data.nodes[i] + '">' + data.nodes[i] + '</option>';
@@ -145,110 +165,27 @@
 			});
 		});
 
-$(function() {
-	// Populate image_list drop down
-	var option = '';
-	if (parent.manage_image) {
-		option += '<option value="' + parent.manage_image + '">' + parent.manage_image + '</option>';
-		$('#image_list').append(option);
-		parent.manage_image = '';
-	} else {
 		$(function() {
-			$.get("/nodes?token=" + parent.token, function(data) {
-				for (var i in data.container_list) {
-					option += '<option value="' + data.container_list[i] + '">' + data.container_list[i] + '</option>';
-				}
-				option += '<option value="' + '*' + '">' + '*' + '</option>';
+			// Populate image_list drop down
+			var option = '';
+			if (parent.manage_image) {
+				option += '<option value="' + parent.manage_image + '">' + parent.manage_image + '</option>';
 				$('#image_list').append(option);
-			});
-		});
-	}
-});
-		function exec() {
-			var image_list = document.getElementById("image_list");
-			var cache = document.getElementById("cache");
-			var no_cache = 0;
-			var image_build = image_list.options[image_list.selectedIndex].value;
-			var image_pull = document.getElementById('image_pull').value;
-			var registry = document.getElementsByName('container_list')[0].value;
-			var local_tag_name = document.getElementById('local_tag_name').value;
-			var remote_tag_name = document.getElementById('remote_tag_name').value;
-			var radio_image_build = $('input[id=radio_image_build]:checked').val();
-			var radio_image_delete = $('input[id=radio_image_delete]:checked').val();
-			var radio_image_pull = $('input[id=radio_image_pull]:checked').val();
-			var radio_image_upload = $('input[id=radio_start]:checked').val();
-			var path = '';
-			var operation = '';
-			var div = document.getElementById('images-manage-modal-body');
-			
-			if(cache.checked){
-				no_cache = 1;
-			}
-
-			if (radio_image_build && image_build) {
-				div.innerHTML = 'Sent request to the server. Any errors will be reported in this window.<br><br>';
-				operation = 'build'
-				$.post('/manage-image', {
-					token: parent.token,
-					operation,
-					container: image_build,
-					no_cache
-				}, function(data) {
-					div.innerHTML = div.innerHTML + data.replace(/(?:\r\n|\r|\n)/g, '<br />');
-						});
-			}
-
-			if (image_build && radio_image_delete) {
-				div.innerHTML = 'Sent request to the server. Any errors will be reported in this window.<br><br>';
-				operation = 'rm'
-				$.post('/manage-image', {
-					token: parent.token,
-					operation,
-					container: image_build
-				}, function(data) {
-					div.innerHTML = div.innerHTML + data.replace(/(?:\r\n|\r|\n)/g, '<br />');
-						});
-			}
-
-			if (radio_image_pull) {
-				if (image_pull && local_tag_name) {
-					// Build the fully qualified image name to pull
-					image_pull = registry !== 'hub.docker.com' ? registry + '/' + image_pull : 'index.docker.io/' + image_pull;
-
-					if (image_pull.indexOf(':') === -1) {
-						image_pull = remote_tag_name.toLowerCase() !== 'latest' ? image_pull + ':' + remote_tag_name : image_pull;
-					}
-
-					var command = "docker image pull " + image_pull + "; docker tag " + image_pull + ' ' + local_tag_name;
-					//docker tag tokinring/nginx-php-alpine test
-					var nodes = document.getElementsByName('node_list');
-					var div = document.getElementById('images-manage-modal-body');
-					var username = document.getElementsByName('imageauth-user')[0].value || '';
-					var password = document.getElementsByName('imageauth-password')[0].value || '';
-
-					// Login first if the user has provided authentication
-					command = username.length > 0 && password.length > 0 ? ["docker", "login", registry, "--username", username, "--password", password].join(' ') + ' && ' + command : command;
-					var check_counter = 0;
-					nodes.forEach(function(node, i) {
-						if (nodes[i].checked) {
-							nodes.forEach(function(node, i) {
-								if (nodes[i].checked) {
-									check_counter++;
-									$.post('/exec', {
-										token: parent.token,
-										command: command,
-										node: node.value
-									}, function(data) {});
-								}
-							});
+				parent.manage_image = '';
+			} else {
+				$(function() {
+					// TODO: refactor reference to /nodes handle to use /api/host/info
+					$.get("/nodes?token=" + parent.token, function(data) {
+						for (var i in data.container_list) {
+							option += '<option value="' + data.container_list[i] + '">' + data.container_list[i] + '</option>';
 						}
+						option += '<option value="' + '*' + '">' + '*' + '</option>';
+						$('#image_list').append(option);
 					});
-					div.innerHTML = check_counter == 0 ? 'Error, no hosts were selected.' : 'Sent request to the server. Please check the logs and running containers for updated information.';
-				} else {
-					alert('\nError: Missing local tag name or image name. Please try again');
-				}
+				});
 			}
-		}
+		});
+
 		$(document).ready(function() {
 			// TODO: Refactor individual radio hide/show into an active/inactive class
 			$("input[id$='radio_image_build']").click(function() {
@@ -260,7 +197,7 @@ $(function() {
 				$(this).is(":checked") ? $("#image_description").hide() : '';
 				$(this).is(":checked") ? $("#image_list_upload").hide() : '';
 				$(this).is(":checked") ? $("#image_list_options_fieldset").show() : '';
-				$(this).is(":checked") ? $("#submit_button_div").show() : '';
+				$(this).is(":checked") ? $("#submit_element").show() : '';
 			})
 
 			$("input[id$='radio_image_delete']").click(function() {
@@ -270,7 +207,7 @@ $(function() {
 				$(this).is(":checked") ? $("#image_list_pull_options").hide() : '';
 				$(this).is(":checked") ? $("#image_description").hide() : '';
 				$(this).is(":checked") ? $("#image_list_upload").hide() : '';
-				$(this).is(":checked") ? $("#submit_button_div").show() : '';
+				$(this).is(":checked") ? $("#submit_element").show() : '';
 			})
 
 			$("input[id$='radio_image_pull']").click(function() {
@@ -282,7 +219,7 @@ $(function() {
 				$(this).is(":checked") ? $("#image_description").show() : '';
 				$(this).is(":checked") ? $("#image_list_upload").hide() : '';
 				$(this).is(":checked") ? $("#image_list_options_fieldset").show() : '';
-				$(this).is(":checked") ? $("#submit_button_div").show() : '';
+				$(this).is(":checked") ? $("#submit_element").show() : '';
 			})
 
 			$("input[id$='radio_image_upload']").click(function() {
@@ -294,7 +231,7 @@ $(function() {
 				$(this).is(":checked") ? $("#image_description").hide() : '';
 				$(this).is(":checked") ? $("#image_list_upload").show() : '';
 				$(this).is(":checked") ? $("#image_list_options_fieldset").hide() : '';
-				$(this).is(":checked") ? $("#submit_button_div").hide() : '';
+				$(this).is(":checked") ? $("#submit_element").hide() : '';
 				document.getElementById("token").value = parent.token;
 			})
 			$("#image_description").hide();
@@ -309,7 +246,9 @@ $(function() {
 </head>
 
 <body>
-	<div id="modal_container" class="modal">
+	<div id="menu"></div>
+
+	<div  class="modal">
 		<div class="modal-content modal-small">
 			<div class="modal-header">
 				<span class="close">&times;</span>
@@ -322,20 +261,20 @@ $(function() {
 
 					<div id="image_list_action_selector">
 						<input type="radio" name="image_radio" id="radio_image_build">
-						<label class="windowfont">Build</label>
+						<label>Build</label>
 						<hr>
 						<input type="radio" name="image_radio" id="radio_image_delete">
-						<label class="windowfont">Delete</label>
+						<label>Delete</label>
 						<hr>
 						<input type="radio" name="image_radio" id="radio_image_pull">
-						<label class="windowfont">Pull</label>
+						<label>Pull</label>
 						<hr>
 						<input type="radio" name="image_radio" id="radio_image_upload">
-						<label class="windowfont">Upload</label>
+						<label>Upload</label>
 					</div>
 
 					<div id="image_list_build">
-						<label class="windowfont">Image</label>
+						<label>Image</label>
 						<select name="image_list" id="image_list"></select>
 					</div>
 
@@ -392,7 +331,7 @@ $(function() {
 					</div>
 				</fieldset>
 
-				<div id="submit_button_div">
+				<div id="submit_element">
 					<button id="submit_button">Submit</button>
 				</div>
 			</div>
@@ -418,22 +357,21 @@ $(function() {
 		var output_span = document.getElementsByClassName("close")[1];
 		var submit_button = document.getElementById("submit_button");
 
-		span.onclick = function () {
+		span.onclick = function() {
 			modal.style.display = "none";
 		}
 
-		output_span.onclick = function () {
+		output_span.onclick = function() {
 			output_modal.style.display = "none";
 		}
 
-		submit_button.onclick = function () {
+		submit_button.onclick = function() {
 			modal.style.display = "none";
 			output_modal.style.display = "block";
-			exec();
+			generate_image_manage('images-manage-modal-body');
 		}
 
 		modal.style.display = "block";
-
 	</script>
 </body>
 

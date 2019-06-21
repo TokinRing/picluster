@@ -6,3 +6,4 @@ picluster-pm2.config.json
 ssl/*
 docs
 docs/*
+picluster.sqlite3

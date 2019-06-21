@@ -1,38 +1,52 @@
-<!-- NOTE: This is a blank template to use as referent for future views -->
+<html>
 
-<div id="landing_page">
-	<img id="logo" src="/logo.png">
-	<br>
-	<b>Welcome to PiCluster!</b>
-</div>
+<head>
+	<title>PiCluster Web Console</title>
+	<script src="/jquery.js"></script>
+	<script src="/jquery-ui.js"></script>
+	<script src="/picluster.js"></script>
+	
+	<script src="/distLogo.js"></script>
+	<script src="/moment.js"></script>
 
-<div id="source_issues_circle">
-	<a href='https://github.com/picluster/picluster' id='source' target="_blank">
-		<img src="/assets/images/GitHub-Mark-120px-plus.png">
-		<br>
-		GitHub
-	</a>
-	<a href='https://github.com/picluster/picluster/issues' id='issues' target="_blank">
-		<img src="/assets/images/Debug-Bug-icon.png">
-		<br>
-		Report Issue
-	</a>
-	<a href="containers-layout.html" id="status_circle">
-		<div class="page">
-			<div class="clearfix">
-				<div id="running-class" class="c100 p0 small">
-					<span id='running_containers'>0%</span>
-					<div class="slice">
-						<div class="bar"></div>
-						<div class="fill"></div>
-					</div>
-				</div>
-			</div>
-		</div>
-		Running
-	</a>
-</div>
+	<link rel="stylesheet" href="/jquery-ui.css">
+	<link rel="stylesheet" href="/picluster-ui.css">
+	<link rel="stylesheet" href="/circle.css">
 
-<script>
-	getContainerStatus();
-</script>
+	<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+	<link rel="manifest" href="/images/manifest.json">
+	<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+
+	<meta name="theme-color" content="#ffffff">
+	<meta name="msapplication-TileColor" content="#ffffff">
+	<meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
+	<meta name="theme-color" content="#ffffff">
+
+	<script>
+
+		generate_nav("#menu");
+
+		$(document).ready(function() {
+			//build_doc_links();
+
+			// Provide dropdown menu when javascript disabled
+			$('nav li ul').hide().removeClass('dropdown');
+
+			// Render menu dropdown the right way
+			$('nav li').hover(function() {
+				$('ul', this).stop().slideDown(125);
+			}, function() {
+				$('ul', this).stop().slideUp(125);
+			});
+		});
+	</script>
+</head>
+
+<body>
+	<div id="menu"></div>
+	<div id="content"></div>
+</body>
+
+</html>

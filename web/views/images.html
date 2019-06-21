@@ -49,14 +49,10 @@
 		<div class="modal-content modal-large">
 			<div class="modal-header">
 				<span class="close">&times;</span>
-				<h2>PiCluster Log</h2>
+				<h2>PiCluster Images</h2>
 			</div>
 
-			<div class="modal-body">
-				<div id="log_output">
-					<textarea id="command_output" name="command_output" value="" enctype="application/json"></textarea>
-				</div>
-			</div>
+			<div id="modal-body" class="modal-body"></div>
 		</div>
 	</div>
 
@@ -70,7 +66,7 @@
 
 		output_modal.style.display = "block";
 
-		generate_log_status("#command_output");
+		generate_image_status('modal-body')
 
 	</script>
 

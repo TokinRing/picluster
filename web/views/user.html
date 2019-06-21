@@ -1,10 +1,59 @@
-<script>
-	$.get("/api/user_data").then(function(data) {
-		$(".username").text(data.username);
-	});
-</script>
+<html>
 
-<div id="landing_page">
-	<h2><b>Welcome to PiCluster, <span class="username"></span>!</b></h2>
-	<h3>Your API token is <span class="api_token"></span><h3>
-</div>
+<head>
+	<title>PiCluster Web Console</title>
+	<script src="/jquery.js"></script>
+	<script src="/jquery-ui.js"></script>
+	<script src="/picluster.js"></script>
+	<script src="/distLogo.js"></script>
+	<script src="/moment.js"></script>
+
+	<link rel="stylesheet" href="/jquery-ui.css">
+	<link rel="stylesheet" href="/picluster-ui.css">
+	<link rel="stylesheet" href="/circle.css">
+
+	<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+	<link rel="manifest" href="/images/manifest.json">
+	<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+
+	<meta name="theme-color" content="#ffffff">
+	<meta name="msapplication-TileColor" content="#ffffff">
+	<meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
+	<meta name="theme-color" content="#ffffff">
+
+	<script>
+		generate_nav("#menu");
+
+		$(document).ready(function() {
+			//build_doc_links();
+
+			// Provide dropdown menu when javascript disabled
+			$('nav li ul').hide().removeClass('dropdown');
+
+			// Render menu dropdown the right way
+			$('nav li').hover(function() {
+				$('ul', this).stop().slideDown(125);
+			}, function() {
+				$('ul', this).stop().slideUp(125);
+			});
+		});
+
+		$.get("/api/user/info").then(function(data) {
+			$(".username").text(data.username);
+		});
+	</script>
+</head>
+
+<body>
+	<div id="menu"></div>
+	<div id="content">
+		<div id="landing_page">
+			<h2><b>Welcome to PiCluster, <span class="username"></span>!</b></h2>
+			<h3>Your API token is <span class="api_token"></span><h3>
+		</div>
+	</div>
+</body>
+
+</html>

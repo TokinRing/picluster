@@ -1,55 +1,46 @@
 <html>
 
 <head>
-	<script src="/assets/jquery.min.js"></script>
-	<link rel="stylesheet" href="/assets/jquery-ui.css">
-	<script src="/assets/jquery-ui.js"></script>
-	<script src="/assets/distLogo.js"></script>
-	<link rel="stylesheet" href="/assets/picluster-iframe.css">
-	<script>
-		function exec() {
-			var radio_add = $('input[id=radio_add]:checked').val();
-			var radio_delete = $('input[id=radio_delete]:checked').val();
-			var radio_kibana = $('input[id=radio_kibana]:checked').val();
-			var elasticsearch_url = $("#es_url").val();
-			var kibana_url = $("#kibana_url").val();
-			var path = '/elasticsearch';
-			if (path) {
-				if (radio_add) {
-					$.post(path, {
-						token: parent.token,
-						elasticsearch_url,
-						'mode': 'add'
-					}, function(data) {
-						var div = document.getElementById('containers-manage-modal-body');
-						div.innerHTML = '<label id="windowfont"> Sent request to the server. Please check the logs for updated information.<br><br>\n' + data;
-					});
-				} else if (radio_kibana) {
-					$.post(path, {
-						token: parent.token,
-						'elasticsearch_url': kibana_url,
-						'mode': 'kibana'
-					}, function(data) {
-						var div = document.getElementById('containers-manage-modal-body');
-						div.innerHTML = '<label id="windowfont"> Sent request to the server. Please check the logs for updated information.<br><br>\n' + data;
-					});
-				} else if (radio_delete) {
-					$.post(path, {
-						token: parent.token,
-						elasticsearch_url,
-						'mode': 'delete'
-					}, function(data) {
-						var div = document.getElementById('containers-manage-modal-body');
-						div.innerHTML = 'Sent request to the server. Please check the logs for updated information.<br><br>\n' + data.replace(/(?:\r\n|\r|\n)/g, '<br />');
-					});
-				} else {
-					alert('Error, you did not select an operation.')
-					output_modal.style.display = "none";
-					modal.style.display = "block";
-				}
-			}
-		}
+	<title>PiCluster Web Console</title>
+	<script src="/jquery.js"></script>
+	<script src="/jquery-ui.js"></script>
+	<script src="/picluster.js"></script>
+	
+	<script src="/distLogo.js"></script>
+	<script src="/moment.js"></script>
 
+	<link rel="stylesheet" href="/jquery-ui.css">
+	<link rel="stylesheet" href="/picluster-ui.css">
+	<link rel="stylesheet" href="/circle.css">
+
+	<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+	<link rel="manifest" href="/images/manifest.json">
+	<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+
+	<meta name="theme-color" content="#ffffff">
+	<meta name="msapplication-TileColor" content="#ffffff">
+	<meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
+	<meta name="theme-color" content="#ffffff">
+
+	<script>
+		generate_nav("#menu");
+
+		$(document).ready(function() {
+			//build_doc_links();
+
+			// Provide dropdown menu when javascript disabled
+			$('nav li ul').hide().removeClass('dropdown');
+
+			// Render menu dropdown the right way
+			$('nav li').hover(function() {
+				$('ul', this).stop().slideDown(125);
+			}, function() {
+				$('ul', this).stop().slideUp(125);
+			});
+		});
+		
 		$(document).ready(function() {
 			$("input[id$='radio_add']").click(function() {
 			$("#es_kibana").hide();
@@ -72,7 +63,9 @@
 </head>
 
 <body>
-	<div id="modal_container" class="modal">
+	<div id="menu"></div>
+
+	<div  class="modal">
 		<div class="modal-content modal-small">
 			<div class="modal-header">
 				<span class="close">&times;</span>
@@ -84,29 +77,29 @@
 					<legend><b>Elasticsearch Configuration</b></legend>
 					<div id="es_action_selector">
 						<input type="radio" name="container_radio" id="radio_add">
-						<label class="windowfont">Add</label>
+						<label>Add</label>
 						<hr>
 						<input type="radio" name="container_radio" id="radio_delete">
-						<label class="windowfont">Remove</label>
+						<label>Remove</label>
 						<hr>
 						<input type="radio" name="container_radio" id="radio_kibana">
-						<label class="windowfont">Kibana or Grafana Access</label>
+						<label>Kibana or Grafana Access</label>
 					</div>
 
 					<div id="es_add">
 						<br>
-						<label class="windowfont">Elasticsearch URL:</label>
+						<label>Elasticsearch URL:</label>
 						<input type="text" size="30" id="es_url" class="modal_input" name="es_url" value=""></font>
 						<br>
 					</div>
 					<div id="es_kibana">
 						<br>
-						<label class="windowfont">Web Console URL:</label>
+						<label>Web Console URL:</label>
 						<input type="text" size="30" id="kibana_url" class="modal_input" name="kibana_url" value=""></font>
 						<br>
 					</div>
 				</fieldset>
-				<div id="submit_button_div">
+				<div id="submit_element">
 					<button id="submit_button">Submit</button>
 				</div>
 			</div>
@@ -144,7 +137,7 @@
 		submit_button.onclick = function () {
 			modal.style.display = "none";
 			output_modal.style.display = "block";
-			exec();
+			generate_op_elasticsearch('containers-manage-modal-body');
 		}
 
 		modal.style.display = "block";

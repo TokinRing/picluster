@@ -1,4 +1,3 @@
-/*jshint esversion:6*/
 // Requiring bcrypt for password hashing
 const bcrypt = require("bcrypt");
 
@@ -17,13 +16,6 @@ module.exports = (sequelize, DataTypes) => {
     password: {
       type: DataTypes.STRING,
       allowNull: false
-    },
-
-    // API token cannot be null
-    api_token: {
-      type: DataTypes.STRING,
-      allowNull: false,
-      unique: true
     }
   }, {
     hooks: {
@@ -35,9 +27,14 @@ module.exports = (sequelize, DataTypes) => {
   });
 
   // Check if unhashed password entered is same as stored hashed password
-User.prototype.validPassword = async (password) => {
-  return await bcrypt.compareSync(password, this.password);
-};
+  // NOTE: Function must be declared or else hashed password isn't returned
+  User.prototype.validPassword = function(password) {
+    try {
+      return bcrypt.compareSync(password, this.password);
+    } catch (err) {
+      console.error(err);
+    }
+  };
 
   // Return the sequelized User model object
   return User;

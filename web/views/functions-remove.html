@@ -49,13 +49,10 @@
 		<div class="modal-content modal-large">
 			<div class="modal-header">
 				<span class="close">&times;</span>
-				<h2>PiCluster Log</h2>
+				<h2>Cleaning stale functions</h2>
 			</div>
-
-			<div class="modal-body">
-				<div id="log_output">
-					<textarea id="command_output" name="command_output" value="" enctype="application/json"></textarea>
-				</div>
+			<div id="functions-clear-modal-body" class="modal-body">
+				Please wait.
 			</div>
 		</div>
 	</div>
@@ -67,10 +64,9 @@
 		output_span.onclick = function () {
 			output_modal.style.display = "none";
 		}
-
 		output_modal.style.display = "block";
 
-		generate_log_status("#command_output");
+		generate_function_clear('functions-clear-modal-body');
 
 	</script>
 

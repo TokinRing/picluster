@@ -1,41 +1,52 @@
 <html>
 
 <head>
-	<script src="/assets/jquery.min.js"></script>
-	<link rel="stylesheet" href="/assets/jquery-ui.css">
-	<script src="/assets/jquery-ui.js"></script>
-	<script src="/assets/distLogo.js"></script>
-	<link rel="stylesheet" href="/assets/picluster-iframe.css">
+	<title>PiCluster Web Console</title>
+	<script src="/jquery.js"></script>
+	<script src="/jquery-ui.js"></script>
+	<script src="/picluster.js"></script>
+
+	<script src="/distLogo.js"></script>
+	<script src="/moment.js"></script>
+
+	<link rel="stylesheet" href="/jquery-ui.css">
+	<link rel="stylesheet" href="/picluster-ui.css">
+	<link rel="stylesheet" href="/circle.css">
+
+	<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+	<link rel="manifest" href="/images/manifest.json">
+	<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+
+	<meta name="theme-color" content="#ffffff">
+	<meta name="msapplication-TileColor" content="#ffffff">
+	<meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
+	<meta name="theme-color" content="#ffffff">
+
 	<script>
-		function exec() {
-			var node_list = document.getElementById("node_list");
-			var command_list = document.getElementById("command_list");
-			var path = '/exec';
-			var node = node_list.options[node_list.selectedIndex].value;
-			var saved_command = command_list.options[command_list.selectedIndex].value;
-			var command = '';
+		generate_nav("#menu");
 
-			// FIXME: refactor ternary into a variable assignment ternary
-			(saved_command.indexOf('Choose') > -1) ? command = $("#command_entry").val() : command = saved_command;
+		$(document).ready(function() {
+			//build_doc_links();
 
-			if (!command) {
-				output_modal.style.display = "none";
-				modal.style.display = "block";
-			} else {
-				$.post(path, {
-					token: parent.token,
-					command: command,
-					node: node
-				}, function(data) {
-					$('#exec_output').val($('#exec_output').val() + '\n' + data + '\n');
-				});
-			}
-		}
+			// Provide dropdown menu when javascript disabled
+			$('nav li ul').hide().removeClass('dropdown');
+
+			// Render menu dropdown the right way
+			$('nav li').hover(function() {
+				$('ul', this).stop().slideDown(125);
+			}, function() {
+				$('ul', this).stop().slideUp(125);
+			});
+		});
 	</script>
 </head>
 
 <body>
-	<div id="modal_container" class="modal">
+	<div id="menu"></div>
+
+	<div  class="modal">
 		<div class="modal-content modal-small">
 			<div class="modal-header">
 				<span class="close">&times;</span>
@@ -56,7 +67,7 @@
 						<label id="windowfont" for="command_list">Saved Commands</label>
 						<select name="command_list" id="command_list" class="modal_input"></select>
 					</div>
-					<div id="submit_button_div">
+					<div id="submit_element">
 						<button id="submit_button">Submit</button>
 					</div>
 				</fieldset>
@@ -64,7 +75,7 @@
 				<script>
 					$(function () {
 						var option = '';
-
+						// TODO: refactor reference to /nodes handle to use /api/host/info
 						$.get("/nodes?token=" + parent.token, function (data) {
 							for (var i in data.nodes) {
 								option += '<option value="' + data.nodes[i] + '">' + data.nodes[i] + '</option>';
@@ -137,12 +148,12 @@
 		submit_button.onclick = function () {
 			modal.style.display = "none";
 			output_modal.style.display = "block";
-			exec();
+			generate_op_exec();
 		}
 
 		rerun_button.onclick = function () {
 			$('#exec_output').val('');
-			exec();
+			generate_op_exec();
 		}
 
 		modal.style.display = "block";

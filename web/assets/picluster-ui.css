@@ -2,23 +2,27 @@
 * HTML elements
 */
 html {
+  /*
   font-family: 'Nunito', sans-serif;
   -webkit-font-smoothing: antialiased;
   height: 100%;
   overflow: auto;
+  */
 }
 
 body {
   background: #FFFFFF;
-  background-image: url("/assets/images/background.jpg");
+  background-image: url("/images/background.jpg");
   background-size: 100%;
   font-family: Verdana, Arial, Helvetica, sans-serif;
   font-size: 11px;
   margin: 0px;
+  /*
   line-height: 18px;
   color: #333333;
   height: 100%;
   overflow: auto;
+  */
 }
 
 /*
@@ -58,6 +62,7 @@ h2 {
   margin: .4em;
 }
 
+/*
 label {
   font-size: 18px;
 }
@@ -69,11 +74,12 @@ legend {
 input {
   font-size: 18px;
 }
+*/
 
 nav {
   margin: 0 auto;
-  max-width: 100%;
-  max-height: 100%;
+  width: 100%;
+  /*max-height: 100%;*/
   float: left;
   background: #555;
   z-index: 10;
@@ -87,11 +93,9 @@ nav::after {
 }
 */
 nav ul {
-  /*
   padding: 0;
   margin: 0;
   list-style: none;
-  */
   text-align: center;
 }
 
@@ -106,7 +110,7 @@ nav ul li:hover {
 }
 
 nav ul li a {
-  padding: 1vw;
+  padding: .7vw;
   display: block;
   color: white;
   text-decoration: none;
@@ -138,10 +142,8 @@ nav ul li ul {
   margin-top: 3px;
   padding: 0;
   text-align: left;
-  /*
   background: linear-gradient(to bottom right, white, #F8F8F8) !important;
   box-shadow: 0 4px 10px #555;
-  */
 }
 
 nav ul li ul li {
@@ -178,6 +180,7 @@ nav ul li:hover ul.dropdown {
   display: block;
 }
 
+/*
 table tbody tr td label {
   color: black;
 }
@@ -185,6 +188,7 @@ table tbody tr td label {
 textarea {
   font-size: 18px;
 }
+*/
 
 @-webkit-keyframes animatetop {
   from {
@@ -252,6 +256,11 @@ textarea {
 
 .clearfix {
   *zoom: 1;
+}
+
+.config_block {
+  display: block;
+  padding-bottom: 10px;
 }
 
 .log_type_box {
@@ -340,12 +349,12 @@ textarea {
   font-size: 16px;
 }
 
-.node_card {
+.host_card {
   display: inline-block;
   width: 100%;
 }
 
-.node_status_div {
+.host_status_div {
   margin: 10px;
   width: 105px;
   display: inline-block;
@@ -353,7 +362,7 @@ textarea {
   text-align: center;
 }
 
-.node_status_text {
+.host_status_text {
   font-size: medium;
   color: black;
   width: 96px
@@ -389,14 +398,15 @@ textarea {
 }
 
 .modal {
-  /* display: none; */
   z-index: 1;
-  padding-top: 2px;
   height: 100%;
-  width: 100%;
-  background-color: rgb(0, 0, 0);
   background-color: rgba(0, 0, 0, 0.4);
-  3
+  width: 100%;
+  padding-top: 10px;
+  /*
+  padding-top: 2px;
+  display: none;
+  */
 }
 
 .modal-description {
@@ -406,17 +416,19 @@ textarea {
 }
 
 .modal-content {
-  position: relative;
   background-color: #fefefe;
   margin: auto;
   font-size: 12px;
-  padding: 0;
   border: 1px solid #888;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   -webkit-animation-name: animatetop;
   -webkit-animation-duration: 0.4s;
   animation-name: animatetop;
   animation-duration: 0.4s
+  /*
+  position: relative;
+  padding: 0;
+  */
 }
 
 .modal-small {
@@ -428,8 +440,9 @@ textarea {
 .modal-large {
   width: 75%;
   min-width: 600px;
-  height: 95%;
-  overflow-y: scroll;
+  min-height: 600px;
+  /*height: 95%;
+  overflow-y: scroll;*/
 }
 
 .modal-header {
@@ -439,10 +452,11 @@ textarea {
 }
 
 .modal-body {
-  padding: 1px 10px 10px;
   color: black;
+  /*
   font-size: 18px;
-  max-height: 90%;
+  padding: 1px 10px 10px;
+  */
 }
 
 .modal_input {
@@ -477,6 +491,29 @@ textarea {
   */
 }
 
+.failover_element {
+  display: grid;
+};
+
+
+
+.failover_element label {
+  display: grid;
+};
+
+.selection_fieldset {
+  display: inline-block;
+  vertical-align: top;
+  float: left;
+  width: 95%;
+  padding: 5px
+}
+
+.windowfont {
+  font-size: 18px;
+}
+
+
 /**
 * ID elements
 */
@@ -505,6 +542,10 @@ textarea {
   z-index: -1;
 }
 
+#hosts_checkbox {
+  display: grid;
+};
+
 #iframe_a {
   display: block;
   border-width: 0px;
@@ -515,11 +556,17 @@ textarea {
 
 #logo {
   padding: 0px;
+  width: 379px;
+  height: 511px;
+}
+
+#link_logo {
+  padding: 0px;
 }
 
 #nav_logo_image {
-  height: 4vw;
-  width: 4vw;
+  height: 3vw;
+  width: 3vw;
 }
 
 #nav_system {}
@@ -536,22 +583,31 @@ textarea {
 
 #nav_docs {}
 
+  #options_fieldset {
+  padding: 5;
+  margin: 0;
+  float: left;
+  width: 50%;
+  min-width: 227px;
+}
+
 #container_searching {}
 
 #function_searching {}
 
 #image_searching {}
 
-#node_searching {}
+#host_searching {}
 
 #landing_page {
   text-align: center;
   color: black;
 }
 
-#modal_container {
+/* #modal_container {
   height: 98.5%;
-}
+  padding-top: 4.2vw;
+} */
 
 #query {
   font-size: 20px;
@@ -568,7 +624,7 @@ textarea {
   /* position: fixed; */
 }
 
-#submit_button_div {
+#submit_element {
   text-align: center;
 }
 
@@ -646,37 +702,30 @@ textarea {
   margin-right: 5px;
 }
 
-#node {
+#addr {
   font-size: 18px;
   width: 50%;
   display: inline;
   margin-right: 5px;
 }
 
-#node_add {
+#block_add {
   width: 75%;
   display: inline-block;
 }
 
-#node_remove {
+#block_remove {
   width: 75%;
   display: inline-block;
 }
 
-#node_list {
+#host_list {
   font-size: 18px;
   margin-right: 5px;
 }
 
-#node_failover_constraint {
+#host_failover_constraint {
   margin-bottom: 10px;
-}
-
-#node_list_action_selector {
-  width: 22%;
-  display: inline-block;
-  vertical-align: top;
-  margin-right: 5px;
 }
 
 #container_list {
@@ -687,22 +736,48 @@ textarea {
 
 #container_list_options_fieldset {}
 
-#container_list_action_selector {
-  width: 21%;
-  display: inline-block;
-  vertical-align: top;
-  margin-right: 5px;
-}
-
-#container_list_add {
+#block_add {
   width: 75%;
   display: inline-block;
-}
+};
 
-#container_list_modify {
+
+#block_create {
+
+};
+
+#block_remove {
+
+};
+
+#block_modify {
   width: 75%;
   display: inline-block;
-}
+};
+
+#block_start {
+
+};
+
+#block_stop {
+
+};
+
+#block_restart {
+
+};
+
+#block_move {
+
+};
+
+#block_failover {
+
+};
+
+#block_log {
+
+};
 
 #container-add-fieldset {}
 
@@ -710,7 +785,7 @@ textarea {
 
 #container {
   font-size: 16px;
-}
+};
 
 #image_list_action_selector {
   width: 21%;
@@ -793,10 +868,6 @@ textarea {
   margin: 0;
 }
 
-#windowfont {
-  font-size: 18px;
-}
-
 #config_editor {
   width: 100%;
   height: 80%;
@@ -807,7 +878,7 @@ textarea {
   height: 100%;
 }
 
-#node_status_logo {
+#host_status_logo {
   font-size: 72px;
   max-width: 72px;
   text-align: center;
@@ -845,6 +916,17 @@ textarea {
   text-align: center;
 }
 
+#radio_selector {
+  width: 127px;
+  vertical-align: top;
+  float: left;
+  display: grid;
+}
+
+#radio_selector span {
+  float: left;
+}
+
 #config-reload-modal-body {}
 
 #containers-add-modal-body {}
@@ -878,8 +960,8 @@ textarea {
 
 #killvip-modal-body {}
 
-#nodes-add-modal-body {}
+#hosts-add-modal-body {}
 
-#nodes-list-modal-body {}
+#hosts-list-modal-body {}
 
-#nodes-removed-modal-body {}
+#hosts-removed-modal-body {}

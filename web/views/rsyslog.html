@@ -1,47 +1,52 @@
 <html>
 
 <head>
-	<script src="/assets/jquery.min.js"></script>
-	<link rel="stylesheet" href="/assets/jquery-ui.css">
-	<script src="/assets/jquery-ui.js"></script>
-	<script src="/assets/moment.js"></script>
-	<script src="/assets/distLogo.js"></script>
-	<link rel="stylesheet" href="/assets/picluster-iframe.css">
+	<title>PiCluster Web Console</title>
+	<script src="/jquery.js"></script>
+	<script src="/jquery-ui.js"></script>
+	<script src="/picluster.js"></script>
+	
+	<script src="/distLogo.js"></script>
+	<script src="/moment.js"></script>
+
+	<link rel="stylesheet" href="/jquery-ui.css">
+	<link rel="stylesheet" href="/picluster-ui.css">
+	<link rel="stylesheet" href="/circle.css">
+
+	<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+	<link rel="manifest" href="/images/manifest.json">
+	<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+
+	<meta name="theme-color" content="#ffffff">
+	<meta name="msapplication-TileColor" content="#ffffff">
+	<meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
+	<meta name="theme-color" content="#ffffff">
+
 	<script>
-		function exec() {
-			$.get("/rsyslog?token=" + parent.token, function(data) {
-				//	var output = data.replace(/(?:\r\n|\r|\n)/g, '<br />');
-				if ($('#query').val()) {
-					var search_string = $('#query').val();
-					var modified_data = data.split("\n");
-					var search_output = "";
+		generate_nav("#menu");
 
-					for (i = 0; i != modified_data.length; i++) {
-						if (modified_data[i].toLowerCase().indexOf(search_string.toLowerCase()) > -1) {
-							search_output += "\n" + modified_data[i];
-						}
-					}
+		$(document).ready(function() {
+			//build_doc_links();
 
-					$("#command_output").val(search_output);
-				} else {
-					$("#command_output").val(data);
-				}
+			// Provide dropdown menu when javascript disabled
+			$('nav li ul').hide().removeClass('dropdown');
+
+			// Render menu dropdown the right way
+			$('nav li').hover(function() {
+				$('ul', this).stop().slideDown(125);
+			}, function() {
+				$('ul', this).stop().slideUp(125);
 			});
-		}
-
-		function search(day, id) {
-			var day_check = moment().format("D");
-			var date = day_check.length > 1 ? moment().format("MMM D") : moment().format("MMM  D");
-
-			day.indexOf("today") > -1 ? $("#query").val(date) : $("#query").val(day);
-			exec();
-			document.getElementById(id).checked = false;
-		};
+		});
 	</script>
 </head>
 
 <body>
-	<div id="modal_container" class="modal">
+	<div id="menu"></div>
+
+	<div  class="modal">
 		<div class="modal-body">
 			<div class="modal-content modal-large">
 				<div class="modal-header">
@@ -92,12 +97,12 @@
 		}
 
 		submit_button.onclick = function () {
-			exec();
+			generate_op_rsyslog();
 		}
 
 		modal.style.display = "block";
 
-		exec();
+		generate_op_rsyslog();
 
 	</script>
 

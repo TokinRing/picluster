@@ -1,11 +1,11 @@
 <html>
 
 <head>
-	<script src="/assets/jquery.min.js"></script>
-	<link rel="stylesheet" href="/assets/jquery-ui.css">
-	<script src="/assets/jquery-ui.js"></script>
-	<script src="/assets/distLogo.js"></script>
-	<link rel="stylesheet" href="/assets/picluster-iframe.css">
+	<script src="/jquery.min.js"></script>
+	<link rel="stylesheet" href="/jquery-ui.css">
+	<script src="/jquery-ui.js"></script>
+	<script src="/distLogo.js"></script>
+	<link rel="stylesheet" href="/picluster-iframe.css">
 	<script>
 		function exec() {
 			$.get("/reloadconfig?token=" + parent.token, function (data) {
@@ -27,7 +27,7 @@
 			</div>
 
 			<div id="config-reload-modal-body" class="modal-body">
-				<div id="submit_button_div"></div>
+				<div id="submit_element"></div>
 			</div>
 		</div>
 	</div>

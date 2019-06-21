@@ -5,7 +5,7 @@
 	<script src="/jquery.js"></script>
 	<script src="/jquery-ui.js"></script>
 	<script src="/picluster.js"></script>
-	
+
 	<script src="/distLogo.js"></script>
 	<script src="/moment.js"></script>
 
@@ -26,9 +26,10 @@
 
 	<script>
 		generate_nav("#menu");
-		//build_doc_links();
 
 		$(document).ready(function() {
+			//build_doc_links();
+
 			// Provide dropdown menu when javascript disabled
 			$('nav li ul').hide().removeClass('dropdown');
 
@@ -44,34 +45,24 @@
 
 <body>
 	<div id="menu"></div>
+	<div id="content">
+		<div id="output" class="modal">
+			<div class="modal-content modal-large">
+				<div class="modal-header">
+					<span class="close">&times;</span>
+					<h2>PiCluster Hosts</h2>
+				</div>
 
-	<div id="output" class="modal">
-		<div class="modal-content modal-large">
-			<div class="modal-header">
-				<span class="close">&times;</span>
-				<h2>PiCluster Log</h2>
-			</div>
-
-			<div class="modal-body">
-				<div id="log_output">
-					<textarea id="command_output" name="command_output" value="" enctype="application/json"></textarea>
+				<div id="hosts-list-modal-body" class="modal-body">
 				</div>
 			</div>
 		</div>
 	</div>
+</body>
 
-	<script>
-		var output_modal = document.getElementById('output');
-		var output_span = document.getElementsByClassName("close")[0];
-
-		output_span.onclick = function () {
-			output_modal.style.display = "none";
-		}
-
-		output_modal.style.display = "block";
-
-		generate_log_status("#command_output");
-
-	</script>
+<script>
+	generate_host_status("hosts-list-modal-body")
+	window_reloader("hosts-list-modal-body", generate_host_status);
+</script>
 
 </html>

@@ -1,9 +1,7 @@
 const fs = require("fs");
 const path = require("path");
 const Sequelize = require("sequelize");
-//const basename = path.basename(module.filename);
-//const env = process.env.NODE_ENV || "production";
-const db_config = JSON.parse(fs.readFileSync((process.env.PICLUSTER_CONFIG) ? process.env.PICLUSTER_CONFIG : path.join(__dirname, "../../config.json")), "utf8");
+const config = JSON.parse(fs.readFileSync((process.env.PICLUSTER_CONFIG ? process.env.PICLUSTER_CONFIG : path.join(__dirname, "../../config.json")), "utf8"));
 
 // Initialize models
 let models = {};
@@ -12,28 +10,30 @@ let models = {};
 let modules = [
   require("./config.js"),
   require("./container.js"),
-  require("./host.js"),
-  require("./user.js"),
+  require("./host.js")
 ];
 
-const sequelize = (db_config.db.dialect == "sqlite") ?
-  new Sequelize("sqlite:" + db_config.db.storage)
+// Initialize sequelize instance as sqlite or mysql/postgresql
+const sequelize = (config.db.dialect == "sqlite") ?
+  new Sequelize("sqlite:" + config.db.storage)
   :
-  new Sequelize(db_config.db.database, db_config.db.username, db_config.db.password, {
-    host: db_config.db.host,
-    dialect: db_config.db.dialect,
+  new Sequelize(config.db.database, config.db.username, config.db.password, {
+    host: config.db.host,
+    dialect: config.db.dialect,
     operatorsAliases: false,
   });
 
 // Sequelize each of the model modules
 modules.forEach((module) => {
-  let model = module(sequelize, Sequelize, db_config);
+  let model = module(sequelize, Sequelize, config);
   models[model.name] = model;
 });
 
 // Initialize model object relation mapping
 Object.keys(models).forEach((model_name) => {
-  if (models[model_name].associate) models[model_name].associate(models);
+  if (models[model_name].associate) {
+    models[model_name].associate(models);
+  }
 });
 
 models["Host"].hasMany(models["Container"], {foreignKey: "container_id", constraints: false});

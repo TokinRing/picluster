@@ -49,29 +49,28 @@
 		<div class="modal-content modal-large">
 			<div class="modal-header">
 				<span class="close">&times;</span>
-				<h2>PiCluster Log</h2>
+				<h2>PiCluster Functions Awaiting Data Retrieval</h2>
 			</div>
 
-			<div class="modal-body">
-				<div id="log_output">
-					<textarea id="command_output" name="command_output" value="" enctype="application/json"></textarea>
+			<div id="functions-current-modal-body" class="modal-body">
+				<div id="submit_element">
 				</div>
 			</div>
 		</div>
-	</div>
+		</p>
 
-	<script>
-		var output_modal = document.getElementById('output');
-		var output_span = document.getElementsByClassName("close")[0];
+		<script>
+			var output_modal = document.getElementById('output');
+			var output_span = document.getElementsByClassName("close")[0];
 
-		output_span.onclick = function () {
-			output_modal.style.display = "none";
-		}
+			output_span.onclick = function () {
+				output_modal.style.display = "none";
+			}
 
-		output_modal.style.display = "block";
+			output_modal.style.display = "block";
 
-		generate_log_status("#command_output");
+			generate_function_status('functions-current-modal-body');
 
-	</script>
+		</script>
 
 </html>

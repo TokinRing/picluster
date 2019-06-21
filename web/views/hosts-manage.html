@@ -1,0 +1,151 @@
+<html>
+<head>
+	<title>PiCluster Web Console</title>
+	<script src="/jquery.js"></script>
+	<script src="/jquery-ui.js"></script>
+	<script src="/picluster.js"></script>
+	<script src="/distLogo.js"></script>
+	<script src="/moment.js"></script>
+
+	<link rel="stylesheet" href="/jquery-ui.css">
+	<link rel="stylesheet" href="/picluster-ui.css">
+	<link rel="stylesheet" href="/circle.css">
+
+	<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+	<link rel="manifest" href="/images/manifest.json">
+	<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+
+	<meta name="theme-color" content="#ffffff">
+	<meta name="msapplication-TileColor" content="#ffffff">
+	<meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
+	<meta name="theme-color" content="#ffffff">
+
+	<script>
+		generate_nav("#menu");
+		//build_doc_links();
+		$("input").checkboxradio();
+
+		$(document).ready(function() {
+			var option;
+
+			// Fill the host selector with options
+			generate_host_selector("#host");
+
+			$("#radio_add").click(function() {
+				$("#options_fieldset").show();
+				$("#block_add").show();
+				$("#block_remove").hide();
+
+				$("#host").prop("selectedIndex",0);
+				$("#operation").val("add");
+			})
+
+			$("#radio_remove").click(function() {
+				$("#options_fieldset").show();
+				$("#block_add").hide();
+				$("#block_remove").show();
+
+				$("#operation").val("remove");
+			})
+
+			// Provide dropdown menu when javascript disabled
+			$("nav li ul").hide().removeClass("dropdown");
+
+			// Render menu dropdown the right way
+			$("nav li").hover(function() {
+				$("ul", this).stop().slideDown(125);
+			}, function() {
+				$("ul", this).stop().slideUp(125);
+			});
+
+			// Hide all elements not needing immediate display
+			$("#block_hidden").hide();
+			$("#options_fieldset").hide();
+			$("#block_add").hide();
+			$("#block_remove").hide();
+		});
+
+	</script>
+</head>
+
+<body>
+	<div id="menu"></div>
+
+	<div  class="modal">
+		<div class="modal-content modal-small">
+			<div class="modal-header">
+				<span class="close">&times;</span>
+				<h2>Add/Remove host to PiCluster</h2>
+			</div>
+
+			<div class="modal-body">
+				<form action="/hosts/manage" method="post">
+					<fieldset class="selection_fieldset">
+					<legend><b>Host</b></legend>
+
+					<div id="radio_selector">
+							<label for="radio_add">
+							<input type="radio" id="radio_add" name="selection">
+							Add</label>
+							<label for="radio_remove">
+							<input type="radio" id="radio_remove" name="selection">
+							Remove</label>
+					</div>
+
+					<fieldset id="options_fieldset">
+						<legend><b>Options</b></legend>
+
+						<div id="block_add">
+							<input type="text" id="host_name" name="host_name" placeholder="Hostname" value="">
+							<input type="text" id="host_addr" name="host_addr" placeholder="IP Address" value="">
+						</div>
+
+						<div id="block_remove">
+							<label for="radio_remove">Host</label>
+							<select id="host" name="host"></select>
+						</div>
+					</fieldset>
+				</fieldset>
+
+				<input type="hidden" id="operation" name="operation" value="">
+
+				<div id="submit_element">
+					<button id="submit_button">Submit</button>
+				</div>
+			</form>
+			</div>
+		</div>
+	</div>
+
+	<div id="output" class="modal">
+		<div class="modal-content modal-small">
+			<div class="modal-header">
+				<span class="close">&times;</span>
+				<h2>Command Output</h2>
+			</div>
+			<div id="hosts-manage-modal-body" class="modal-body">
+				Please wait.
+			</div>
+		</div>
+	</div>
+
+	<script>
+		var span = document.getElementsByClassName("close")[0];
+		var modal = document.getElementById("modal_container");
+		var output_modal = document.getElementById("output");
+		var output_span = document.getElementsByClassName("close")[1];
+
+		span.onclick = function () {
+			modal.style.display = "none";
+		}
+
+		output_span.onclick = function () {
+			output_modal.style.display = "none";
+		}
+
+		//modal.style.display = "block";
+
+	</script>
+</html>

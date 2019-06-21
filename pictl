@@ -15,8 +15,8 @@ if type jq &>/dev/null; then
   hb(){
     clear
     echo "Heartbeat is now checking....."
-    if [ "${config_ssl}" == "true" ]; then curl -s "https://${config_web_connect}:${config_server_port}/hb?token=${config_token}"
-    else curl -s "http://${config_web_connect}:${config_server_port}/hb?token=${config_token}"
+    if [ "${config_ssl}" == "true" ]; then curl -s "https://${config_web_connect}:${config_server_port}/heartbeat?token=${config_token}"
+    else curl -s "http://${config_web_connect}:${config_server_port}/heartbeat?token=${config_token}"
     fi
     logs
   }
@@ -40,8 +40,8 @@ if type jq &>/dev/null; then
   stop(){
     clear
     echo "Stopping the container(s)....."
-    if [ "${config_ssl}" == "true" ]; then curl -s -G -d "token=${config_token}&container=$1&operation=stop" "https://${config_web_connect}:${config_server_port}/manage"
-    else curl -s -G -d "token=${config_token}&container=$1&operation=stop" "http://${config_web_connect}:${config_server_port}/manage"
+    if [ "${config_ssl}" == "true" ]; then curl -s -G -d "token=${config_token}&container=$1&operation=stop" "https://${config_web_connect}:${config_server_port}/containers/manage"
+    else curl -s -G -d "token=${config_token}&container=$1&operation=stop" "http://${config_web_connect}:${config_server_port}/containers/manage"
     fi
   }
 
@@ -85,8 +85,8 @@ if type jq &>/dev/null; then
   build() {
     clear
     echo "Building the container(s). This may take a while......"
-    if [ "${config_ssl}" == "true" ]; then curl -s -G -d "token=${config_token}&container=$1&no_cache=1&operation=build" "https://${config_web_connect}:${config_server_port}/manage-image"
-    else curl -s -G -d "token=${config_token}&container=$1&no_cache=1&operation=build" "http://${config_web_connect}:${config_server_port}/manage-image"
+    if [ "${config_ssl}" == "true" ]; then curl -s -G -d "token=${config_token}&container=$1&no_cache=1&operation=build" "https://${config_web_connect}:${config_server_port}/image/manage"
+    else curl -s -G -d "token=${config_token}&container=$1&no_cache=1&operation=build" "http://${config_web_connect}:${config_server_port}/image/manage"
     fi
   }
 
@@ -110,16 +110,16 @@ if type jq &>/dev/null; then
   start(){
     clear
     echo "Starting the container(s)....."
-    if [ "${config_ssl}" == "true" ]; then curl -s -G -d "token=${config_token}&container=$1&operation=start" "https://${config_web_connect}:${config_server_port}/manage"
-    else curl -s -G -d "token=${config_token}&container=$1&operation=start" "http://${config_web_connect}:${config_server_port}/manage"
+    if [ "${config_ssl}" == "true" ]; then curl -s -G -d "token=${config_token}&container=$1&operation=start" "https://${config_web_connect}:${config_server_port}/containers/manage"
+    else curl -s -G -d "token=${config_token}&container=$1&operation=start" "http://${config_web_connect}:${config_server_port}/containers/manage"
     fi
   }
 
   restart(){
     clear
     echo "Restarting the container(s)....."
-    if [ "${config_ssl}" == "true" ]; then curl -s -G -d "token=${config_token}&container=$1&operation=restart" "https://${config_web_connect}:${config_server_port}/manage"
-    else curl -s -G -d "token=${config_token}&container=$1&operation=restart" "http://${config_web_connect}:${config_server_port}/manage"
+    if [ "${config_ssl}" == "true" ]; then curl -s -G -d "token=${config_token}&container=$1&operation=restart" "https://${config_web_connect}:${config_server_port}/containers/manage"
+    else curl -s -G -d "token=${config_token}&container=$1&operation=restart" "http://${config_web_connect}:${config_server_port}/containers/manage"
     fi
   }
 
@@ -134,8 +134,8 @@ if type jq &>/dev/null; then
   delete(){
     clear
     echo "Deleting the container(s)....."
-    if [ "${config_ssl}" == "true" ]; then curl -s -G -d "token=${config_token}&container=$1&operation=rm" "https://${config_web_connect}:${config_server_port}/manage"
-    else curl -s -G -d "token=${config_token}&container=$1&operation=rm" "http://${config_web_connect}:${config_server_port}/manage"
+    if [ "${config_ssl}" == "true" ]; then curl -s -G -d "token=${config_token}&container=$1&operation=rm" "https://${config_web_connect}:${config_server_port}/containers/manage"
+    else curl -s -G -d "token=${config_token}&container=$1&operation=rm" "http://${config_web_connect}:${config_server_port}/containers/manage"
     fi
   }
 

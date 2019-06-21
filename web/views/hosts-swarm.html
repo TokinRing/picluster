@@ -1,0 +1,165 @@
+<html>
+
+<head>
+	<title>PiCluster Web Console</title>
+	<script src="/jquery.js"></script>
+	<script src="/jquery-ui.js"></script>
+	<script src="/picluster.js"></script>
+	<script src="/distLogo.js"></script>
+	<script src="/moment.js"></script>
+
+	<link rel="stylesheet" href="/jquery-ui.css">
+	<link rel="stylesheet" href="/picluster-ui.css">
+	<link rel="stylesheet" href="/circle.css">
+
+	<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+	<link rel="manifest" href="/images/manifest.json">
+	<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+
+	<meta name="theme-color" content="#ffffff">
+	<meta name="msapplication-TileColor" content="#ffffff">
+	<meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
+	<meta name="theme-color" content="#ffffff">
+
+	<script>
+	generate_nav("#menu");
+	//build_doc_links();
+
+		$(document).ready(function () {
+		generate_host_selector("#host");
+
+		$("#radio_create").click(function() {
+			// Set operation and tranfer specific form field elements
+			$("#operation").val("create");
+			$("#host_element").detach().appendTo( $("#block_create") );
+
+			// Hide/show specific options
+			$("#options_fieldset").show();
+			$("#block_create").show();
+			$("#block_leave").hide();
+			$("#block_network").hide();
+
+			// Reset values of unused form fields
+			$("#host").prop("selectedIndex",0);
+			$("#network_name").val("");
+		})
+
+		$("#radio_leave").click(function() {
+			$("#operation").val("leave");
+			$("#host_element").detach().appendTo( $("#block_leave") );
+
+			$("#options_fieldset").show();
+			$("#block_create").hide();
+			$("#block_leave").show();
+			$("#block_network").hide();
+
+			$("#host").prop("selectedIndex",0);
+			$("#network_name").val("");
+		})
+
+		$("#radio_network").click(function() {
+			$("#operation").val("network");
+			$("#host_element").detach().appendTo( $("#block_network") );
+
+			$("#options_fieldset").show();
+			$("#block_create").hide();
+			$("#block_leave").hide();
+			$("#block_network").show();
+
+			$("#host").prop("selectedIndex",0);
+		})
+
+		// Provide dropdown menu when javascript disabled
+		$("nav li ul").hide().removeClass("dropdown");
+
+		// Render menu dropdown the right way
+		$("nav li").hover(function() {
+			$("ul", this).stop().slideDown(125);
+		}, function() {
+			$("ul", this).stop().slideUp(125);
+		});
+
+		$("#options_fieldset").hide();
+		$("#block_create").hide();
+		$("#block_leave").hide();
+		$("#block_network").hide();
+	});
+	</script>
+</head>
+
+<body>
+	<div id="menu"></div>
+	<div id="content">
+		<div  class="modal">
+			<div class="modal-content modal-small">
+				<div class="modal-header">
+					<span class="close">&times;</span>
+					<h2>Docker Swarm Setup</h2>
+				</div>
+
+				<div class="modal-body">
+					<form action="/hosts/swarm" method="post">
+						<fieldset class="selection_fieldset">
+							<legend><b>Swarm</b></legend>
+
+							<div id="radio_selector">
+								<span>
+									<input type="radio" id="radio_create" name="selection">
+									<label>Create</label>
+								</span>
+								<span>
+									<input type="radio" id="radio_leave" name="selection">
+									<label>Leave</label>
+								</span>
+								<span>
+									<input type="radio" id="radio_network" name="selection">
+									<label>Network</label>
+								</span>
+							</div>
+
+							<fieldset id="options_fieldset">
+								<legend><b>Options</b></legend>
+
+								<div id="block_create"></div>
+
+								<div id="block_leave"></div>
+
+								<div id="block_network">
+									<input type="text" id="network_name" name="network_name" placeholder="Network Name" value="">
+								</div>
+							</fieldset>
+						</fieldset>
+
+						<input type="hidden" id="operation" name="operation" value="">
+
+						<div id="submit_element">
+							<button id="submit_button">Submit</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+
+		<div id="output" class="modal">
+			<div class="modal-content modal-small">
+				<div class="modal-header">
+					<span class="close">&times;</span>
+					<h2>Command Output</h2>
+				</div>
+				<div id="nodes-manage-modal-body" class="modal-body">
+					Please wait.
+				</div>
+			</div>
+		</div>
+	</div>
+	<div name="block_hidden">
+		<div id="host_element" name="block_element">
+			<label><b>Host:</b></label>
+			<select name="host" id="host"></select>
+		</div>
+	</div>
+</body>
+
+</html>

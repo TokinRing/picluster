@@ -5,7 +5,6 @@
 	<script src="/jquery.js"></script>
 	<script src="/jquery-ui.js"></script>
 	<script src="/picluster.js"></script>
-	
 	<script src="/distLogo.js"></script>
 	<script src="/moment.js"></script>
 
@@ -29,15 +28,16 @@
 		//build_doc_links();
 
 		$(document).ready(function() {
-			// Provide dropdown menu when javascript disabled
-			$('nav li ul').hide().removeClass('dropdown');
+		});
+		
+		// Provide dropdown menu when javascript disabled
+		$('nav li ul').hide().removeClass('dropdown');
 
-			// Render menu dropdown the right way
-			$('nav li').hover(function() {
-				$('ul', this).stop().slideDown(125);
-			}, function() {
-				$('ul', this).stop().slideUp(125);
-			});
+		// Render menu dropdown the right way
+		$('nav li').hover(function() {
+			$('ul', this).stop().slideDown(125);
+		}, function() {
+			$('ul', this).stop().slideUp(125);
 		});
 	</script>
 </head>
@@ -49,29 +49,16 @@
 		<div class="modal-content modal-large">
 			<div class="modal-header">
 				<span class="close">&times;</span>
-				<h2>PiCluster Log</h2>
+				<h2>PiCluster Containers</h2>
 			</div>
 
-			<div class="modal-body">
-				<div id="log_output">
-					<textarea id="command_output" name="command_output" value="" enctype="application/json"></textarea>
-				</div>
-			</div>
+			<div id="container-layout-modal-body" class="modal-body"></div>
 		</div>
 	</div>
 
 	<script>
-		var output_modal = document.getElementById('output');
-		var output_span = document.getElementsByClassName("close")[0];
-
-		output_span.onclick = function () {
-			output_modal.style.display = "none";
-		}
-
-		output_modal.style.display = "block";
-
-		generate_log_status("#command_output");
-
+		generate_container_status("container-layout-modal-body");
+		window_reloader("container-layout-modal-body", generate_container_status);
 	</script>
 
 </html>

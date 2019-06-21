@@ -1,0 +1,190 @@
+<html>
+
+<head>
+	<title>PiCluster Web Console</title>
+	<script src="/jquery.js"></script>
+	<script src="/jquery-ui.js"></script>
+	<script src="/picluster.js"></script>
+	<script src="/distLogo.js"></script>
+	<script src="/moment.js"></script>
+
+	<link rel="stylesheet" href="/jquery-ui.css">
+	<link rel="stylesheet" href="/picluster-ui.css">
+	<link rel="stylesheet" href="/circle.css">
+
+	<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+	<link rel="manifest" href="/images/manifest.json">
+	<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+
+	<meta name="theme-color" content="#ffffff">
+	<meta name="msapplication-TileColor" content="#ffffff">
+	<meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
+	<meta name="theme-color" content="#ffffff">
+
+	<script>
+		generate_nav("#menu");
+
+		$(document).ready(function() {
+			//build_doc_links();
+
+			// Provide dropdown menu when javascript disabled
+			$('nav li ul').hide().removeClass('dropdown');
+
+			// Render menu dropdown the right way
+			$('nav li').hover(function() {
+				$('ul', this).stop().slideDown(125);
+			}, function() {
+				$('ul', this).stop().slideUp(125);
+			});
+
+			$.get("/api/config", function(result) {
+				console.log("config: " + result);
+				config_placeholder(JSON.parse(result))
+			});
+		});
+</script>
+
+</head>
+
+<body>
+	<div id="menu"></div>
+
+	<div  class="modal">
+		<div class="modal-content modal-large">
+			<div class="modal-header">
+				<span class="close">&times;</span>
+				<h2>PiCluster System Configuraton</h2>
+			</div>
+
+			<div class="modal-body">
+
+				<div>
+					<form id="config" action="/ops/config" method="post">
+						<h2>General</h2>
+
+						<div>
+							<span class="config_label">
+								<label for="theme">Theme</label>
+							</span>
+							<span class="config_block">
+								<input type="text" name="theme" id="theme">
+							</span>
+						</div>
+						<div>
+							<span class="config_label">
+								<label for="conf_syslog">Syslog</label>
+							</span>
+							<span class="config_block">
+								<input type="text" name="syslog" id="conf_syslog">
+							</span>
+						</div>
+						<div>
+							<span class="config_block">
+								<p>Session Secret: <span id="session_secret"></span></p>
+							</span>
+						</div>
+						<hr>
+
+						<h2>Paths</h2>
+
+						<div>
+							<span class="config_label">
+								<label for="dockerfile_path">Dockerfile Path</label>
+							</span>
+							<span class="config_block">
+								<input type="text" name="dockerfile_path" id="dockerfile_path">
+							</span>
+						</div>
+						<hr>
+
+						<h2>TLS</h2>
+
+						<div>
+							<span class="config_label">
+								<label for="tls_enable">Enable</label>
+							</span>
+							<span class="config_block">
+								<input type="text" name="tls_enable" id="tls_enable">
+							</span>
+						</div>
+						<div>
+							<span class="config_label">
+								<label for="tls_self_signed">Self-signed</label>
+							</span>
+							<span class="config_block">
+								<input type="text" name="tls_self_signed" id="tls_self_signed">
+							</span>
+						</div>
+						<div>
+							<span class="config_label">
+								<label for="tls_key_path">Key Path</label>
+							</span>
+							<span class="config_block">
+								<input type="text" name="tls_key_path" id="tls_key_path">
+							</span>
+						</div>
+						<div>
+							<span class="config_label">
+								<label for="tls_cert_path">Cert Path</label>
+							</span>
+							<span class="config_block">
+								<input type="text" name="tls_cert_path" id="tls_cert_path">
+							</span>
+						</div>
+						<hr>
+
+						<h2>Heartbeat</h2>
+
+						<div>
+							<span class="config_label">
+								<label for="heartbeat_interval">Interval</label>
+							</span>
+							<span class="config_block">
+								<input type="text" name="heartbeat_interval" id="heartbeat_interval">
+							</span>
+						</div>
+
+						<button type="submit" class="btn btn-default" id="config-btn">
+							Save
+						</button>
+						<a href="/api/config/reset">Reset Config</a>
+						<a href="/api/config/upgrade">Upgrade Config</a>
+					</form>
+				</div>
+				<!--
+				<div id="config_editor" title="PiCluster Configuration Editor">
+					<textarea id="payload" name="payload" value="" enctype="application/json"></textarea>
+					<br><br>
+					<div id="submit_element">
+						<button id="submit_button">Submit</button>
+					</div>
+				</div>
+			-->
+			</div>
+		</div>
+	</div>
+
+	<script>
+		/*
+	var modal = document.getElementById('modal_container');
+	var span = document.getElementsByClassName("close")[0];
+	var submit_button = document.getElementById("submit_button");
+
+	span.onclick = function() {
+		modal.style.display = "none";
+	}
+
+	submit_button.onclick = function() {
+		exec();
+	}
+
+	modal.style.display = "block";
+
+	getconfig();
+	*/
+	</script>
+</body>
+
+</html>

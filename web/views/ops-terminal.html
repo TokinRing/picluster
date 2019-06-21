@@ -1,56 +1,52 @@
 <html>
 
 <head>
-	<script src="/assets/jquery.min.js"></script>
-	<link rel="stylesheet" href="/assets/jquery-ui.css">
-	<script src="/assets/jquery-ui.js"></script>
-	<script src="/assets/distLogo.js"></script>
-	<script src="/assets/jquery.terminal.min.js"></script>
-	<script src="/assets/unix_formatting.js"></script>
-	<link href="/assets/jquery.terminal.min.css" rel="stylesheet" />
-	<link rel="stylesheet" href="/assets/picluster-iframe.css">
+	<title>PiCluster Web Console</title>
+	<script src="/jquery.js"></script>
+	<script src="/jquery-ui.js"></script>
+	<script src="/picluster.js"></script>
+
+	<script src="/distLogo.js"></script>
+	<script src="/moment.js"></script>
+
+	<link rel="stylesheet" href="/jquery-ui.css">
+	<link rel="stylesheet" href="/picluster-ui.css">
+	<link rel="stylesheet" href="/circle.css">
+
+	<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+	<link rel="manifest" href="/images/manifest.json">
+	<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+
+	<meta name="theme-color" content="#ffffff">
+	<meta name="msapplication-TileColor" content="#ffffff">
+	<meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
+	<meta name="theme-color" content="#ffffff">
+
 	<script>
-		var node;
+		generate_nav("#menu");
 
-		function exec(command, callback) {
-			callback = !callback ? function () {} : callback;
+		$(document).ready(function() {
+			//build_doc_links();
 
-			$.post('/exec', {
-				token: parent.token,
-				command: command,
-				node: node
-			}, callback);
-		}
+			// Provide dropdown menu when javascript disabled
+			$('nav li ul').hide().removeClass('dropdown');
 
-		function init() {
-			var node_list = document.getElementById("node_list");
-			node = node_list.options[node_list.selectedIndex].value;
-			var term = $('#terminal').terminal(function (command) {
-				var _this = this;
-				command !== '' ? (
-					exec(command, function (output) {
-						_this.echo(output);
-					})
-				) : (
-					this.echo('')
-				);
-			}, {
-				greetings: '> Connecting to terminal on node ' + node +
-					'. There will be a short delay when returning each command output.\n',
-				prompt: 'λ ',
-				wrap: true
+			// Render menu dropdown the right way
+			$('nav li').hover(function() {
+				$('ul', this).stop().slideDown(125);
+			}, function() {
+				$('ul', this).stop().slideUp(125);
 			});
-
-			exec('uptime', function (output) {
-				term.echo(output);
-			});
-		}
-
+		});
 	</script>
 </head>
 
 <body>
-	<div id="modal_container" class="modal">
+	<div id="menu"></div>
+
+	<div  class="modal">
 		<div class="modal-content modal-small">
 			<div class="modal-header">
 				<span class="close">&times;</span>
@@ -63,13 +59,14 @@
 					<select name="node_list" id="node_list"></select>
 				</fieldset>
 
-				<div id="submit_button_div">
+				<div id="submit_element">
 					<button id="submit_button">Submit</button>
 				</div>
 
 				<script>
 					$(function () {
 						var option = '';
+						// TODO: refactor reference to /nodes handle to use /api/host/info
 						$.get("/nodes?token=" + parent.token, function (data) {
 							for (var i in data.nodes) {
 								option += '<option value="' + data.nodes[i] + '">' + data.nodes[i] + '</option>';
@@ -116,7 +113,7 @@
 		submit_button.onclick = function () {
 			modal.style.display = "none";
 			output_modal.style.display = "block";
-			init();
+			generate_op_exec_init();
 		}
 
 		modal.style.display = "block";
